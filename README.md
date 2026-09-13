@@ -261,8 +261,6 @@ Sovereign changes:
 
 **Upcoming releases:**
 
-~**Stage 11 whitepaper**
-
 ~**Substrate OS architecture**
 
 ~**Genesis OS**
