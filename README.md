@@ -330,7 +330,7 @@ Commercial use requires permission.***
 For collaboration, research inquiries, or industry integration, please reach out via GitHub or HuggingFace.***
 
 ---
-
+**If you'd like to support the project:**
 **Buy me a coffee if your feeling generous - cheers!**
 
 https://buymeacoffee.com/michaelrickyneal
