@@ -25,6 +25,8 @@ Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/d
 
 The Eigenweight Engine: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/The_Eigenweight_Engine_Whitepaper.md
 
+Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main/calculator/shannon_stage10_calculator.py
+
 
 ---
 
