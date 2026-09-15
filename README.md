@@ -19,6 +19,8 @@ Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/st
 
 Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
+The Eigenweight Engine: 
+
 ---
 
 ***Why Sovereign Exists:***
