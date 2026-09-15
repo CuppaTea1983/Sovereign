@@ -3,7 +3,8 @@
 *Q: What is Sovreign*
 ---
 ***Sovereign — Cognitive Substrate Systems***
-Is A Unified Architecture for Intelligence, Memory, Compression, and Geometry
+Is A Unified Architecture for Intelligence, Memory, Compression, and Geometry.
+---
 Sovereign is the culmination of a multi‑year research effort exploring the true structure of intelligence — not as a statistical model, but as a geometric substrate. It is a complete ecosystem of technologies, whitepapers, mathematical frameworks, and GPU‑native implementations that redefine how artificial intelligence stores memory, processes context, compresses information, and maintains identity.
 
 This repository contains all whitepapers, diagrams, math, and reference implementations for the Sovereign architecture.
