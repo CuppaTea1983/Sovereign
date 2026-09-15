@@ -329,7 +329,7 @@ Commercial use requires permission.***
 ---
 
 ***Contact
-For collaboration, research inquiries, or industry integration, please reach out via GitHub or HuggingFace.***
+For collaboration, research inquiries, or industry integration, please reach out via GitHub.***
 
 ---
 **If you'd like to support the project:**
