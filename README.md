@@ -318,7 +318,7 @@ This project has been a long haul — years of work, thousands of hours, countle
 
 ~**Cognitive Substrate Systems Overview**
 
-~**More to come...**
+**More to come...**
 
 ---
 
