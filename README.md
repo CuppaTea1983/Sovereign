@@ -13,7 +13,7 @@ Sovereign is not a model.
 Sovereign is not a framework.
 Sovereign is not a feature.
 
-**Sovereign is a new field.**
+**Sovereign proposes a new substrate field.**
 
 ---
 
