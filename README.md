@@ -15,9 +15,20 @@ Sovereign is not a feature.
 
 **Sovereign is a new field.**
 
+---
+
+**Links:**
+
 Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
 
 Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+
+The Eigenweight Engine: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/The_Eigenweight_Engine_Whitepaper.md
+
+
+---
+
+
 
 The Eigenweight Engine: 
 
