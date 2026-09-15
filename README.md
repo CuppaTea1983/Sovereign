@@ -307,6 +307,8 @@ This project has been a long haul — years of work, thousands of hours, countle
 
 ~**Cognitive Substrate Systems Overview**
 
+---
+
 ***License:
 All whitepapers and technologies are released under CC BY‑NC 4.0.
 Non‑commercial use is permitted.
