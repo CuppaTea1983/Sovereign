@@ -17,15 +17,15 @@ Sovereign is not a feature.
 
 ---
 
-**Links:**
+**Quick Links:**
 
-Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
+- Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
 
-Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+- Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
-The Eigenweight Engine: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/The_Eigenweight_Engine_Whitepaper.md
+- The Eigenweight Engine: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/The_Eigenweight_Engine_Whitepaper.md
 
-Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main/calculator/shannon_stage10_calculator.py
+- Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main/calculator/shannon_stage10_calculator.py
 
 
 ---
