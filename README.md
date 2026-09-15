@@ -15,6 +15,8 @@ Sovereign is not a feature.
 
 **Sovereign is a new field.**
 
+Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
+
 ---
 
 ***Why Sovereign Exists:***
@@ -298,8 +300,6 @@ This project has been a long haul — years of work, thousands of hours, countle
 ~**Shared Manifold**
 
 ~**Persistent Quantum Memory**
-
-~**Shannon Stage 11 (coming next)**
 
 ~**Substrate Formats**
 
