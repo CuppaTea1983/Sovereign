@@ -17,6 +17,8 @@ Sovereign is not a feature.
 
 Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
 
+Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+
 ---
 
 ***Why Sovereign Exists:***
