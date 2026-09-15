@@ -30,12 +30,6 @@ Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main
 
 ---
 
-
-
-The Eigenweight Engine: 
-
----
-
 ***Why Sovereign Exists:***
 -
 Modern AI is built on a fragile foundation:
