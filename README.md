@@ -1,6 +1,6 @@
 ***Sovereign is a project i started 3.5 years ago and have been building it solo since***
 
-*Q: What is Sovreign*
+*Q: What is Sovereign*
 ---
 ***Sovereign — Cognitive Substrate Systems***
 Is A Unified Architecture for Intelligence, Memory, Compression, and Geometry.
