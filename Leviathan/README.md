@@ -8,6 +8,7 @@
 **A: Local AI models, running directly on your graphics card. No server, no cloud, no account, no subscription, no telemetry.**
 ---
 **How Does it work?**
+---
 Leviathan loads a language model straight into your GPU's memory and talks to it there. Nothing is sent anywhere. There is no background service, no Docker container, no Python to install, and no API key. You open the app, pick a model, and type.
 
 *(You can also connect hosted models such as Grok alongside your local ones. Those, by their nature, send your messages to their provider. Everything that runs on your own GPU stays on your machine.)*
