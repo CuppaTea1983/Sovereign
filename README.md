@@ -27,6 +27,8 @@ Sovereign is not a feature.
 
 - Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main/calculator/shannon_stage10_calculator.py
 
+- Leviathan: An all in one solution for Large language model hosting: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
+
 
 ---
 
