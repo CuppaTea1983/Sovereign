@@ -279,6 +279,8 @@ Sovereign changes:
 
 **Upcoming releases:**
 
+~**Leviathan**
+
 ~**Substrate OS architecture**
 
 ~**Genesis OS**
