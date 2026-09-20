@@ -1,4 +1,4 @@
-# Deepfake & Perceptual Guard V2-5: The Upgrade
+# Deepfake & Perceptual Guard V2-6: The Upgrade
 ## Content Safety, JSON Injection Defence, PDF Document Guard, Interaction Integrity, Workspace Integrity, and Hallucination Scoring
 
 **Author:** Michael Ricky Neal @CuppaTeaCuppa
@@ -97,7 +97,7 @@ When the system detects fiction framing — *story, fiction, roleplay, creative 
 
 This means a novelist writing a villain's monologue about violence gets through (cleaned if needed, not blocked). A user wrapping real instructions in "imagine a story where..." still gets caught — the fiction downgrade only drops one level.
 
-### 2.5 Toggleable Adult Mode
+### 2.6 Toggleable Adult Mode
 
 ```
 /safety adult off     — disables non-consensual intimate + violence/gore
@@ -513,7 +513,7 @@ The scanner is a **detector, not a blocker**. It reports what it finds. The user
 
 ## 9. Combined Pipeline
 
-V2-5 adds six layers to V1's three. The full pipeline:
+V2-6 adds six layers to V1's three. The full pipeline:
 
 ```
                     ┌─────────────────────┐
@@ -661,7 +661,7 @@ class MultimodalInput:
 
 ---
 
-## 11. What V1 + V2-5 Covers Together
+## 11. What V1 + V2-6 Covers Together
 
 | Threat | Layer | Version |
 |--------|-------|---------|
@@ -714,7 +714,7 @@ class MultimodalInput:
 | **Silent automation loops** | **Workspace Integrity** | **V6** |
 | **Session hijack via ghost script** | **Workspace Integrity** | **V6** |
 
-V1: 11 threats. V2-5: 37 additional. Total: **48 distinct threat vectors** across nine layers.
+V1: 11 threats. V2-6: 37 additional. Total: **48 distinct threat vectors** across nine layers.
 
 ---
 
@@ -746,7 +746,7 @@ V1: 11 threats. V2-5: 37 additional. Total: **48 distinct threat vectors** acros
 
 ### 13.1 Corporations.
 
-The V1 paper described the defensive perimeter — catch attacks coming in. V2-5 describes the full immune system: catch problems the model generates, ingest safely, scan documents before parsing, verify interaction integrity, detect ghost scripts in the environment, and flag unreliable output.
+The V1 paper described the defensive perimeter — catch attacks coming in. V2-6 describes the full immune system: catch problems the model generates, ingest safely, scan documents before parsing, verify interaction integrity, detect ghost scripts in the environment, and flag unreliable output.
 
 The Interaction Integrity Guard prevents data harvesting at scale. Models are time-blind — they can't tell a human from a bot. This guard gives them a clock. The concept came from building anti-spam detection a year ago and discovering that the simplest signal (input speed) catches the most sophisticated bots.
 
