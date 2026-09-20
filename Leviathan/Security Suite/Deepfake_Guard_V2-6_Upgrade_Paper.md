@@ -11,7 +11,7 @@
 
 This is the upgrade. Six new layers, same philosophy: stop real harm, get out of the way for everything else.
 
-V2-5 addresses the threats that come from *inside* the pipeline — content the model generates, structured data the model ingests, document files fed into context, interaction timing that reveals bots vs humans, ghost scripts that silently puppet AI services, and confidence levels the model reports. The original V1 layers remain untouched. The new layers compose on top. Total system: nine independent layers, one unified guard, zero dependencies.
+V2-6 addresses the threats that come from *inside* the pipeline — content the model generates, structured data the model ingests, document files fed into context, interaction timing that reveals bots vs humans, ghost scripts that silently puppet AI services, and confidence levels the model reports. The original V1 layers remain untouched. The new layers compose on top. Total system: nine independent layers, one unified guard, zero dependencies.
 
 | Version | What It Added | Threat Class |
 |---------|---------------|--------------|
@@ -801,7 +801,7 @@ Three integration points. One before inference (interaction + input + JSON + doc
 
 ## 14. Conclusion
 
-V1 built the perimeter. V2-5 builds the complete immune system.
+V1 built the perimeter. V2-6 builds the complete immune system.
 
 The original three layers catch external attacks — people trying to break the model, forge identities, or embed hidden payloads. The six new layers cover every remaining surface: the model generating harmful content, ingesting poisoned JSON, reading weaponised documents, being targeted by bot farms, operating in an environment with ghost scripts, or presenting fabrication with false confidence.
 
