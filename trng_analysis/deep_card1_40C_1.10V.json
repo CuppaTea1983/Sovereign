@@ -1,0 +1,72 @@
+{
+  "label": "Card_1_40C_1.10V_acq0",
+  "path": "F:\\Backup\\raw data output from PLL-TRNG\\Card_1\\40C\\1.10V\\acq_20180716155733_0.r32",
+  "file_bytes": 2000000,
+  "matrix_shape": [
+    2000,
+    1000
+  ],
+  "byte_std_empirical": 73.93258666992188,
+  "mp_upper_edge": 5644.319462774367,
+  "top_singular_values": [
+    5618.5302734375,
+    5593.6875,
+    5569.63330078125,
+    5558.9287109375,
+    5546.35107421875,
+    5512.5576171875,
+    5509.78125,
+    5501.3818359375,
+    5492.34814453125,
+    5476.87548828125
+  ],
+  "n_sv_above_mp_edge": 0,
+  "top_sv_over_edge_ratio": 0.9954309479633545,
+  "spectral_flatness_wiener": 0.8454377055168152,
+  "fft_peak_to_median_ratio": 4.6588547645470015,
+  "fft_peak_index": 349200,
+  "byte_chi2_vs_uniform": 263.32032,
+  "byte_chi2_p99_threshold": 311.6,
+  "bit_autocorr": [
+    {
+      "lag": 1,
+      "corr": 0.001254640705605694
+    },
+    {
+      "lag": 2,
+      "corr": 0.0039396748352207535
+    },
+    {
+      "lag": 4,
+      "corr": -0.0004003802640321482
+    },
+    {
+      "lag": 8,
+      "corr": 6.961219605833584e-05
+    },
+    {
+      "lag": 16,
+      "corr": 0.0024998040448205557
+    },
+    {
+      "lag": 32,
+      "corr": 0.0014398587537124098
+    },
+    {
+      "lag": 64,
+      "corr": 0.00015969114348443557
+    },
+    {
+      "lag": 128,
+      "corr": -0.0011910935056503203
+    }
+  ],
+  "plot": "F:\\Backup\\Procedural shader\\trng_analysis\\Card_1_40C_1.10V_acq0_svd.png",
+  "residual": {
+    "k_removed": 1,
+    "residual_std": 73.82576751708984,
+    "residual_top_sv": 5593.6875,
+    "residual_mp_edge": 5636.1644468269515,
+    "residual_above_edge": 0.992463501157979
+  }
+}
