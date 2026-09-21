@@ -240,7 +240,7 @@ The structural-sensing instrument used for this investigation operates in passiv
 All numerical outputs of this investigation are preserved in:
 
 ```
-
+https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 ├─ SUMMARY.md                       — auto-generated whitepaper draft
 ├─ sweep_results.csv                — all 50 conditions, all metrics
 ├─ full_results.json                — complete numeric output
