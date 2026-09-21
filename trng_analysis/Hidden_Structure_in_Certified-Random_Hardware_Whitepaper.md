@@ -5,8 +5,11 @@
 ---
 
 **Author:** Michael Ricky Neal
+-
 **Tool:** gridv2 — Structure-Detection Microscope
+-
 **Dataset:** Public PLL-TRNG raw-output corpus (250 files, 4.4 GB)
+-
 **Date:** 2026-05-07
 
 ---
