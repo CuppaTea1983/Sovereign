@@ -29,6 +29,8 @@ Sovereign is not a feature.
 
 - Leviathan: An all in one solution for Large language model hosting: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
 
+- TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
+
 
 ---
 
@@ -290,8 +292,6 @@ Sovereign changes:
 ~**ASI substrate kernel**
 
 ~**Gridv2 instrumentation**
-
-~**TRNG structure paper**
 
 ~**Unified substrate simulation engine**
 
