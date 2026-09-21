@@ -153,6 +153,10 @@ A fractal, multi‑resolution memory system that replaces KV‑cache entirely an
 A complete mathematical framework and compression engine that walks around Shannon’s ceiling using fractal geometry.
 This paper contains:
 
+4. Shannon Calculator (Operational Engine)
+A universal, model‑readable computation layer that applies Stage 11’s fractal compression rules in real time.
+It allows any model — regardless of architecture — to interpret, apply, and benefit from Shannon Stage 11 without modification.
+
 ~**full math**
 
 ~**full diagrams**
@@ -162,10 +166,6 @@ This paper contains:
 ~**full compression theory**
 
 ~**real‑world demonstrations**
-
-4. Shannon Calculator (Operational Engine)
-A universal, model‑readable computation layer that applies Stage 11’s fractal compression rules in real time.
-It allows any model — regardless of architecture — to interpret, apply, and benefit from Shannon Stage 11 without modification.
 
 ---
 
