@@ -3,12 +3,8 @@
 
 # Leviathan
 
-**Q: What is Leviathan**
+**Local AI models, running directly on your graphics card. No server, no cloud, no account, no subscription.**
 
-**A: Local AI models, running directly on your graphics card. No server, no cloud, no account, no subscription, no telemetry.**
----
-**How Does it work?**
----
 Leviathan loads a language model straight into your GPU's memory and talks to it there. Nothing is sent anywhere. There is no background service, no Docker container, no Python to install, and no API key. You open the app, pick a model, and type.
 
 *(You can also connect hosted models such as Grok alongside your local ones. Those, by their nature, send your messages to their provider. Everything that runs on your own GPU stays on your machine.)*
@@ -91,11 +87,13 @@ A rough analogy, if it helps: if the model is a **person**, then `.lev` is their
 
 A `.fqm` is that memory, written to a file. When you load the model again, the memory loads with it. The conversation genuinely continues.
 
-**How you get one:** automatically. If a model has memory enabled, Leviathan saves a `.fqm` after the first exchange and then every fifth one, quietly, in the background. You do not have to do anything, and if it ever *cannot* save, it says so out loud rather than pretending it worked.
+**A `.fqm` comes into being one of two ways, and it is worth knowing which is which — they are the same kind of file doing the same job, but they start life very differently, and people often assume there is only the first.**
 
-You can also build one deliberately — see **Studio → Personality** — by feeding the model a body of text and letting it absorb the whole thing in one pass. That is how you make a model that already knows your project, your writing style, or your world's lore before you have said a word to it.
+**One — it happens on its own, as you talk.** If a model has memory enabled, Leviathan saves a `.fqm` after the first exchange and then every fifth one, quietly, in the background. This is the running memory of *your* conversations with *this* model — it grows as you chat and loads back the next time you open the model. You do not have to do anything, and if it ever *cannot* save, it says so out loud rather than pretending it worked. It also refuses to save a turn that came out garbled, so one bad reply can never lodge itself in the memory permanently.
 
-**One memory per model.** Each model keeps its own, named after it, in your FQM Database folder. Two models loaded at once do not share a memory or bleed into each other.
+**Two — you build one on purpose, in Studio → Personality.** Instead of letting memory accumulate one chat at a time, you hand the model a whole body of text at once — a folder of past conversations, your project notes, your novel, your world's lore — and it absorbs the lot in a single pass into a `.fqm` that you name and keep. **This is not the auto-memory above, and it is not connected to it.** The auto-memory is what the model happened to remember from talking to you; a Personality profile is a deliberate portrait you construct and can rebuild whenever your source text grows. It is how you make a model that already knows your material — or already sounds like you — before you have typed a word. You point chat at it yourself, and you can keep as many as you like. The Studio section below explains exactly what each control does.
+
+**The auto-memory: one per model.** The memory that builds itself as you chat is named after the model and lives in your FQM Database folder. Two models loaded at once do not share it or bleed into each other. Personality profiles you build by hand are separate files that you manage yourself, so they never collide with the auto-memory.
 
 ---
 
@@ -105,13 +103,13 @@ You can also build one deliberately — see **Studio → Personality** — by fe
 
 That line needs unpacking, because it is the thing most people get wrong about this format. When a model learns something, what it "knows" does not sit inside it as sentences — it becomes geometry, patterns in numbers. A `.fkb` captures knowledge in that same form, through the same mathematical decomposition (SVD) that `.eig` performs on the model's own weights. So a knowledge bank is not a document read aloud to the model when you ask a question. It is knowledge in the shape the model already thinks in, blended into its understanding for as long as the bank is loaded. The model does not consult it. It knows it.
 
-**Why that is far more than "documents you fed in."** Because a `.fkb` speaks the model's native language, it can hold much more than a folder of your notes. It can hold knowledge decomposed straight out of a model — the whole of what that model learned, kept in the same compressed geometric form — which is what lets knowledge move *between* models instead of staying locked inside the one that learned it. Your documents, a model's lived experience of your conversations, or an entire body of learned knowledge: all of it becomes knowledge a model can genuinely use, not text you have to remember to paste.
+**The heavy version, and the thing most people miss: a `.fkb` can be an archive of another model's knowledge.** This is what makes the format matter. Because a bank is written in the model's native geometry rather than in words, you can point Leviathan at *another model* and decompose what that model learned — the actual knowledge sitting in its weights — straight into a bank. That bank is then portable. Knowledge that one model spent its entire training absorbing can be lifted out and blended into a *different* model, with no retraining of either. So a `.fkb` is not "the notes I fed in." At its fullest it is the distilled learning of a whole model, kept in compressed geometric form, ready to hand to another one. That is what the archives are: raw knowledge absorbed out of models, in the shape a model can actually use — not documents typed up and pasted back.
 
 **How the right knowledge finds you — the tag system.** This is what makes it effortless, and it is worth understanding rather than taking on trust. Every bank is filed under **tags**: the subjects it covers. When you ask a question, Leviathan reads it, works out which subjects it touches, and pulls the banks filed under those tags — before the model answers. You never open a menu or choose a bank. The question chooses it.
 
 And it reads meaning, not spelling. Ask about "symptoms" and it finds the bank filed under "symptom"; ask about "debugging" and it finds "debug". Plurals, tenses, word endings — the router follows them, so the knowledge is there whether or not you happened to use the exact word the bank was filed under. Change the subject halfway through a conversation and the knowledge that travels with you changes too, quietly, without being asked for.
 
-**How you get one:** **Studio → Absorb**. Point it at documents — a manual, a rulebook, a folder of notes, a codebase, a set of transcripts — and it decomposes them into a tagged, routable bank. It skips anything it has already taken in, so adding a few files later only processes the new ones.
+**How you get one:** **Studio → Absorb**. Point it at a model — a `.gguf` file, or a folder of safetensors — and Leviathan reads its weights, decomposes what it learned, and files the result as a tagged, routable bank. You decide how much of the model to take and how much detail to keep; the Studio section below walks through every control. This is the model-to-model transfer described above: you are not uploading documents, you are lifting knowledge out of one model so another can use it.
 
 **The one requirement, and the reason a bank sometimes seems dead:** a `.fkb` blends into a model's eigenspace, so the model needs a `.eig` for the knowledge to have somewhere to land. Without one, the bank loads, the routing runs, the model answers — and none of the knowledge reaches it, with nothing to tell you. If a bank appears to do nothing, this is almost always why. The next section is about `.eig`, and it matters more than its name lets on.
 
@@ -213,22 +211,43 @@ Routes work only from what the two models already know. They do not browse the w
 
 ### 🌀 Studio
 
-Where you build the things Leviathan runs on. Five sub-tabs.
+Where you build the things Leviathan runs on. Five sub-tabs. Nearly every control has a sensible default; the notes below tell you which ones are worth touching and which to leave alone.
 
 **⚡ Convert → .lev**
-Turns a `.gguf` into a `.lev`. The first thing you will use. If a model is not supported, it is refused here with an explanation of exactly which parts Leviathan does not understand — before the multi-gigabyte conversion starts, not after.
+Turns a `.gguf` (or a safetensors model folder) into a `.lev`, the format Leviathan actually runs on. The first thing you will use, and a one-time job per model. If a model is not supported, it is refused here — with an explanation of exactly which parts Leviathan does not understand — *before* the multi-gigabyte conversion starts, not after.
+- **Model list** — every model Leviathan found, with buttons to select **All**, **None**, or just the **Unconverted** ones. Tick what you want and convert in a batch.
+- **Q8_0 mode** — how eight-bit models are laid out. **Split (default)** is the safe choice and what you want almost always. *Shannon* and *Tensor Core F16* are alternative layouts for particular cards; leave it on Split unless you have a specific reason. (Applies to `.gguf` only — safetensors always convert as raw F16.)
 
 **🌀 Absorb → .fkb**
-Turns documents into a knowledge bank. Point it at files or a folder. Material it has already absorbed is skipped automatically, so re-running it after adding a few documents only processes the new ones.
+Turns a *model* into a knowledge bank — the model-to-model transfer described in the file-types section. Point it at a `.gguf`/`.cgguf` file (**File…**) or a folder of safetensors (**Folder…**), press **Discover** to list the parts that can be absorbed, tick the ones you want, and press **Absorb selected**.
+
+If you just want *all of it* and don't care about the dials, tick **🧠 Absorb full knowledge** and hit Absorb — that's the one-click answer. The rest of these controls are for when you want to trade completeness for a smaller, faster bank.
+- **🧠 Absorb full knowledge** *(the easy button)* — one tick and Leviathan keeps *everything*: it lifts the rank ceiling and captures **≈99.9%** of each layer. That 99.9% *is* "all of it" — the final 0.1% is numerical noise, not knowledge, and capturing it would roughly double the file for no real gain, so 99.9% is as complete as it gets. The result is near-lossless but **large and slow to build** — a full bank can be several times the size of the model itself. Use it when you want the complete knowledge and don't want to think about the settings below. (You genuinely don't need it most of the time — see the note under this tab.)
+- **SVD rank (max)** *(default 64)* — the real limiter, and the honest one. It caps how many "directions" of each layer are kept. Here's the thing most people get wrong: a model's weights are **high-rank**, so rank 64 keeps only the *dominant* structure — about half of what each layer actually holds. That is usually exactly what you want for a knowledge bank (the strong, general patterns), but if you want more, this is the knob to raise. Higher rank = more captured, larger and slower bank.
+- **Variance target** *(default 0.95)* — where absorption *stops* if it gets there first: "keep directions until this fraction of the layer is captured, or the rank cap is reached, whichever comes first." For high-rank model weights the rank cap is almost always what stops it, so raising this alone does little — it's the rank that moves the needle. The variance figure Leviathan reports afterwards is the **true** fraction captured (of the whole layer, not of what it kept), so if it says 53% and you wanted more, raise the rank or tick Absorb full knowledge.
+- **Min dim** *(default 128)* — ignores tensors smaller than this on each side. Small tensors carry little transferable knowledge; the default filters them out cleanly.
+- **Preset** — a one-click starting point for the two regex boxes. **Universal LLM (recommended)** is right for ordinary language models; the others target specific parts (attention only, feed-forward only, embeddings only) or particular model families.
+- **Include / Exclude regex** — precise control over which tensors are taken, by name. The preset fills these for you; touch them only if you know exactly which layers you want. The default Exclude deliberately drops the token-embedding and output layers, which do not transfer usefully between models.
+- While a model loads (which happens before the first progress tick) a **"Loading model into memory — please wait…"** line shows under the log, so you can tell it is working rather than stuck.
+
+**You rarely need a full absorb — it depends on what the knowledge actually is.** A bank is only worth what it *adds* to the model you load it into. If the model you're feeding is already strong at a subject, absorbing another model's take on that same subject at full strength buys you little. Say you run a DeepSeek model that's already excellent at maths, and you absorb another model to "top up" its maths — a full-knowledge bank there is mostly wasted effort, because the maths is already there. Full absorb earns its keep when you're bringing in something the target model is genuinely *weak* at, or doesn't have at all. When in doubt, a normal rank-64 absorb captures the dominant knowledge cheaply; reach for full knowledge when you specifically want completeness and know the subject is one the target lacks.
 
 **🔎 Inspect .fkb**
-Opens a bank and shows you what is actually in it — how much was absorbed, from where, how densely. Use it when a bank does not seem to be helping and you want to know whether the problem is the bank or the routing.
+Opens a finished bank and shows what is actually inside it: where it came from (**Source** and **Architecture**, filled in from the model's blueprint when the bank itself does not record them), how many tensors, original size against compressed size, the ratio, and a per-layer breakdown with each layer's kept rank and the fraction of variance it captured. Use it when a bank does not seem to be helping and you want to know whether the problem is the bank or the routing.
 
 **🔗 Bridge .fkb**
-Connects a knowledge bank to a model. This is where a bank and a model are matched up.
+Matches a bank to a target model. Load the `.fkb`, set the target model's **dimension** and **layer count**, and press **Compute bridge** to see the plan for how the bank's knowledge maps onto that model's shape. This is the step that lines a bank up with a model of a different size.
 
 **🪞 Personality → .fqm**
-Builds a memory file directly from a body of text, rather than waiting for it to accumulate through conversation. Feed it your project notes, your novel, your documentation, and the model starts already knowing it. This is the fastest way to get a model that understands your particular world.
+Builds a Personality profile — the *second* kind of `.fqm`, the one you make on purpose, not the memory that accumulates on its own as you chat. Point it at the **model** the profile is for (the same one you will chat with — a profile is tied to its model) and at the **chat log or folder** to absorb (`.txt`, `.md`, `.json`, `.log`). Press **Preview (dry-run)** to see what it will do without writing anything, or **Build profile** to make it.
+- **Mirror me (weight my turns)** *(on)* — makes the profile reflect *you* rather than the assistant voice, by weighting your side of the conversation. Leave it on for a "sounds like me" profile.
+- **Assistant chars kept** *(default 200; 0 = pure-you)* — how much of the assistant's replies to keep for context. Set it to 0 for a profile built purely from your own words.
+- **Resume / accumulate into existing .fqm** *(off)* — adds to a profile you already built instead of starting fresh. Turn it on to grow one profile across several batches of source text.
+- **Stage-11 quantum cascade** *(on)* — lets a full-length log be absorbed without hitting a memory wall, and does nothing on models that do not need it. Leave it on.
+- **Hot-window** *(default 2048)* — how many of the newest tokens are kept at full detail while older ones compress. The default suits most logs.
+- **Trait weighting (feel the weight)** *(on)* with **Boost** *(default 1.0)* — keeps the charged, distinctive moments sharp while filler blurs, so personality survives compression. Raise the Boost above 1 to make the personality bite harder; 1.0 is balanced.
+- **Skip duplicate messages** *(on)* — skips byte-identical messages (boilerplate, copy-pasted snippets, "thanks"), roughly 40% faster on real logs with no loss.
+- **Harvest reasoning chains** *(on)* — pulls step-by-step reasoning out of the same log into a companion file beside the profile, so the model keeps that too.
 
 ---
 
@@ -334,6 +353,8 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 **The requirement, again, because it is the single most common reason this appears not to work:** knowledge banks blend into a model's eigenspace, so the model needs a `.eig`. Without one, the bank loads, the routing runs, and the knowledge never actually reaches the model — with nothing to tell you it didn't. If your banks seem to be doing nothing, build a `.eig` first and try again.
 
+**Seeing it happen — the Route panel.** Beside the chat, the **🔀 Route** panel keeps a running log of where your questions went. Each time a model answers, a new entry appears at the top: the model that replied, the knowledge bank it drew on, the subjects the question matched, and how many tokens and milliseconds it took. Newest on top, older ones beneath, so at a glance you can see which banks are actually being used — and which never get picked, which usually means a bank whose tags don't match the way you ask. The list keeps the last thirty or so routes; when you want a clean slate, the **🧹 Clear Route** button in the bottom-right of the panel wipes it. It clears only the on-screen log — your banks, memories and models are untouched.
+
 ---
 
 ### Eidetic recall
@@ -436,3 +457,4 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Whitepapers:** https://zenodo.org/records/22766642 — the research behind the memory, compression and eigenspace work, permanently archived and citable.
 
 All three are linked from **Settings → About** inside the app.
+
