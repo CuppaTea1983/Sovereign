@@ -23,7 +23,7 @@ What makes it different from the other ways of running a model locally is what h
 - [The tabs]
 - [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Settings]
 - [The systems]
-- [Persistent memory] · [Knowledge routing] · [Eidetic recall] · [The security membrane]
+- [Persistent memory] · [Knowledge routing] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
 - [Using Leviathan from other programs]
 - [Where your files live]
 - [What Leviathan will not do]
@@ -355,6 +355,18 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 **Seeing it happen — the Route panel.** Beside the chat, the **🔀 Route** panel keeps a running log of where your questions went. Each time a model answers, a new entry appears at the top: the model that replied, the knowledge bank it drew on, the subjects the question matched, and how many tokens and milliseconds it took. Newest on top, older ones beneath, so at a glance you can see which banks are actually being used — and which never get picked, which usually means a bank whose tags don't match the way you ask. The list keeps the last thirty or so routes; when you want a clean slate, the **🧹 Clear Route** button in the bottom-right of the panel wipes it. It clears only the on-screen log — your banks, memories and models are untouched.
 
+**Clicking a subject.** The subjects on a route entry are not just labels. Click one and a small panel opens with the topics filed under it — click *science* and you get physics, astronomy, chemistry and the rest; click a topic and you get the subject it belongs to. It is the same map Leviathan routes by, laid open, so you can see exactly why a question landed where it did, and spot a bank that is filed too broadly or too narrowly to be found the way you ask.
+
+**A second opinion, in a different currency.** Beneath each entry sits a 🧠 line: an independent guess at which bank fits, made not from the *words* you typed but from their *meaning*, placed in the model's own embedding space. It agrees with the tag routing most of the time; when it disagrees, that gap is the useful part — usually a bank whose name and tags don't describe what it actually holds. It is shown for your eyes only, and never changes where the knowledge really came from.
+
+---
+
+### Recycling cloud answers
+
+Connect a cloud model — your own account, your own key — and Leviathan quietly keeps the substance of what it tells you. Ask Claude or Grok or Gemini something on your machine, and the answer is folded into a subject-tagged store your *local* models can then route against, exactly like a bank you built by hand. Over time the big models teach the small ones, on your own logs, without you doing a thing.
+
+It is careful about what it keeps. A near-duplicate of something already there is dropped rather than stored twice — but two answers that differ by a single number, a dose or a date or a version, are both kept, because a different figure is a different fact and not a repeat. Nothing is ever pre-loaded, and nothing leaves your disk: it is your conversations, under your key, on your machine. Switch it off with `NEXUS_VAULT_CAPTURE=0`.
+
 ---
 
 ### Eidetic recall
@@ -368,6 +380,20 @@ This is deliberately strict. A loose version — returning a *similar* old answe
 If you re-ask something and get a better answer, the new one replaces the old in the cache.
 
 Toggle in [Settings].
+
+---
+
+### Second-opinion fact-check
+
+A local model asked something it does not truly know will often answer anyway — confidently, and differently each time you ask. Leviathan can turn that against it. Switch the check on and, after a factual answer, it quietly puts the same question a few more times and compares: say the same thing every time and the answer stands; wander between retellings — or agree on something *other* than what you were first told — and the answer is flagged as unverified rather than served as fact.
+
+No internet, no outside reference: it only asks the model to be consistent with itself, which is exactly where an invented fact comes apart. It watches numbers and names most closely, since that is where a wrong answer usually hides. Because it costs a few extra runs of the model, it is off by default — turn it on with `NEXUS_FACTCHECK=1`. A flagged answer is also kept out of the instant-recall cache above, so a shaky reply is never remembered as though it were right.
+
+---
+
+### Any model, described by itself
+
+Leviathan ships knowing a handful of models in detail. Load one it has never seen — your own, converted yourself — and rather than guess at its shape, it reads the model's own interior at load time and writes down what it finds: how many layers there are, how attention and the feed-forward are built, where every tensor goes. That description is saved beside your data, so the second time you load that model the reading is already done, and you are left with a plain, honest record of exactly how Leviathan is treating it. Change the model and the description is rebuilt to match.
 
 ---
 
@@ -457,4 +483,5 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Whitepapers:** https://zenodo.org/records/22766642 — the research behind the memory, compression and eigenspace work, permanently archived and citable.
 
 All three are linked from **Settings → About** inside the app.
+
 
