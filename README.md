@@ -1,5 +1,3 @@
-***Sovereign is a project i started 3.5 years ago and have been building it solo since***
-
 ***Q: What is Sovereign***
 ---
 ***A: Sovereign — Cognitive Substrate Systems***
@@ -87,7 +85,7 @@ It started as a personal one.
 
 ---
 
-Years ago, I watched a family member lose themselves to dementia — a biological collapse of memory continuity. Later, I saw the same failure mode inside AI models: no persistence, no continuity, no identity, no memory.
+Years ago, I watched a family member lose themselves to dementia — a biological collapse of memory continuity. Later, I saw the same failure mode inside AI models: no persistence, no continuity, no identity, no memory. That parallel pushed me into AI/Science, and so I’ve been building this architecture solo for the past 3.5 years.
 
 That parallel became the seed.
 
