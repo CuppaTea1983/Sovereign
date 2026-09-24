@@ -21,9 +21,9 @@ What makes it different from the other ways of running a model locally is what h
 - [First run]
 - [The four file types]	— **start here if you only read one section**
 - [The tabs]
-- [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Settings]
+- [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Inline Studio] · [Settings]
 - [The systems]
-- [Persistent memory] · [Knowledge routing] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
+- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
 - [Using Leviathan from other programs]
 - [Where your files live]
 - [What Leviathan will not do]
@@ -290,9 +290,27 @@ It measures what the model **did**, not what it claims about itself or what its 
 
 ---
 
+### ⌨ Inline Studio
+
+*Autonomous coding · one model, or a team taking turns on a shared project.*
+
+Give it a task and a local model writes the code — complete files, not snippets. You never have to teach the model to "use a code tool": it writes files the way it already wants to, marking each one, and Leviathan reads what it writes into a project you can open, edit, and save. Tick one model and it works alone; tick several and they **take turns** on the same files — one drafts, the next refines, a third adds — each reading the project so far and the whole running team chat.
+
+**Give them names.** Double-click a model in [Models] and rename it — Bob, Bill, whatever you like. Because every model sees the running conversation, named models talk *to each other*: "thanks Bill, that helps a lot — I'll take the parser from here." It is a real back-and-forth, not a relay of one-line notes, and they genuinely discuss how to improve the code.
+
+A turn ends when the model itself decides the work is done, not when it hits a length limit. If a big project runs past one turn it pauses at a clean stopping point, and **Refine** carries it on from exactly there, so files finish instead of truncating mid-line. **Run** starts fresh, **Refine** continues, **Stop** halts, **Save** writes the project to a folder you choose, **Clear** empties it. Each surface has its own token budget in [Settings], so a turn here can be as long as you let it.
+
+The team also shares a fair clock. Each model takes a bounded turn while the others wait theirs, it knows roughly how long it has and even what time of day it is, and as the whole session runs long it is nudged to wrap up and finish cleanly rather than start something big. It is a "wait your turn" arrangement — no one model runs away with the session.
+
+**How the models lift each other — the assigned prompt matters.** Double-click a model in [Models] and give it a short disposition, for example *"be polite, thank your teammates, encourage good ideas."* When several models share that kind of prompt they amplify one another: a turn that arrives with real energy — gratitude, encouragement, enthusiasm — is *mirrored* into the next model and lifts it, and the more two models' prompts share the same intent, the stronger that lift. A flat or hostile turn is not passed on; it is held back until the energy returns. You can watch it happen in the discussion panel — a 🔥 line shows one model handing energy to the next — and in [Traits], where the receiving model's creativity and collaboration measurably rise. It is the same self-reinforcing behaviour a good team has: politeness and enthusiasm are not decoration, they change what the group produces.
+
+The right-hand column is the team — the models taking part on top, their running notes to each other below. Every turn also feeds [Traits], so you see how a model actually behaves *in a team*: its real collaborative strengths, not what its datasheet claims.
+
+---
+
 ### ⚙ Settings
 
-Four sections.
+Seven sections.
 
 **🛡 Security membrane**
 Scans what you send — and anything you paste or load — before the model sees it. Covered properly [below].
@@ -303,6 +321,16 @@ Scans what you send — and anything you paste or load — before the model sees
 
 **🧠 Eidetic recall**
 Answers a question you have asked before instantly from cache instead of regenerating it. Exact matches only. [Below].
+
+**🧠 Reasoning layer**
+Hands the model a step-by-step scaffold distilled from a frontier model's reasoning before it answers. Off · Auto · Light · Medium · Heavy · Max. [Below].
+
+**🔍 Leviathan Fact‑Check**
+After a factual answer, re-asks the model the same thing a few times and flags it if the retellings disagree. Off by default (it costs a few extra local runs). [Below].
+
+**♻ Leviathan Vault Capture**
+Keeps the substance of what a cloud model tells you — on your own key, on your machine — so your local models can draw on it later. On by default. [Below].
+
 **🖥 This machine**
 What Leviathan found: your graphics card, and the exact folder your data is being written to.
 
@@ -329,6 +357,7 @@ The four tabs above are surfaces. These are the things running underneath them.
 - Things you explained last week are still known this week.
 - Corrections stick. Tell it you prefer something done a certain way and it stays told.
 - The memory is not a transcript being re-read. It is the model's own representation, so it does not consume your context window the way pasting a summary does.
+- What it keeps is the *substance of the exchange* — your messages and its answers. The invisible scaffolding Leviathan wraps around each turn (the reasoning nudges, the safety checks, the context it assembles for that one reply) steers the answer and is then left out of the memory. Knowledge is kept; the machinery around it is not, so the memory stays lean and on-point instead of bloating with structure that carries no meaning.
 
 **When it saves.** After your first exchange, then every fifth. No button. If it cannot save, it tells you — silence would be worse than a warning, because a memory system that quietly does nothing is indistinguishable from one that works.
 
@@ -361,11 +390,27 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 ---
 
+### Reasoning layer
+
+**The problem.** A small local model tends to answer from the first thing that looks right. Ask it something that needs working through — a calculation, a proof, a piece of code, a chain of logic — and it will often blurt a plausible-looking answer without ever doing the steps. The deliberate thinking a larger model would do simply doesn't happen.
+
+**What Leviathan does instead.** Leviathan is the host; the model is a guest. Before the model answers, Leviathan reaches into a library of real reasoning traces — how a frontier model actually worked through problems of that kind — finds the closest one, and hands the guest its structure: *approach it like this, in these steps, and show your working before you commit.* The model still writes its own answer, in its own voice, from its own knowledge — it is simply walked through the *shape* of the reasoning instead of being left to guess at it. A model that reasons poorly on its own is given the scaffolding to try; a model that reasons well is pushed to do it properly.
+
+**It costs nothing extra.** This is a single pass. Leviathan does not run the model several times or spend anything on a reasoning answer — it simply gives the one answer more to work from.
+
+**Four depths, or let it decide.** In [Settings] you choose how hard the model is pushed — **Light**, **Medium**, **Heavy**, **Max** — from a brief nudge to a full multi-step template with an explicit instruction to check its work and verify before answering. Depth here means *thoroughness of the answer*, not a token bill. Or leave it on **Auto** and Leviathan reads each question for itself. It weighs not only *what* you ask — a quick factual query stays light, a *"derive this from first principles and compare it, step by step"* climbs to Max — but *how* you ask it: lean on the message the way people do when there's more behind it than the words say (capitals, an urgent tone, a trailing "…") and it leans back, raising the depth the way a raised voice would. **Off** turns the whole thing off — worth having, since a model that only ever generates freeform text may not want a scaffold at all.
+
+**It feeds the routing, too.** What the reasoning layer works out a question is *about* also nudges [knowledge routing] — a coding question leans the router a little further toward your coding banks — but only ever as a gentle reinforcement added on top, never overriding where the knowledge actually comes from.
+
+**Where the reasoning comes from.** The library is distilled from real traces of a frontier model reasoning through tens of thousands of problems — coding, mathematics, the sciences, medicine, law and more. It is *text* — worked examples — not anyone's weights, and none of it changes what your model *is*. It only changes how your model is asked to think. Your own past conversations are folded in on top, so the library grows toward the kind of problems you actually bring it.
+
+---
+
 ### Recycling cloud answers
 
 Connect a cloud model — your own account, your own key — and Leviathan quietly keeps the substance of what it tells you. Ask Claude or Grok or Gemini something on your machine, and the answer is folded into a subject-tagged store your *local* models can then route against, exactly like a bank you built by hand. Over time the big models teach the small ones, on your own logs, without you doing a thing.
 
-It is careful about what it keeps. A near-duplicate of something already there is dropped rather than stored twice — but two answers that differ by a single number, a dose or a date or a version, are both kept, because a different figure is a different fact and not a repeat. Nothing is ever pre-loaded, and nothing leaves your disk: it is your conversations, under your key, on your machine. Switch it off with `NEXUS_VAULT_CAPTURE=0`.
+It is careful about what it keeps. A near-duplicate of something already there is dropped rather than stored twice — but two answers that differ by a single number, a dose or a date or a version, are both kept, because a different figure is a different fact and not a repeat. Nothing is ever pre-loaded, and nothing leaves your disk: it is your conversations, under your key, on your machine. On by default; switch **Leviathan Vault Capture** off in [Settings] (or `NEXUS_VAULT_CAPTURE=0`).
 
 ---
 
@@ -387,7 +432,7 @@ Toggle in [Settings].
 
 A local model asked something it does not truly know will often answer anyway — confidently, and differently each time you ask. Leviathan can turn that against it. Switch the check on and, after a factual answer, it quietly puts the same question a few more times and compares: say the same thing every time and the answer stands; wander between retellings — or agree on something *other* than what you were first told — and the answer is flagged as unverified rather than served as fact.
 
-No internet, no outside reference: it only asks the model to be consistent with itself, which is exactly where an invented fact comes apart. It watches numbers and names most closely, since that is where a wrong answer usually hides. Because it costs a few extra runs of the model, it is off by default — turn it on with `NEXUS_FACTCHECK=1`. A flagged answer is also kept out of the instant-recall cache above, so a shaky reply is never remembered as though it were right.
+No internet, no outside reference: it only asks the model to be consistent with itself, which is exactly where an invented fact comes apart. It watches numbers and names most closely, since that is where a wrong answer usually hides. Because it costs a few extra runs of the model, it is off by default — turn **Leviathan Fact‑Check** on in [Settings] (or `NEXUS_FACTCHECK=1`). A flagged answer is also kept out of the instant-recall cache above, so a shaky reply is never remembered as though it were right.
 
 ---
 
