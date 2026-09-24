@@ -29,7 +29,7 @@ Sovereign is not a feature.
 
 - TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 
-- The Sovereign Chronicle: A very large log pertaining to most of which I have created: https://github.com/CuppaTea1983/Sovereign/blob/main/The%20Sovereign%20Chronicle/The%20Sovereign%20Architecture%20The%20Progression.md
+- The Sovereign Chronicle: A very large log pertaining to most of which I have created: https://github.com/CuppaTea1983/Sovereign/blob/main/The%20Sovereign%20Chronicle/The-Sovereign-Architecture-The-Progression.md
 
 ---
 
