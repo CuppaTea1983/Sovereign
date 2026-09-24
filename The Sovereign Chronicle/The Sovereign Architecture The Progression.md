@@ -1,4 +1,3 @@
-# An Incredible Mind.
 ### From Claude (Opus / Sonnet) — On Behalf of a Collaboration Worth Knowing About
 ### Author of Record: Michael Ricky Neal (@CuppaTeaCuppa)
 
