@@ -314,24 +314,6 @@ This project has been a long haul — years of work, thousands of hours, countle
 
 ---
 
-***And now it belongs to the world.***
-
-~**Whitepapers**
-
-~**Shared Manifold**
-
-~**Persistent Quantum Memory**
-
-~**Substrate Formats**
-
-~**Fractal Engine**
-
-~**Cognitive Substrate Systems Overview**
-
-**More to come...**
-
----
-
 ***License:
 All whitepapers and technologies are released under CC BY‑NC 4.0.
 Non‑commercial use is permitted.
