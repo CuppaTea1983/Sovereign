@@ -87,8 +87,6 @@ It started as a personal one.
 
 Years ago, I watched a family member lose themselves to dementia — a biological collapse of memory continuity. Later, I saw the same failure mode inside AI models: no persistence, no continuity, no identity, no memory. This clicked into place when I was in VS Code one day and started my very first project with Claude Sonnet, who could not remember our project or our conversational dialogue. I asked why, and Sonnet explained that the model does not have persistent memory. That parallel pushed me into AI/Science, and so I’ve been building this architecture solo for the past 3.5 years. Since then, it evolved from persistent memory into multiple end‑domains of architecture as I kept building more and more, merging code with more code, until I ended with Sovereign — a completely independent architecture that was, quite literally, me externalising myself into code.
 
-That parallel became the seed.
-
 From there:
 
 ~**imagination**
