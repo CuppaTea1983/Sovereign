@@ -23,7 +23,7 @@ What makes it different from the other ways of running a model locally is what h
 - [The tabs]
 - [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Inline Studio] · [Settings]
 - [The systems]
-- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
+- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Grid Sight] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
 - [Using Leviathan from other programs]
 - [Where your files live]
 - [What Leviathan will not do]
@@ -157,7 +157,7 @@ Where you actually talk to the model.
 
 Type, press Start or `Ctrl+Enter`, and the reply streams back as it is generated. You can interrupt mid-answer — including during the long pause at the start while the model reads a large prompt — and it stops immediately rather than finishing the paragraph first.
 
-The chat takes the full width of the window. There is no side panel competing with it and nothing to arrange before you can start.
+The chat is the main event. Beside it sits a slim companion panel — the models currently in the conversation, the **🔀 Route** log showing where each question went, and the **👁 Grid Sight** controls for showing the model an image — but it is there to *inform*, never to *arrange*. Nothing in it needs setting before you begin: type, press Start, and go.
 
 **More than one model.** If you have several models connected, they take turns over a set number of rounds — you set that in [Models]. Useful when you want a second opinion in the same conversation rather than in two separate windows.
 
@@ -406,6 +406,22 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 ---
 
+### 👁 Grid Sight
+
+*Structural vision for models that have none.*
+
+**The problem.** A local model — a small one especially — usually cannot see an image at all. It has no visual eye, and the models that do are fussy about format and often can't run on your own GPU. So a diagram, a scan, a plot, a screenshot is simply outside the conversation: you describe it in words, or you go without.
+
+**What Leviathan does instead.** It does not try to teach your model to recognise pixels. It reads the *structure* of the image with the grid — the same structure-reading mathematics the rest of Leviathan is built on — and hands the model a short, plain-language readout of what is there: where the bright mass sits, what shape it takes (a compact **blob**, a line or **ridge**, **layered** bands, or **diffuse** with no clear form), which way it runs, and whether there is real structure at all or just noise. The grid does the seeing; the model reads what it saw and reasons about it.
+
+**How you use it.** In the panel beside the chat, turn **👁 Grid Sight** on, press **🖼 Scan image**, and pick a file. Leviathan reads its structure, tells you plainly what it found — *"blob, lower-right"* — and attaches that readout to your **next message** on its own. You just ask your question about the image. One toggle, one button, nothing to configure. Off by default, because it is yours to switch on when you want it.
+
+**What it is, and what it is not — so you know what to expect.** This is *structural* sight, not object recognition. It will tell a model that an image has a compact bright region in the lower-right, a diagonal ridge across it, or eight layered bands — it will **not** tell it "that's a photo of a dog" or read the words on a sign. Where structure *is* the content — diagrams, plots, charts, scans, microscopy, scientific and medical images, anything where *where things are and what shape they make* is the point — that is exactly what it delivers, on any capable model, with no visual training and nothing sent off your machine. For a caption of a holiday snap it is the wrong tool, and it will show you that honestly by describing shape rather than subject.
+
+**It reads better on a stronger model.** The model has to *understand* the readout, so a good instruction-follower makes full use of it while a very small or weak model may not — another reason it is a toggle you control rather than something always on. Images now; the same idea extends naturally to the pages of a document, which is where it is headed next.
+
+---
+
 ### Recycling cloud answers
 
 Connect a cloud model — your own account, your own key — and Leviathan quietly keeps the substance of what it tells you. Ask Claude or Grok or Gemini something on your machine, and the answer is folded into a subject-tagged store your *local* models can then route against, exactly like a bank you built by hand. Over time the big models teach the small ones, on your own logs, without you doing a thing.
@@ -528,5 +544,6 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Whitepapers:** https://zenodo.org/records/22766642 — the research behind the memory, compression and eigenspace work, permanently archived and citable.
 
 All three are linked from **Settings → About** inside the app.
+
 
 
