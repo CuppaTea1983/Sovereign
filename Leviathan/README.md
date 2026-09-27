@@ -23,7 +23,7 @@ What makes it different from the other ways of running a model locally is what h
 - [The tabs]
 - [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Inline Studio] · [Settings]
 - [The systems]
-- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Grid Sight] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
+- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Forensic Grid] · [Surface Sight] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
 - [Using Leviathan from other programs]
 - [Where your files live]
 - [What Leviathan will not do]
@@ -135,7 +135,11 @@ Think of a library where the books arrived in delivery order and were shelved ex
 
 **Note the "from GGUF" carefully — this is the bit that trips people up.** A `.eig` has to be built from the **original `.gguf`**, not from the `.lev` you converted. The conversion to `.lev` pre-packs the model for the graphics card, and once packed it cannot be taken apart again to be reorganised. So keep the original `.gguf` around until you have built your `.eig`. If you have already deleted it, you will need to download it again.
 
-**Where to put it:** next to your model, with the same name and a `.eig` extension. Leviathan looks there automatically every time it loads a model. There is no button to press and no setting to switch on — if the file is there, it is used; if it is not, the model runs the ordinary way and says so in the log.
+**Where it lands, and where it needs to end up — read this bit, it is the part that confuses everyone.** The builder works from the `.gguf`, so the `.eig` it produces is written **into the same folder as that `.gguf`**, with the `.gguf`'s name. But the model you actually *run* is the `.lev`, and that usually lives somewhere else entirely. Leviathan looks for the `.eig` **right next to the `.lev`, sharing the `.lev`'s exact name** — so the freshly-built file is almost never in the right place on its own.
+
+So the one step people miss: **move the `.eig` so it sits beside your `.lev`, and give it the same name as the `.lev` with a `.eig` extension.** If your `.lev` is `F:\Lev-Models\atom-astronomy-7b.lev`, the file next to it must be `F:\Lev-Models\atom-astronomy-7b.eig`. (If you built the `.lev` from the same `.gguf`, the name already matches — you only need to move it, not rename it.) Leave the `.eig` sitting in the `.gguf` folder and Leviathan will never find it: the bank loads, the model answers, and nothing tells you the `.eig` was in the wrong place.
+
+Once it is beside the `.lev`, it is automatic. There is no button to press and no setting to switch on — if the file is there, it is used; if it is not, the model runs the ordinary way and says so in the log.
 
 **Quality setting (SVD rank).** The builder asks for a rank. Higher keeps more of the original detail; lower is faster and smaller.
 - **1024** is the default and what Leviathan uses when loading. It keeps the model's quality essentially intact.
@@ -157,7 +161,9 @@ Where you actually talk to the model.
 
 Type, press Start or `Ctrl+Enter`, and the reply streams back as it is generated. You can interrupt mid-answer — including during the long pause at the start while the model reads a large prompt — and it stops immediately rather than finishing the paragraph first.
 
-The chat is the main event. Beside it sits a slim companion panel — the models currently in the conversation, the **🔀 Route** log showing where each question went, and the **👁 Grid Sight** controls for showing the model an image — but it is there to *inform*, never to *arrange*. Nothing in it needs setting before you begin: type, press Start, and go.
+Down by the input box sits a compact **🧠 depth selector** — **Off · Auto · Light · Medium · Heavy · Max**. This is where you set how hard the model is made to think before it answers, and it lives with the chat, not buried in Settings, so you can change it question by question. What each depth actually does is under [Reasoning layer].
+
+The chat is the main event. Beside it sits a slim companion panel — the models currently in the conversation, the **🔀 Route** log showing where each question went, and the **🔬 Forensic Grid** / **🔎 Surface Sight** controls for showing the model an image — but it is there to *inform*, never to *arrange*. Nothing in it needs setting before you begin: type, press Start, and go.
 
 **More than one model.** If you have several models connected, they take turns over a set number of rounds — you set that in [Models]. Useful when you want a second opinion in the same conversation rather than in two separate windows.
 
@@ -310,7 +316,7 @@ The right-hand column is the team — the models taking part on top, their runni
 
 ### ⚙ Settings
 
-Seven sections.
+Six sections. (The reasoning-depth control used to live here; it now sits down by the chat box instead — see [Chat] and [Reasoning layer].)
 
 **🛡 Security membrane**
 Scans what you send — and anything you paste or load — before the model sees it. Covered properly [below].
@@ -321,9 +327,6 @@ Scans what you send — and anything you paste or load — before the model sees
 
 **🧠 Eidetic recall**
 Answers a question you have asked before instantly from cache instead of regenerating it. Exact matches only. [Below].
-
-**🧠 Reasoning layer**
-Hands the model a step-by-step scaffold distilled from a frontier model's reasoning before it answers. Off · Auto · Light · Medium · Heavy · Max. [Below].
 
 **🔍 Leviathan Fact‑Check**
 After a factual answer, re-asks the model the same thing a few times and flags it if the retellings disagree. Off by default (it costs a few extra local runs). [Below].
@@ -398,7 +401,7 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 **It costs nothing extra.** This is a single pass. Leviathan does not run the model several times or spend anything on a reasoning answer — it simply gives the one answer more to work from.
 
-**Four depths, or let it decide.** In [Settings] you choose how hard the model is pushed — **Light**, **Medium**, **Heavy**, **Max** — from a brief nudge to a full multi-step template with an explicit instruction to check its work and verify before answering. Depth here means *thoroughness of the answer*, not a token bill. Or leave it on **Auto** and Leviathan reads each question for itself. It weighs not only *what* you ask — a quick factual query stays light, a *"derive this from first principles and compare it, step by step"* climbs to Max — but *how* you ask it: lean on the message the way people do when there's more behind it than the words say (capitals, an urgent tone, a trailing "…") and it leans back, raising the depth the way a raised voice would. **Off** turns the whole thing off — worth having, since a model that only ever generates freeform text may not want a scaffold at all.
+**Four depths, or let it decide.** A compact **🧠** selector sits right by the chat box — no digging through Settings — where you choose how hard the model is pushed: **Light**, **Medium**, **Heavy**, **Max**, from a brief nudge to a full multi-step template with an explicit instruction to check its work and verify before answering. Depth here means *thoroughness of the answer*, not a token bill. Or leave it on **Auto** and Leviathan reads each question for itself. It weighs not only *what* you ask — a quick factual query stays light, a *"derive this from first principles and compare it, step by step"* climbs to Max — but *how* you ask it: lean on the message the way people do when there's more behind it than the words say (capitals, an urgent tone, a trailing "…") and it leans back, raising the depth the way a raised voice would. **Off** turns the whole thing off — worth having, since a model that only ever generates freeform text may not want a scaffold at all.
 
 **It feeds the routing, too.** What the reasoning layer works out a question is *about* also nudges [knowledge routing] — a coding question leans the router a little further toward your coding banks — but only ever as a gentle reinforcement added on top, never overriding where the knowledge actually comes from.
 
@@ -406,7 +409,7 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 ---
 
-### 👁 Grid Sight
+### 🔬 Forensic Grid
 
 *Structural vision for models that have none.*
 
@@ -414,11 +417,27 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 **What Leviathan does instead.** It does not try to teach your model to recognise pixels. It reads the *structure* of the image with the grid — the same structure-reading mathematics the rest of Leviathan is built on — and hands the model a short, plain-language readout of what is there: where the bright mass sits, what shape it takes (a compact **blob**, a line or **ridge**, **layered** bands, or **diffuse** with no clear form), which way it runs, and whether there is real structure at all or just noise. The grid does the seeing; the model reads what it saw and reasons about it.
 
-**How you use it.** In the panel beside the chat, turn **👁 Grid Sight** on, press **🖼 Scan image**, and pick a file. Leviathan reads its structure, tells you plainly what it found — *"blob, lower-right"* — and attaches that readout to your **next message** on its own. You just ask your question about the image. One toggle, one button, nothing to configure. Off by default, because it is yours to switch on when you want it.
+**How you use it.** In the panel beside the chat, turn **🔬 Forensic Grid** on, press **🖼 Scan image**, and pick a file. Leviathan reads its structure, tells you plainly what it found — *"blob, lower-right"* — and attaches that readout to your **next message** on its own. You just ask your question about the image. One toggle, one button, nothing to configure. Off by default, because it is yours to switch on when you want it.
 
 **What it is, and what it is not — so you know what to expect.** This is *structural* sight, not object recognition. It will tell a model that an image has a compact bright region in the lower-right, a diagonal ridge across it, or eight layered bands — it will **not** tell it "that's a photo of a dog" or read the words on a sign. Where structure *is* the content — diagrams, plots, charts, scans, microscopy, scientific and medical images, anything where *where things are and what shape they make* is the point — that is exactly what it delivers, on any capable model, with no visual training and nothing sent off your machine. For a caption of a holiday snap it is the wrong tool, and it will show you that honestly by describing shape rather than subject.
 
 **It reads better on a stronger model.** The model has to *understand* the readout, so a good instruction-follower makes full use of it while a very small or weak model may not — another reason it is a toggle you control rather than something always on. Images now; the same idea extends naturally to the pages of a document, which is where it is headed next.
+
+---
+
+### 🔎 Surface Sight
+
+*Actual image recognition, run as a tool the engine never has to become.*
+
+**The other half of seeing.** Forensic Grid reads an image's *structure*; Surface Sight reads its *surface* — what the picture actually **depicts**. Point it at a photo and it tells the model *"a cake"*, *"an office"*, *"a street"*, *"a mountain"* — the kind of recognition a vision model or a coding assistant gives you, now available to a local text model that has no eye of its own.
+
+**How it stays true to Leviathan.** Recognition comes from a trained vision model, and those live in weights that are far too heavy to bake into a lean, driver-only engine. So Leviathan does not bake them in. The recogniser runs as an **external tool** — a small, self-contained vision model on your **CPU** (no special graphics card, works on any machine, nothing sent off it) — and simply hands the words it found back into the chat. The engine that runs your language model never changes; it just gets told what the picture shows, the same way Forensic Grid tells it the shape.
+
+**How you use it.** In the panel beside the chat, turn **🔎 Surface Sight** on, press **🖼 See image**, and pick a file. It recognises the content, attaches a short readout — *"most likely a cake (99%)"* — to your **next message**, and you ask your question about the image. One toggle, one button, off by default.
+
+**Honest about confidence.** It tells you *how sure it is*, and when it is not sure it says so and offers its best few guesses rather than bluffing a single answer. It is strong on clear subjects and honest about the fuzzy ones — you will always see the number, so you always know how much to trust it.
+
+**The vision add-on.** To keep the installer small, the vision model itself is an **optional, one-time download** you choose to add — it is not shipped inside Leviathan and nothing is fetched without you asking. Until you add it, the button is there and simply tells you the add-on isn't installed yet. Forensic Grid (structure) needs nothing extra and works out of the box; Surface Sight (recognition) is the opt-in companion for when you want the model to know *what*, not just *where*.
 
 ---
 
@@ -544,6 +563,7 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Whitepapers:** https://zenodo.org/records/22766642 — the research behind the memory, compression and eigenspace work, permanently archived and citable.
 
 All three are linked from **Settings → About** inside the app.
+
 
 
 
