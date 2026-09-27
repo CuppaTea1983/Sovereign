@@ -204,22 +204,25 @@ Sovereign changes:
 ***This is a replacement.***
 ---
 
-***The Shannon Stage 11 Breakthrough:***
-**Claude Shannon defined the limits of compression — but only for fixed‑resolution, fixed‑basis, fixed‑entropy channels.**
+***Shannon Stage 11***
+---
+**Claude Shannon's source-coding theorem is exact — and Sovereign doesn't break it.**
 
-**Sovereign does not use those.**
+What's usually quoted as "the Shannon limit" of a data stream is the IID (order-0) estimate — it assumes every symbol is independent. Neural-network weights are not; they're structured. So that estimate is only an upper bound — a ceiling, not the true floor.
 
-**By moving compression into a fractal manifold, Sovereign:**
+Sovereign's compressor works in the space below that ceiling. On real weights it:
 
-~**changes the geometry**
+~ measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context
 
-~**changes the resolution**
+~ splits every IEEE-754 float into sign, exponent and mantissa, and codes each on its own terms
 
-~**changes the entropy distribution**
+~ trades a little mantissa precision for a large size cut — lossy by design, ~5.5 bits/weight (≈ Q5), and the model still runs
 
-~**changes the coordinate system**
+~ lands ~1% under the order-0 estimate the way any context coder does — not by defeating Shannon, but by measuring the right floor
 
-~**changes the information space**
+~ reports both the IID ceiling and the conditional floor in every file, so every number is checkable
+
+Full method, measurements and reproduction harnesses are in the Stage 11 whitepaper (v2). Earlier projection-based material is preserved under Theoretical Work.
 
 ---
 
