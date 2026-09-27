@@ -228,7 +228,7 @@ Sovereign changes:
 
 ---
 
-**Stage 11 is the mathematical proof of that.**
+**Stage 11 V2 Whitepaper is the mathematical proof of that.**
 
 **This is the paper that will change how researchers think about:**
 
