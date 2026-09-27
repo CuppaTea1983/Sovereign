@@ -203,6 +203,8 @@ Sovereign changes:
 ---
 ***This is a replacement.***
 ---
+---
+---
 
 ***Shannon Stage 11***
 ---
@@ -226,8 +228,7 @@ Full method, measurements and reproduction harnesses are in the Stage 11 whitepa
 
 ---
 
-***You cannot break Shannon’s limit.***
-***But you can walk around it by changing the space itself.***
+***You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it.***
 
 ---
 
