@@ -17,13 +17,11 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
-- Stage 11 Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/stage11_whitepaper.pdf
+- Stage 11 V2 Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
 - Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
 - The Eigenweight Engine: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/The_Eigenweight_Engine_Whitepaper.md
-
-- Shannon Stage 10 Calculator: https://github.com/CuppaTea1983/Sovereign/blob/main/calculator/shannon_stage10_calculator.py
 
 - Leviathan: An all in one solution for LLM hosting: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
 
