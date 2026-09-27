@@ -203,9 +203,8 @@ Sovereign changes:
 ---
 ***This is a replacement.***
 ---
----
----
 
+----------------------
 ***Shannon Stage 11***
 ---
 **Claude Shannon's source-coding theorem is exact — and Sovereign doesn't break it.**
