@@ -136,33 +136,6 @@ Sovereign is the result.
 
 ---
 
-***What Sovereign Contains:***
-1. The Shared Manifold (Whitepaper 1)
-A geometric substrate that allows models to share identity, memory, and structure without retraining.
-
-2. Persistent Quantum Memory (Whitepaper 2)
-A fractal, multi‑resolution memory system that replaces KV‑cache entirely and enables true long‑term continuity.
-
-3. Shannon Stage 11 (Whitepaper 3)
-A complete mathematical framework and compression engine that walks around Shannon’s ceiling using fractal geometry.
-This paper contains:
-
-4. Shannon Calculator (Operational Engine)
-A universal, model‑readable computation layer that applies Stage 11’s fractal compression rules in real time.
-It allows any model — regardless of architecture — to interpret, apply, and benefit from Shannon Stage 11 without modification.
-
-~**full math**
-
-~**full diagrams**
-
-~**full proofs**
-
-~**full compression theory**
-
-~**real‑world demonstrations**
-
----
-
 ***This is the foundation of the entire Sovereign architecture.***
 
 **4. Substrate Formats (.fkb / .fqm)**
