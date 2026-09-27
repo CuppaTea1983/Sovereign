@@ -19,7 +19,7 @@ What makes it different from the other ways of running a model locally is what h
 
 - [Requirements]
 - [First run]
-- [The four file types]	— **start here if you only read one section**
+- [The three file types]	— **start here if you only read one section**
 - [The tabs]
 - [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Inline Studio] · [Settings]
 - [The systems]
@@ -59,11 +59,11 @@ Everything after that is optional. Leviathan is fully usable knowing only those 
 
 ---
 
-## The four file types
+## The three file types
 
-This is the part most people find confusing, and it is worth five minutes because everything else in Leviathan is built on it. There are four kinds of file, they do four completely different jobs, and they are not alternatives to one another.
+This is the part most people find confusing, and it is worth five minutes because everything else in Leviathan is built on it. There are three kinds of file, they do three completely different jobs, and they are not alternatives to one another.
 
-A rough analogy, if it helps: if the model is a **person**, then `.lev` is their brain, `.fqm` is their memory of your conversations, `.fkb` is knowledge they have studied until it became part of how they think, and `.eig` is the filing system their brain is organised into.
+A rough analogy, if it helps: if the model is a **person**, then `.lev` is their brain, `.fqm` is their memory of your conversations, and `.fkb` is knowledge they have studied until it became part of how they think.
 
 ---
 
@@ -99,53 +99,15 @@ A `.fqm` is that memory, written to a file. When you load the model again, the m
 
 ### `.fkb` — the knowledge bank
 
-**What it is:** knowledge held in the model's own language.
+**What it is:** a body of knowledge you can give a model without retraining it — facts, answers, worked material — kept as *text* and routed to the model by meaning when a question calls for it. Not a document you paste in and hope fits; knowledge that is there when the subject comes up and out of the way when it does not. How the right bank actually reaches the model is covered under [Knowledge routing — ANI]; this section is about what the banks themselves are.
 
-That line needs unpacking, because it is the thing most people get wrong about this format. When a model learns something, what it "knows" does not sit inside it as sentences — it becomes geometry, patterns in numbers. A `.fkb` captures knowledge in that same form, through the same mathematical decomposition (SVD) that `.eig` performs on the model's own weights. So a knowledge bank is not a document read aloud to the model when you ask a question. It is knowledge in the shape the model already thinks in, blended into its understanding for as long as the bank is loaded. The model does not consult it. It knows it.
+**Where a bank comes from — three ways, all the same kind of thing in the end:**
 
-**The heavy version, and the thing most people miss: a `.fkb` can be an archive of another model's knowledge.** This is what makes the format matter. Because a bank is written in the model's native geometry rather than in words, you can point Leviathan at *another model* and decompose what that model learned — the actual knowledge sitting in its weights — straight into a bank. That bank is then portable. Knowledge that one model spent its entire training absorbing can be lifted out and blended into a *different* model, with no retraining of either. So a `.fkb` is not "the notes I fed in." At its fullest it is the distilled learning of a whole model, kept in compressed geometric form, ready to hand to another one. That is what the archives are: raw knowledge absorbed out of models, in the shape a model can actually use — not documents typed up and pasted back.
+- **Folded from your own conversations.** A captured session becomes a bank, in **Settings → Consume knowledge**. What you worked out with a model last week is answerable next week — even by a *different* model.
+- **Drained from a model.** Have a model talk out what it knows and keep the substance as text, before you retire it. The knowledge a model spent its whole training absorbing is lifted out and kept — a retired model becomes a knowledge *donor* instead of a deleted file.
+- **Built by hand.** Your own notes, a rulebook, a body of lore.
 
-**How the right knowledge finds you — the tag system.** This is what makes it effortless, and it is worth understanding rather than taking on trust. Every bank is filed under **tags**: the subjects it covers. When you ask a question, Leviathan reads it, works out which subjects it touches, and pulls the banks filed under those tags — before the model answers. You never open a menu or choose a bank. The question chooses it.
-
-And it reads meaning, not spelling. Ask about "symptoms" and it finds the bank filed under "symptom"; ask about "debugging" and it finds "debug". Plurals, tenses, word endings — the router follows them, so the knowledge is there whether or not you happened to use the exact word the bank was filed under. Change the subject halfway through a conversation and the knowledge that travels with you changes too, quietly, without being asked for.
-
-**How you get one:** **Studio → Absorb**. Point it at a model — a `.gguf` file, or a folder of safetensors — and Leviathan reads its weights, decomposes what it learned, and files the result as a tagged, routable bank. You decide how much of the model to take and how much detail to keep; the Studio section below walks through every control. This is the model-to-model transfer described above: you are not uploading documents, you are lifting knowledge out of one model so another can use it.
-
-**The one requirement, and the reason a bank sometimes seems dead:** a `.fkb` blends into a model's eigenspace, so the model needs a `.eig` for the knowledge to have somewhere to land. Without one, the bank loads, the routing runs, the model answers — and none of the knowledge reaches it, with nothing to tell you. If a bank appears to do nothing, this is almost always why. The next section is about `.eig`, and it matters more than its name lets on.
-
----
-
-### `.eig` — the weight basis
-
-**This is the one nobody understands from the name, so here it is plainly.**
-
-**What it is:** your model's own knowledge, reorganised into a tidier arrangement. Not a different model, not extra knowledge, not a setting. The same model, filed differently.
-
-Think of a library where the books arrived in delivery order and were shelved exactly as they came off the van. Everything is there, but finding anything means walking the whole building. A `.eig` is that library re-shelved properly — same books, nothing added, nothing thrown out, but now organised so you can go straight to what you need.
-
-**It does two separate things, and the second one is why it matters more than it looks.**
-
-**One — it makes the model faster.** Working from the organised arrangement instead of the raw one, the model answers substantially quicker. On an RTX 4080 the speed-up was measured at roughly 6.8× at the aggressive setting. This is the reason most people build one.
-
-**Two — it is what knowledge banks plug into.** This is the part that catches people out. A `.fkb` does not get pasted into your prompt; it blends into the model's arrangement of its own knowledge. If there is no arrangement to blend into — no `.eig` — then there is nothing for the bank to attach to, and **your knowledge banks silently do nothing at all**. The bank loads. The routing runs. The model answers without it. Nothing appears broken.
-
-> **If you want `.fkb` knowledge banks to work, you need a `.eig` for that model. This is not optional and there is no way around it.**
-
-**How you get one:** **Models → ⚗ Build .eig from GGUF**.
-
-**Note the "from GGUF" carefully — this is the bit that trips people up.** A `.eig` has to be built from the **original `.gguf`**, not from the `.lev` you converted. The conversion to `.lev` pre-packs the model for the graphics card, and once packed it cannot be taken apart again to be reorganised. So keep the original `.gguf` around until you have built your `.eig`. If you have already deleted it, you will need to download it again.
-
-**Where it lands, and where it needs to end up — read this bit, it is the part that confuses everyone.** The builder works from the `.gguf`, so the `.eig` it produces is written **into the same folder as that `.gguf`**, with the `.gguf`'s name. But the model you actually *run* is the `.lev`, and that usually lives somewhere else entirely. Leviathan looks for the `.eig` **right next to the `.lev`, sharing the `.lev`'s exact name** — so the freshly-built file is almost never in the right place on its own.
-
-So the one step people miss: **move the `.eig` so it sits beside your `.lev`, and give it the same name as the `.lev` with a `.eig` extension.** If your `.lev` is `F:\Lev-Models\atom-astronomy-7b.lev`, the file next to it must be `F:\Lev-Models\atom-astronomy-7b.eig`. (If you built the `.lev` from the same `.gguf`, the name already matches — you only need to move it, not rename it.) Leave the `.eig` sitting in the `.gguf` folder and Leviathan will never find it: the bank loads, the model answers, and nothing tells you the `.eig` was in the wrong place.
-
-Once it is beside the `.lev`, it is automatic. There is no button to press and no setting to switch on — if the file is there, it is used; if it is not, the model runs the ordinary way and says so in the log.
-
-**Quality setting (SVD rank).** The builder asks for a rank. Higher keeps more of the original detail; lower is faster and smaller.
-- **1024** is the default and what Leviathan uses when loading. It keeps the model's quality essentially intact.
-- **512** is roughly 6.8× faster but noticeably lossier on some models. Worth trying, worth checking the answers afterwards.
-
-**Does it use extra VRAM?** No. This is the common worry and the answer is genuinely no. As each piece of the reorganised model uploads to the card, the original copy of that piece is released. It **replaces** the original rather than sitting alongside it. A `.eig` will not push you over your VRAM budget.
+**Why it is text, and why that matters.** Knowledge crosses between models as text, carried by meaning — not as transplanted weights. That is what makes a bank portable: it does not care what architecture, size or family the model reading it is, because it is re-read into whatever model is live. A bank is only ever as good as what went into it — a strong source makes a strong bank, a vague one makes a vague bank — and on any given question the router surfaces the best match it has, honestly, either way.
 
 ---
 
@@ -210,8 +172,6 @@ Routes work only from what the two models already know. They do not browse the w
 **Profiles.** **💾 Save Profile** stores your whole setup — models and their settings — and **📂 Load Profile** brings it back. Leviathan reloads your last profile on startup, so your working arrangement is there when you open it.
 
 **Max Rounds** controls how many turns a multi-model conversation takes before it stops.
-
-**⚗ Build .eig from GGUF** is here. See [the `.eig` section] — it is the single most useful button on this tab and the least obvious.
 
 ---
 
@@ -370,20 +330,20 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 ---
 
-### Knowledge routing
+### Knowledge routing — ANI
 
 **The problem.** A model knows what it was trained on. It does not know your rulebook, your codebase, your company's processes or your world's history. The usual fix is to paste the relevant document into the chat, which means knowing in advance which document is relevant and having room for it.
 
-**What Leviathan does instead.** You build knowledge banks once, in Studio → Absorb, and each one is filed under **tags** — the subjects it covers. From then on you simply talk. Leviathan reads each question, works out which subjects it touches, pulls the banks filed under those tags, and blends them into the model's understanding before it answers. The knowledge finds you; you never go looking for it.
+**What Leviathan does instead.** You build knowledge banks, and each one is *text* — knowledge drained out of a model before you retire it, folded in from your own past conversations, or written by hand. ANI, the router, projects every bank and every question you ask into **one shared space**, where nearness means relatedness of *meaning*. Ask something and it finds the knowledge that actually fits — across all your banks at once — and hands it to the model before it answers. You never file the question under a subject or pick a bank from a list; the geometry does that for you.
 
 **What that means in practice:**
 
-- No pasting, and no picking a document from a dropdown first.
-- Ask about one subject and its bank is there; change subject mid-conversation and the knowledge that comes with you changes too.
-- Banks are independent of models. Build one, use it with all of them.
-- It reads meaning, not spelling. Plurals, tenses and word endings are followed, so "symptoms" finds material filed under "symptom" and "debugging" finds "debug" — the knowledge is there even when your wording isn't the bank's wording.
+- It reads meaning, not spelling. "symptoms" finds material stored as "symptom", "debugging" finds "debug" — the match is in the shared space, not in the letters.
+- Because a bank is text, it is free of any one model. Drain the knowledge out of a big model that is about to be replaced, and a small model can answer from it — no retraining, no matching architectures, no shared vocabulary required. Knowledge crosses between models as **text**, carried by meaning, not by transplanting weights.
+- The strongest bank wins and a weak one loses, on the same question, by relevance alone — so quality beats quantity. A bank is only ever as good as what went into it; a vague source makes a vague bank, and the router will faithfully surface exactly that.
+- Banks grow. Consume the same knowledge twice and the duplicate is dropped; add something new and it accretes. The space reshapes itself as the substrate grows.
 
-**The requirement, again, because it is the single most common reason this appears not to work:** knowledge banks blend into a model's eigenspace, so the model needs a `.eig`. Without one, the bank loads, the routing runs, and the knowledge never actually reaches the model — with nothing to tell you it didn't. If your banks seem to be doing nothing, build a `.eig` first and try again.
+**Consuming knowledge.** In **Settings → Consume knowledge**, pick a captured-session file and press **Consume**. Leviathan folds it into a bank in the background — deduplicated so nothing is stored twice, and coherence-checked so degenerate or repetitive text never makes it in. That is the everyday way to turn *a conversation I had last week* into *something my model can answer from* — even when the model that first said it is long gone.
 
 **Seeing it happen — the Route panel.** Beside the chat, the **🔀 Route** panel keeps a running log of where your questions went. Each time a model answers, a new entry appears at the top: the model that replied, the knowledge bank it drew on, the subjects the question matched, and how many tokens and milliseconds it took. Newest on top, older ones beneath, so at a glance you can see which banks are actually being used — and which never get picked, which usually means a bank whose tags don't match the way you ask. The list keeps the last thirty or so routes; when you want a clean slate, the **🧹 Clear Route** button in the bottom-right of the panel wipes it. It clears only the on-screen log — your banks, memories and models are untouched.
 
