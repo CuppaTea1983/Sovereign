@@ -5,3 +5,5 @@ The V2 Whitepaper has since been Fully updated & Re-evaluated from V1, the shann
 Also Contains: The Eigenweight Engine Whitepaper-V1.
 
 ANI: The Knowledge Consumer Whitepaper is the upgrade to: The Eigenweight Engine Whitepaper-V1.
+
+ANI can be found here: https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
