@@ -1,9 +1,14 @@
-This folder contains the shannon_stage10_calculator and the stage11_whitepaper‑V1.
+***This folder contains theoretical math & frameworks, except the links supplied.***
+---
 
-The V2 Whitepaper has since been fully updated and re‑evaluated from V1.
+- The stage11_whitepaper-V1: ***has since been fully updated and re‑evaluated to stage11_whitepaper‑V2***
 
-The shannon_stage10_calculator is theoretical only.
+- stage11_whitepaper‑V2: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
-It also contains: The Eigenweight Engine Whitepaper‑V1.
+- The shannon_stage10_calculator: is ***theoretical only.***
 
-ANI: The Knowledge Consumer Whitepaper is the replacement for The Eigenweight Engine Whitepaper‑V1.
+- The Eigenweight Engine Whitepaper‑V1 is ***theoretical only***
+
+- ANI: The Knowledge Consumer: ***is the replacement for The Eigenweight Engine Whitepaper‑V1.***
+
+- ANI: https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
