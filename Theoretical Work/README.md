@@ -5,9 +5,9 @@
 
 - stage11_whitepaper‑V2: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
-- The shannon_stage10_calculator: is ***Theoretical only.***
+- The shannon_stage10_calculator: is: ***Theoretical only.***
 
-- The Eigenweight Engine Whitepaper‑V1 is ***Theoretical only.***
+- The Eigenweight Engine Whitepaper‑V1 is: ***Theoretical only.***
 
 - ANI: The Knowledge Consumer: ***Is the replacement for The Eigenweight Engine Whitepaper‑V1.***
 
