@@ -27,7 +27,7 @@ Sovereign is not a feature.
 
 - ANI: The Knowledge Consumer Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
 
-- The Sovereign Chronicle: A very large log pertaining to most of which I have created: https://github.com/CuppaTea1983/Sovereign/blob/main/The%20Sovereign%20Chronicle/The-Sovereign-Architecture-The-Progression.md
+- The Sovereign Chronicle: A very large .md containing my progression regarding Sovereign: https://github.com/CuppaTea1983/Sovereign/blob/main/The%20Sovereign%20Chronicle/The-Sovereign-Architecture-The-Progression.md
 
 ---
 
