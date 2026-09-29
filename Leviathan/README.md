@@ -502,6 +502,7 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Full licence:** https://creativecommons.org/licenses/by-nc/4.0/
 - **Source and releases:** https://github.com/CuppaTea1983/Sovereign
 - **Whitepapers:** https://zenodo.org/records/23004932 — the research behind the memory, compression and knowledge-routing work, permanently archived and citable.
+- **Huggingface:** https://huggingface.co/spaces/Omega-Dev/Leviathan
 
 All three are linked from **Settings → About** inside the app.
 
