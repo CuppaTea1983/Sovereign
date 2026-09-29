@@ -1,3 +1,6 @@
+***Leviathan HF Space: https://huggingface.co/spaces/Omega-Dev/Leviathan***
+---------------------------------------------------------------------------
+
 ***Q: What is Sovereign***
 ---
 ***A: Sovereign — Cognitive Substrate Systems***
@@ -22,8 +25,6 @@ Sovereign is not a feature.
 - Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
 - Leviathan: An all in one solution for LLM hosting: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
-
-- Leviathan HF Space: https://huggingface.co/spaces/Omega-Dev/Leviathan
 
 - TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 
