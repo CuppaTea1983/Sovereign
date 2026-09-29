@@ -23,6 +23,8 @@ Sovereign is not a feature.
 
 - Leviathan: An all in one solution for LLM hosting: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
 
+- Leviathan HF Space: https://huggingface.co/spaces/Omega-Dev/Leviathan
+
 - TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 
 - ANI: The Knowledge Consumer Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
