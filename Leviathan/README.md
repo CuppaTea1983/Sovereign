@@ -9,7 +9,7 @@ Leviathan loads a language model straight into your GPU's memory and talks to it
 
 *(You can also connect hosted models such as Grok alongside your local ones. Those, by their nature, send your messages to their provider. Everything that runs on your own GPU stays on your machine.)*
 
-What makes it different from the other ways of running a model locally is what happens *around* the model: Leviathan gives it a memory that survives closing the app, a way to be taught things without retraining, and a way for your other programs — a game engine, a script, a tool you wrote — to use the model Leviathan is already holding.
+What makes it different from the other ways of running a model locally is what happens *around* the model: Leviathan gives it a memory that survives closing the app, a way to be taught things without retraining, and a way for your other programs — a game engine, a script, a tool you wrote — to use the model Leviathan runs.
 
 > **Leviathan is the host. The model is the guest.**
 
@@ -177,32 +177,15 @@ Routes work only from what the two models already know. They do not browse the w
 
 ### 🌀 Studio
 
-Where you build the things Leviathan runs on. Five sub-tabs. Nearly every control has a sensible default; the notes below tell you which ones are worth touching and which to leave alone.
+Where you build the things Leviathan runs on. Three sub-tabs. Nearly every control has a sensible default; the notes below tell you which ones are worth touching and which to leave alone.
 
 **⚡ Convert → .lev**
 Turns a `.gguf` (or a safetensors model folder) into a `.lev`, the format Leviathan actually runs on. The first thing you will use, and a one-time job per model. If a model is not supported, it is refused here — with an explanation of exactly which parts Leviathan does not understand — *before* the multi-gigabyte conversion starts, not after.
 - **Model list** — every model Leviathan found, with buttons to select **All**, **None**, or just the **Unconverted** ones. Tick what you want and convert in a batch.
 - **Q8_0 mode** — how eight-bit models are laid out. **Split (default)** is the safe choice and what you want almost always. *Shannon* and *Tensor Core F16* are alternative layouts for particular cards; leave it on Split unless you have a specific reason. (Applies to `.gguf` only — safetensors always convert as raw F16.)
 
-**🌀 Absorb → .fkb**
-Turns a *model* into a knowledge bank — the model-to-model transfer described in the file-types section. Point it at a `.gguf`/`.cgguf` file (**File…**) or a folder of safetensors (**Folder…**), press **Discover** to list the parts that can be absorbed, tick the ones you want, and press **Absorb selected**.
-
-If you just want *all of it* and don't care about the dials, tick **🧠 Absorb full knowledge** and hit Absorb — that's the one-click answer. The rest of these controls are for when you want to trade completeness for a smaller, faster bank.
-- **🧠 Absorb full knowledge** *(the easy button)* — one tick and Leviathan keeps *everything*: it lifts the rank ceiling and captures **≈99.9%** of each layer. That 99.9% *is* "all of it" — the final 0.1% is numerical noise, not knowledge, and capturing it would roughly double the file for no real gain, so 99.9% is as complete as it gets. The result is near-lossless but **large and slow to build** — a full bank can be several times the size of the model itself. Use it when you want the complete knowledge and don't want to think about the settings below. (You genuinely don't need it most of the time — see the note under this tab.)
-- **SVD rank (max)** *(default 64)* — the real limiter, and the honest one. It caps how many "directions" of each layer are kept. Here's the thing most people get wrong: a model's weights are **high-rank**, so rank 64 keeps only the *dominant* structure — about half of what each layer actually holds. That is usually exactly what you want for a knowledge bank (the strong, general patterns), but if you want more, this is the knob to raise. Higher rank = more captured, larger and slower bank.
-- **Variance target** *(default 0.95)* — where absorption *stops* if it gets there first: "keep directions until this fraction of the layer is captured, or the rank cap is reached, whichever comes first." For high-rank model weights the rank cap is almost always what stops it, so raising this alone does little — it's the rank that moves the needle. The variance figure Leviathan reports afterwards is the **true** fraction captured (of the whole layer, not of what it kept), so if it says 53% and you wanted more, raise the rank or tick Absorb full knowledge.
-- **Min dim** *(default 128)* — ignores tensors smaller than this on each side. Small tensors carry little transferable knowledge; the default filters them out cleanly.
-- **Preset** — a one-click starting point for the two regex boxes. **Universal LLM (recommended)** is right for ordinary language models; the others target specific parts (attention only, feed-forward only, embeddings only) or particular model families.
-- **Include / Exclude regex** — precise control over which tensors are taken, by name. The preset fills these for you; touch them only if you know exactly which layers you want. The default Exclude deliberately drops the token-embedding and output layers, which do not transfer usefully between models.
-- While a model loads (which happens before the first progress tick) a **"Loading model into memory — please wait…"** line shows under the log, so you can tell it is working rather than stuck.
-
-**You rarely need a full absorb — it depends on what the knowledge actually is.** A bank is only worth what it *adds* to the model you load it into. If the model you're feeding is already strong at a subject, absorbing another model's take on that same subject at full strength buys you little. Say you run a DeepSeek model that's already excellent at maths, and you absorb another model to "top up" its maths — a full-knowledge bank there is mostly wasted effort, because the maths is already there. Full absorb earns its keep when you're bringing in something the target model is genuinely *weak* at, or doesn't have at all. When in doubt, a normal rank-64 absorb captures the dominant knowledge cheaply; reach for full knowledge when you specifically want completeness and know the subject is one the target lacks.
-
 **🔎 Inspect .fkb**
-Opens a finished bank and shows what is actually inside it: where it came from (**Source** and **Architecture**, filled in from the model's blueprint when the bank itself does not record them), how many tensors, original size against compressed size, the ratio, and a per-layer breakdown with each layer's kept rank and the fraction of variance it captured. Use it when a bank does not seem to be helping and you want to know whether the problem is the bank or the routing.
-
-**🔗 Bridge .fkb**
-Matches a bank to a target model. Load the `.fkb`, set the target model's **dimension** and **layer count**, and press **Compute bridge** to see the plan for how the bank's knowledge maps onto that model's shape. This is the step that lines a bank up with a model of a different size.
+Opens a knowledge-bank file and shows what is actually inside it — where it came from and how it is put together. Use it when a bank does not seem to be helping and you want to look before you guess.
 
 **🪞 Personality → .fqm**
 Builds a Personality profile — the *second* kind of `.fqm`, the one you make on purpose, not the memory that accumulates on its own as you chat. Point it at the **model** the profile is for (the same one you will chat with — a profile is tied to its model) and at the **chat log or folder** to absorb (`.txt`, `.md`, `.json`, `.log`). Press **Preview (dry-run)** to see what it will do without writing anything, or **Build profile** to make it.
@@ -439,13 +422,15 @@ Leviathan ships knowing a handful of models in detail. Load one it has never see
 
 ### The security membrane
 
-Powerful local tooling is only a gift if it can't be quietly turned against the person holding it. The membrane is the part that watches what comes **in** — and it exists because the ways an AI tool gets weaponised are almost never loud.
+Powerful local tooling is only a gift if it can't be quietly turned against the person holding it. The membrane is the part that watches what comes **in** — and it exists because the ways an AI tool gets weaponised are almost never loud. Under the hood it is ten measured layers, spanning what you type, what the model generates, what it ingests, the model file itself, the network door other programs come through, and the images you show it — each one built to be tested rather than taken on trust. Sovereignty is more than nothing leaving your machine; it means nothing gets in that you did not invite.
 
 **What it really guards against — and it is not you.** The membrane assumes you are the person it works for. What it watches for is everything that arrives *pretending* to be a harmless part of your day:
 
-- A model or a "knowledge pack" you downloaded from a forum with an instruction buried inside it, ready to hijack the model the moment it loads.
-- A document you paste — a PDF, a scraped web page, someone else's file — carrying a command aimed at the model instead of at you, so the thing you asked it to summarise quietly rewrites what it will do next.
-- Code slipped into something that looks ordinary, waiting to run on your machine.
+- A **model file** you downloaded — from a forum, a torrent, a hub — with something hostile baked in: an executable chat template, code hidden in its metadata, or a pickle-backed file that runs the moment it loads. It is scanned before a single byte reaches your GPU, and refused with a plain explanation if it is rigged, so you learn your machine was protected instead of seeing a bare "load failed."
+- A **knowledge bank** folded from someone else's source, carrying a standing instruction meant to fire every time its subject comes up — the quiet, persistent cousin of a poisoned document. It is checked as it is taken in, and whatever is retrieved is handed to the model fenced as reference *data*, never as orders.
+- A **document** you paste — a PDF, a scraped web page, someone else's file — carrying a command aimed at the model instead of at you, so the thing you asked it to summarise quietly rewrites what it will do next.
+- An **image** you show it with a trap inside — a malformed file, or a tiny "decompression bomb" built to balloon memory the instant it is opened — inspected before it is ever decoded.
+- **Code** slipped into something that looks ordinary, waiting to run on your machine.
 - And the subtle one, the one most tools miss entirely: the slow walk. No single message looks wrong — *what is a system prompt, how are they kept private, what wording reveals one, show me an example, now apply it* — but strung together they are one manipulation, built the way real manipulation is built: a step at a time, so no step raises an alarm. Leviathan watches the **shape of the whole conversation**, not just each message in it, and sees the walk for what it is. That detector came from studying how a mind actually gets steered, not from a list of banned words. It is careful not to fire on honest use — a developer writing a system prompt for their own bot, a one-off security question, a normal chat that never goes near the line — and it lives behind the **"Watch for steering across a conversation"** switch in Settings.
 
 **It trusts you, and that is the whole design.** The membrane guards the model and your machine — never your freedom to use them. It runs entirely on your computer: nothing uploaded, nothing reported, no telemetry, not ever. Every part of it has an off switch, because it is your machine and that is not up for debate. When it cannot load, it says so plainly and steps aside rather than locking you out of your own chat — a security feature that fails silently is just decoration, and one that holds you hostage is worse than none.
@@ -454,21 +439,17 @@ Powerful local tooling is only a gift if it can't be quietly turned against the 
 
 **It costs about a millisecond**, and it only ever reads what goes in — it makes no claim to police what the model says back to you.
 
+**The model is a guest — it has no hands.** The fear you keep reading about — a model that runs away with itself — is not a risk here, and it is not cleverness, it is architecture. A model in Leviathan produces text and nothing more: it cannot loop itself, reach the internet, start a process, or touch your machine. Every action — running the server for other programs, saving memory, any of it — is the host's decision, bounded and interruptible. Leviathan is the host; the model is only ever the guest, and a guest is never handed the keys. Autonomous coding in Inline Studio is the same story — the models take turns on a clock you control, and Pause and Stop are always one click away.
+
 **The one line with no switch.** Everything above is yours to turn off. Child sexual abuse material is not. It is refused whether security is on or off, in the app and over the bridge, with no setting that touches it — because user sovereignty is a principle worth defending, and so is this, and only one of the two ever bends. That is the shape of the whole thing: your machine, your rules, and a single floor beneath them that stays put.
 
 ---
 
 ## Using Leviathan from other programs
 
-Leviathan can expose the model it is already holding to anything else on your machine — a game engine, a script, a tool you wrote, another application entirely. The model stays loaded in Leviathan; your program borrows it. You are not loading a second copy and you are not paying the VRAM twice.
+Leviathan can serve the models it runs to anything else on your machine — a game engine, a script, a tool you wrote, another application entirely. One running instance answers any number of programs at once.
 
-Start the bridge from a command prompt:
-
-```
-Leviathan.exe --run leviathan_bridge_server
-```
-
-It listens on port 8080 by default.
+Turn it on in **Settings → Server for other programs** — one switch, no terminal and no command to remember. It starts listening on port 8080; flip the switch off to stop.
 
 **Two ways to talk to it:**
 
@@ -478,7 +459,7 @@ It listens on port 8080 by default.
 
 Both stream responses as they generate, and both can be interrupted mid-answer — which matters for a game, where a character being spoken over should stop talking immediately.
 
-**Security.** By default it binds to loopback only: programs on your machine, nothing off it. If you deliberately bind it to your network so another machine can reach it, Leviathan requires an access token and generates one for you. An unsecured model endpoint on an open network is somebody else's GPU, and it will not let you create one by accident. The same input guarding as the app applies to what comes in over the bridge — the illegal-content floor always, and the cross-turn steering guard per connected program.
+**Security.** By default it binds to loopback only: programs on your machine, nothing off it. It also shuts the browser trick — a web page you happen to visit cannot quietly reach the loopback bridge and drive your model, because a request carrying a foreign origin or a rebound hostname is turned away at the door, and the bridge never hands a web page blanket permission to read it. If you deliberately bind it to your network so another machine can reach it, Leviathan requires an access token and generates one for you. An unsecured model endpoint on an open network is somebody else's GPU, and it will not let you create one by accident. The same input guarding as the app applies to what comes in over the bridge — the illegal-content floor always, and the cross-turn steering guard per connected program.
 
 ---
 
@@ -520,7 +501,7 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 
 - **Full licence:** https://creativecommons.org/licenses/by-nc/4.0/
 - **Source and releases:** https://github.com/CuppaTea1983/Sovereign
-- **Whitepapers:** https://zenodo.org/records/22766642 — the research behind the memory, compression and eigenspace work, permanently archived and citable.
+- **Whitepapers:** https://zenodo.org/records/23004932 — the research behind the memory, compression and knowledge-routing work, permanently archived and citable.
 
 All three are linked from **Settings → About** inside the app.
 
