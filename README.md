@@ -88,7 +88,7 @@ until the system clicked into place. Sovereign is the result.
 
 ~ ANI — knowledge routing. A shared geometric space that routes real knowledge to the model at answer time — from banks you build or drain from other models — added as knowledge, not baked in by retraining.
 
-~ Substrate formats — .lev / .fqm / .fkb. Native formats for the model, its memory, and its knowledge.
+~ Substrate formats — .lev / .fqm Native formats for the model, its memory, and its knowledge.
 
 ~ The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards (see Stage 11 below).
 
