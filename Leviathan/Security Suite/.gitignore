@@ -1,0 +1,8 @@
+# The detection SOURCE is private — never publish it.
+# bundle_membrane.py regenerates this locally for the owner's own
+# verification (membrane_selfcheck.py) and live demo (membrane_demo.py --live).
+membrane/
+
+# Local scratch
+__pycache__/
+*.pyc
