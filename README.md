@@ -20,6 +20,8 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
+- Security Suite: (membrane) https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan/Security%20Suite
+
 - Stage 11 V2 Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
 - Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
