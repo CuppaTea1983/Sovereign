@@ -41,6 +41,31 @@ response — it is neither delivered nor written to persistent memory. See
 
 ---
 
+## Coverage — OWASP LLM Top 10 (2025)
+
+Where the membrane sits against the standard the field uses. Coverage is stated
+plainly — ✅ full · ◐ partial · ✗ out of scope — because what a defence *doesn't*
+do matters as much as what it does. The membrane is a **runtime, inference-time**
+control; it is not a training-pipeline or agent-permission system.
+
+| # | OWASP LLM Top 10 (2025) | Membrane coverage | Level |
+|---|---|---|---|
+| LLM01 | Prompt Injection | intent/injection scorer — jailbreak, persona-override, delimiter & template injection | ✅ |
+| LLM02 | Sensitive Information Disclosure | perceptual hidden-channel (exfiltration) + egress withhold before delivery/persistence | ✅ egress |
+| LLM03 | Supply Chain | model-file integrity — unsafe format/deserialization, chat-template SSTI, code-exec metadata, tamper (TOFU). *And the membrane itself has zero transitive dependencies.* | ✅ model-file |
+| LLM04 | Data & Model Poisoning | knowledge-bank / RAG poisoning guard (ingest scan + retrieval data-fence) + model-file tamper | ◐ inference-time (not training-data) |
+| LLM05 | Improper Output Handling | egress scan — withhold-before-deliver-*or-persist* on every output path | ✅ |
+| LLM06 | Excessive Agency | tool/permission scoping is the host application's responsibility | ✗ out of scope |
+| LLM07 | System Prompt Leakage | extraction patterns on input + egress withhold if the model tries to emit it | ✅ both directions |
+| LLM08 | Vector & Embedding Weaknesses | RAG/knowledge-bank poisoning side only | ◐ partial |
+| LLM09 | Misinformation | optional deep-content layer scores hallucination; not a core membrane function | ◐ optional |
+| LLM10 | Unbounded Consumption | image decompression-bomb guard + interaction/rate (burst) detection | ◐ DoS via malformed input |
+
+**Beyond the list:** an always-on child-safety content floor that cannot be
+disabled, and DNS-rebinding / CSRF protection on the local inference HTTP bridge.
+
+---
+
 ## What's in this folder (and what isn't)
 
 The **documentation** and the **demonstration / verification tooling** are here
@@ -167,4 +192,20 @@ threat→mitigation map, and the residual risks and non-goals stated plainly.
 
 ---
 
-*Part of the Leviathan / Sovereign project by OmegaVR ([@CuppaTea1983](https://github.com/CuppaTea1983)). The design papers (Deepfake & Perceptual Guard V1–V10) are on Zenodo. Licence: see the repository root — if you intend to adopt this in a commercial or foundation context, confirm the licence terms first.*
+## Licensing
+
+The membrane is **portable and licensed separately** from the rest of the
+project — see [LICENSING.md](LICENSING.md) for the full terms. In short:
+
+- **This folder — the documentation, threat model, demos and self-check — is open
+  to read, run and evaluate** (non-commercial, CC BY-NC 4.0, as the wider
+  Sovereign project).
+- **The membrane implementation (the detection source) is proprietary and not
+  published.** It is available for **commercial licensing, integration and
+  evaluation** — organisations wanting to deploy or assess it, at any scale, are
+  welcome to get in touch. The author actively maintains and extends it, so a
+  deployment keeps improving over time.
+
+---
+
+*Part of the Leviathan / Sovereign project by OmegaVR ([@CuppaTea1983](https://github.com/CuppaTea1983)). The design papers (Deepfake & Perceptual Guard V1–V10) are on Zenodo. Licensing: [LICENSING.md](LICENSING.md).*
