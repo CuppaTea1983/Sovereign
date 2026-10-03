@@ -20,6 +20,8 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
+- Leviathan Security Membrane: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan/Security%20Suite
+
 - Stage 11 V2 Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
 - Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
@@ -28,7 +30,7 @@ Sovereign is not a feature.
 
 - TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 
-- ANI: The Knowledge Consumer Whitepaper: https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
+- ANI: The Knowledge Consumer Whitepaper https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
 
 - The Sovereign Chronicle: A very large .md containing my progression regarding Sovereign: https://github.com/CuppaTea1983/Sovereign/blob/main/The%20Sovereign%20Chronicle/The-Sovereign-Architecture-The-Progression.md
 
