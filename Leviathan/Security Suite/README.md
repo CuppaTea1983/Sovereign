@@ -54,15 +54,32 @@ self-contained illustrative mode that needs no source at all.
 
 ## See it run
 
+A stream of events — ordinary traffic and one of each threat class — arrives and
+you watch each walk the membrane's layers to a verdict: delivered, withheld, or
+blocked. `--live` drives the actual membrane; the illustrative mode shows the
+same known behaviour with no source present.
+
+**Terminal** — zero dependencies, the reviewer / industrial view:
+
 ```bash
 python membrane_demo.py            # illustrative — runs anywhere, no dependencies
 python membrane_demo.py --live     # the real membrane, real verdicts (owner demo)
 ```
 
-A stream of events — ordinary traffic and one of each threat class — arrives and
-you watch each walk the membrane's layers to a verdict: delivered, withheld, or
-blocked. `--live` drives the actual membrane; the illustrative mode shows the
-same known behaviour with no source present (`--fast` to skip the animation).
+**Graphical** (pygame) — the user-facing view: events fly at a glowing membrane,
+clean traffic passes through, threats are caught, named, and repelled:
+
+```bash
+pip install pygame
+python membrane_demo_gui.py        # illustrative
+python membrane_demo_gui.py --live # the real membrane
+```
+
+Both read the same scenario and the same membrane calls (one source of truth).
+Keys in the GUI: `SPACE` pause · `R` replay · `Q` quit. `--fast` speeds the
+pacing. pygame is the **only** third-party dependency anywhere in this suite, and
+it is needed for the graphical demo *alone* — the membrane and every other tool
+here stay standard-library-only.
 
 ## Prove it
 
