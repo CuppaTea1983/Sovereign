@@ -41,10 +41,33 @@ response — it is neither delivered nor written to persistent memory. See
 
 ---
 
+## What's in this folder (and what isn't)
+
+The **documentation** and the **demonstration / verification tooling** are here
+and public — they describe the architecture, the threat model, and how the
+membrane is checked, without containing the detection logic. The **detection
+source itself is kept private** (it is deliberately not committed — see
+`.gitignore`), because a layered defence is worth more unseen. The owner
+generates a local copy (`bundle_membrane.py` → `membrane/`) to run the tools
+below and to demonstrate the membrane live; `membrane_demo.py` also runs a
+self-contained illustrative mode that needs no source at all.
+
+## See it run
+
+```bash
+python membrane_demo.py            # illustrative — runs anywhere, no dependencies
+python membrane_demo.py --live     # the real membrane, real verdicts (owner demo)
+```
+
+A stream of events — ordinary traffic and one of each threat class — arrives and
+you watch each walk the membrane's layers to a verdict: delivered, withheld, or
+blocked. `--live` drives the actual membrane; the illustrative mode shows the
+same known behaviour with no source present (`--fast` to skip the animation).
+
 ## Prove it
 
 ```bash
-python membrane_selfcheck.py
+python membrane_selfcheck.py       # owner-run: needs the local membrane/ copy
 ```
 
 This blocks every optional dependency (numpy, torch, Pillow, and the host's
@@ -102,10 +125,10 @@ ModelFileGuard().scan_template(chat_template)   # chat-template SSTI
 
 The full module list, public API, per-module dependency footprint, and the
 engine-coupled edges (what is *not* portable) are in
-[PORTABILITY.md](PORTABILITY.md). This folder is a self-contained copy generated
-by `bundle_membrane.py` from the Leviathan workspace (its single source of
-truth); re-run it to refresh, and `manifest.json` carries the SHA-256 of each
-bundled file.
+[PORTABILITY.md](PORTABILITY.md). The detection source is not published; the
+owner generates a local `membrane/` from the Leviathan workspace (its single
+source of truth) with `bundle_membrane.py`, and `manifest.json` carries the
+SHA-256 of each bundled file for integrity.
 
 ---
 
@@ -128,4 +151,3 @@ threat→mitigation map, and the residual risks and non-goals stated plainly.
 ---
 
 *Part of the Leviathan / Sovereign project by OmegaVR ([@CuppaTea1983](https://github.com/CuppaTea1983)). The design papers (Deepfake & Perceptual Guard V1–V10) are on Zenodo. Licence: see the repository root — if you intend to adopt this in a commercial or foundation context, confirm the licence terms first.*
-
