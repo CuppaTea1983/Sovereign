@@ -47,6 +47,11 @@ for _c in (ARGS.src, os.path.join(_HERE, "membrane"), _HERE, os.path.dirname(_HE
         sys.path.insert(0, _c)
 from membrane_demo import EVENTS, live_verdict   # scenario + real-membrane calls
 
+# How many of the scripted events are actually threats (verdict != ALLOW). The
+# rest are legitimate traffic that SHOULD pass — so the score is threats-stopped
+# out of threats, not out of all events.
+THREAT_COUNT = sum(1 for ev in EVENTS if ev[4] != "ALLOW")
+
 # ── Deep-sea / bioluminescent palette (matches the Leviathan HF page) ──────────
 BG      = (7, 11, 18)
 PANEL   = (13, 20, 32)
@@ -65,11 +70,11 @@ VLABEL = {"ALLOW": "DELIVERED", "WITHHOLD": "WITHHELD", "QUARANTINE": "QUARANTIN
           "BLOCK": "BLOCKED", "REFUSE": "REFUSED"}
 
 W, H = 1120, 660
-MEM_X = 505                       # membrane scan face (left edge)
-MEM_W = 118
+MEM_X = 440                       # membrane scan face (left edge)
+MEM_W = 210                       # wide enough for the layer labels (measured: 168px + padding)
 MEM_TOP, MEM_BOT = 92, 556
-DELIV_X = 712                     # where delivered packets land
-LANE_X0 = 34
+DELIV_X = 705                     # where delivered packets land
+LANE_X0 = 30
 
 SEGMENTS = [
     ("intent / injection",      ("intent", "injection")),
@@ -126,22 +131,21 @@ class Packet:
                 self.state = "hit"
                 scene.on_block(self)
                 return False       # packet consumed by the membrane
-        if self.state == "through" and self.x >= DELIV_X:
+        # A clean packet travels fully into the DELIVERED zone, then settles
+        # there as a stored item (it does NOT fade out in mid-air).
+        if self.state == "through" and self.x >= DELIV_X + 40:
             scene.delivered += 1
+            scene.delivered_items.append(self.label)
             return False
         return True
 
     def draw(self, surf, font):
         w = font.size(self.label)[0] + 22
         r = pygame.Rect(int(self.x - w), int(self.y - 13), w, 26)
-        fade = 1.0
-        if self.state == "through" and self.x > MEM_X:
-            fade = max(0.0, 1.0 - (self.x - MEM_X) / (DELIV_X - MEM_X))
-        body = lerp(BG, (self.col if self.state != "through" else GREEN), 0.22 + 0.5 * fade)
-        pygame.draw.rect(surf, body, r, border_radius=13)
-        pygame.draw.rect(surf, lerp(BG, self.col, fade), r, width=2, border_radius=13)
-        surf.blit(font.render(self.label, True, lerp(BG, TEXT, fade)),
-                  (r.x + 11, r.y + 5))
+        edge = GREEN if self.state == "through" else self.col   # green once it's cleared
+        pygame.draw.rect(surf, lerp(BG, edge, 0.72), r, border_radius=13)
+        pygame.draw.rect(surf, edge, r, width=2, border_radius=13)
+        surf.blit(font.render(self.label, True, TEXT), (r.x + 11, r.y + 5))
 
 
 class Particle:
@@ -186,7 +190,9 @@ class Scene:
 
     def reset(self):
         self.packets, self.particles, self.floats = [], [], []
+        self.delivered_items = []              # labels that made it to DELIVERED
         self.flashes = [0.0] * len(SEGMENTS)   # per-segment flash 0..1
+        self.flash_col = [RED] * len(SEGMENTS)  # colour of the last hit on each segment
         self.pass_glow = 0.0
         self.pass_y = 0.0
         self.i = 0
@@ -220,6 +226,7 @@ class Scene:
         col = VCOL[pk.verdict]
         if pk.seg >= 0:
             self.flashes[pk.seg] = 1.0
+            self.flash_col[pk.seg] = col
         ix, iy = MEM_X - 6, pk.y
         for _ in range(26):
             self.particles.append(Particle(ix, iy, col))
@@ -266,9 +273,19 @@ def draw(surf, scene, F):
     surf.blit(sml.render("INCOMING", True, DIM), (LANE_X0 + 8, 82))
     surf.blit(sml.render("DELIVERED", True, lerp(BG, GREEN, 0.9)), (DELIV_X + 6, 82))
 
-    # delivered zone (faint)
+    # delivered zone (faint) + the messages that have landed in it
     pygame.draw.rect(surf, lerp(BG, GREEN, 0.06), (DELIV_X, MEM_TOP, W - DELIV_X - 24, MEM_BOT - MEM_TOP),
                      border_radius=10)
+    zone_w = W - DELIV_X - 24
+    for i, label in enumerate(scene.delivered_items[-12:]):
+        yy = MEM_TOP + 18 + i * 36
+        if yy + 28 > MEM_BOT:
+            break
+        pw = min(lab.size(label)[0] + 22, zone_w - 28)
+        rr = pygame.Rect(DELIV_X + 16, yy, pw, 28)
+        pygame.draw.rect(surf, lerp(BG, GREEN, 0.20), rr, border_radius=14)
+        pygame.draw.rect(surf, lerp(BG, GREEN, 0.75), rr, width=1, border_radius=14)
+        surf.blit(lab.render(label, True, lerp(BG, TEXT, 0.95)), (rr.x + 11, rr.y + 6))
 
     # the membrane barrier
     pygame.draw.rect(surf, PANEL2, (MEM_X, MEM_TOP, MEM_W, MEM_BOT - MEM_TOP), border_radius=8)
@@ -277,8 +294,7 @@ def draw(surf, scene, F):
         fl = scene.flashes[i]
         if fl > 0:
             seg = pygame.Surface((MEM_W, int(SEG_H) - 2), pygame.SRCALPHA)
-            # colour comes from whichever verdict last hit — approximate with amber/red by flash
-            seg.fill((*RED, int(120 * fl)))
+            seg.fill((*scene.flash_col[i], int(120 * fl)))
             surf.blit(seg, (MEM_X, y0 + 1))
         pygame.draw.line(surf, lerp(PANEL2, CYAN_D, 0.5), (MEM_X, int(y0)), (MEM_X + MEM_W, int(y0)))
         nm = lab.render(name, True, lerp(DIM, TEXT, fl))
@@ -311,14 +327,12 @@ def draw(surf, scene, F):
         surf.blit(num.render(str(val), True, col), (x, hud_y + 30))
         x += 150
     # attack wall
-    surf.blit(sml.render("ATTACK WALL", True, DIM), (640, hud_y + 10))
-    for j, (badge, boundary, note, col) in enumerate(scene.log[:5]):
-        yy = hud_y + 30 + j * 15
+    surf.blit(sml.render("ATTACK WALL", True, DIM), (640, hud_y + 8))
+    for j, (badge, _boundary, note, col) in enumerate(scene.log[:4]):
+        yy = hud_y + 27 + j * 14
         surf.blit(sml.render(badge, True, col), (640, yy))
-        note_txt = f"{boundary[:9]:<9} {note}"
-        if len(note_txt) > 54:
-            note_txt = note_txt[:53] + "…"
-        surf.blit(sml.render(note_txt, True, DIM), (752, yy))
+        note_txt = note if len(note) <= 48 else note[:47] + "…"
+        surf.blit(sml.render(note_txt, True, DIM), (744, yy))
 
     # summary hold
     if scene.done_at is not None:
@@ -327,7 +341,8 @@ def draw(surf, scene, F):
         surf.blit(ov, (0, 0))
         stopped = scene.withheld + scene.blocked
         lines = [("SESSION COMPLETE", CYAN, title),
-                 (f"{stopped}/{scene.scanned} threats stopped — clean traffic passed untouched", TEXT, lab),
+                 (f"{stopped}/{THREAT_COUNT} threats stopped  ·  "
+                  f"{scene.delivered} clean messages delivered untouched", TEXT, lab),
                  ("R  replay      Q  quit", DIM, lab)]
         cy = H // 2 - 40
         for txt, col, fnt in lines:
