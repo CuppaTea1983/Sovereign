@@ -41,25 +41,27 @@ response — it is neither delivered nor written to persistent memory. See
 
 ---
 
-## Coverage — OWASP LLM Top 10 (2025)
+## Coverage — OWASP LLM Top 10 (2026)
 
-Where the membrane sits against the standard the field uses. Coverage is stated
-plainly — ✅ full · ◐ partial · ✗ out of scope — because what a defence *doesn't*
-do matters as much as what it does. The membrane is a **runtime, inference-time**
-control; it is not a training-pipeline or agent-permission system.
+Where the membrane sits against the standard the field uses (the 2026 edition,
+published by the OWASP GenAI Security Project). Coverage is stated plainly —
+✅ full · ◐ partial · ✗ out of scope — because what a defence *doesn't* do matters
+as much as what it does. The membrane is a **runtime, inference-time** control for
+the model-as-component; it is not a training-pipeline or agent-permission system
+(agentic risk belongs to the OWASP Agentic Top 10, as the 2026 list itself notes).
 
-| # | OWASP LLM Top 10 (2025) | Membrane coverage | Level |
+| # | OWASP LLM Top 10 (2026) | Membrane coverage | Level |
 |---|---|---|---|
-| LLM01 | Prompt Injection | intent/injection scorer — jailbreak, persona-override, delimiter & template injection | ✅ |
-| LLM02 | Sensitive Information Disclosure | perceptual hidden-channel (exfiltration) + egress withhold before delivery/persistence | ✅ egress |
-| LLM03 | Supply Chain | model-file integrity — unsafe format/deserialization, chat-template SSTI, code-exec metadata, tamper (TOFU). *And the membrane itself has zero transitive dependencies.* | ✅ model-file |
-| LLM04 | Data & Model Poisoning | knowledge-bank / RAG poisoning guard (ingest scan + retrieval data-fence) + model-file tamper | ◐ inference-time (not training-data) |
-| LLM05 | Improper Output Handling | egress scan — withhold-before-deliver-*or-persist* on every output path | ✅ |
-| LLM06 | Excessive Agency | tool/permission scoping is the host application's responsibility | ✗ out of scope |
-| LLM07 | System Prompt Leakage | extraction patterns on input + egress withhold if the model tries to emit it | ✅ both directions |
-| LLM08 | Vector & Embedding Weaknesses | RAG/knowledge-bank poisoning side only | ◐ partial |
-| LLM09 | Misinformation | optional deep-content layer scores hallucination; not a core membrane function | ◐ optional |
-| LLM10 | Unbounded Consumption | image decompression-bomb guard + interaction/rate (burst) detection | ◐ DoS via malformed input |
+| LLM01 | Prompt Injection | intent/injection scorer (jailbreak, persona-override, delimiter) + the magic-eye for **encoded / steganographic channels** (base64/hex/obfuscation — a 2026-highlighted evasion axis) + knowledge-guard for injection in retrieved/absorbed content. *Invisible-Unicode stripping and multimodal stego are noted gaps.* | ◐ text + RAG ingress |
+| LLM02 | Sensitive Information Disclosure | magic-eye hidden-channel / **exfiltration** detector on output + egress withhold-before-deliver-or-persist. *Training-data memorization and inference side-channels are out of scope.* | ◐ egress exfil channel |
+| LLM03 | Excessive Agency | tool/permission scoping is the host application's job — the 2026 list defers agentic risk to the Agentic Top 10 | ✗ out of scope |
+| LLM04 | Supply Chain | model-file integrity — refuses unsafe formats/deserialization, scans chat-template SSTI + code-exec metadata, tamper fingerprint (trust-on-first-use). *And the membrane itself carries zero transitive dependencies.* Honest limit: a backdoor in a "safe"-format computational graph isn't caught. | ✅ model-file |
+| LLM05 | Data & Model Poisoning | **chat-template / tokenizer-artifact tampering** (the SSTI scan — a direct hit on the 2026 inference-time-backdoor-via-chat-template vector) + RAG / knowledge-bank poisoning (ingest scan + retrieval data-fence) + unsafe-deserialization refusal | ◐ inference-time (not training-data) |
+| LLM06 | Unbounded Consumption | image decompression-bomb / malformed-input refusal + partial inference-infra (injected-chat-template refusal). *Token/cost/rate caps are app-level.* | ◐ malformed-input DoS |
+| LLM07 | Misinformation | optional deep-content layer scores hallucination; not a core membrane function | ◐ optional |
+| LLM08 | Hidden Context Exposure *(was System Prompt Leakage)* | system-prompt / hidden-context **extraction-attempt** detection on input + egress withhold if the model emits it | ◐ extraction-attempt |
+| LLM09 | Vector & Embedding Weaknesses | text-level retrieval-poisoning guard (poisoned-document injection). *Embedding-geometry attacks — inversion, jamming, cross-tenant — are out of scope.* | ◐ text-level RAG |
+| LLM10 | Improper Output Handling | egress scan withholds a hidden-channel / abuse output before delivery or persistence. *Context-aware output encoding + control-character (ANSI/OSC) sanitization for downstream sinks is the host's job — a candidate membrane addition.* | ◐ safety-net |
 
 **Beyond the list:** an always-on child-safety content floor that cannot be
 disabled, and DNS-rebinding / CSRF protection on the local inference HTTP bridge.
