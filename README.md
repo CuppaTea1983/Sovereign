@@ -20,17 +20,17 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
-- Leviathan Security Membrane: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan/Security%20Suite
+- ***Leviathan Security Membrane:*** https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan/Security%20Suite
 
-- Stage 11 V2 Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
+- ***Stage 11 V2 Whitepaper***: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
-- Persistent Quantum Memory: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+- ***Persistent Quantum Memory***: https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
-- Leviathan Documentaion: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
+- ***Leviathan Documentation***: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
 
-- TRNG Analysis: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
+- ***TRNG Analysis***: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
 
-- ANI: The Knowledge Consumer Whitepaper https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
+- ***ANI***: The Knowledge Consumer Whitepaper https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
 
 ---
 
