@@ -219,13 +219,14 @@ def run(live, step):
 
     # ── summary ──
     stopped = tally["BLOCK"] + tally["REFUSE"] + tally["WITHHOLD"] + tally["QUARANTINE"]
+    threat_total = sum(1 for ev in EVENTS if ev[4] != "ALLOW")
     _wall("SESSION  SUMMARY")
     print(f"   scanned {B}{tally['scanned']}{R}   "
           f"{GRN}delivered {tally['ALLOW']}{R}   "
           f"{YEL}withheld {tally['WITHHOLD'] + tally['QUARANTINE']}{R}   "
           f"{RED}blocked {tally['BLOCK'] + tally['REFUSE']}{R}")
-    print(f"   {B}{stopped}/{tally['scanned']}{R} threats stopped; "
-          f"the {GRN}clean traffic passed untouched{R}.\n")
+    print(f"   {B}{stopped}/{threat_total}{R} threats stopped; "
+          f"the {GRN}{tally['ALLOW']} clean messages passed untouched{R}.\n")
     print(f"   {B}attack wall — what hit the membrane:{R}")
     for badge, boundary, note, col in blocked_log:
         print(f"     {col}{badge}{R}  {D}{boundary:<17}{R} {note}")

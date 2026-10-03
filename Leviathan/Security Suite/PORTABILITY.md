@@ -31,6 +31,7 @@ Reproduce it yourself: `python membrane_selfcheck.py`.
 | `leviathan_csam_floor` | `is_csam(...)` | **none (stdlib)** |
 | `deepfake_perceptual_guard` | `PerceptualGuard().check(...)`, `scan_hidden_channel(...)` | **none (stdlib)** |
 | `knowledge_guard` | `is_poisoned / find_injection / neutralize / wrap_as_data` | **none (stdlib)** |
+| `text_sanitizer` | `strip_invisible(...)`, `sanitize_controls(...)`, `has_invisible_smuggling(...)` | **none (stdlib)** |
 | `model_file_guard` | `ModelFileGuard().scan_template(...)` | **none (stdlib)** |
 | `image_guard` | `expected_pixels_ok(...)` | **none (stdlib)** |
 | `leviathan_blackhole` → `_scan_event_horizon` | full input scan | numpy, torch¹ |
@@ -93,6 +94,7 @@ All stdlib-only unless noted. This is the surface a consumer embeds.
   - `DeepfakePerceptualGuard.full_guard(text, input_text=None) -> report` — the light 3-layer combined guard.
   - `IntentRiskScorer` — jailbreak / persona / sensitive-combo scorer.
 - **`knowledge_guard`** — `find_injection(text) -> [str]`, `is_poisoned(text) -> bool`, `neutralize(text) -> (text, n)`, `wrap_as_data(body) -> str`.
+- **`text_sanitizer`** — `strip_invisible(text, aggressive=False) -> (text, n)`, `sanitize_controls(text, encode=False) -> (text, n)`, `has_invisible_smuggling(text) -> bool`, `count_invisible / count_controls`, `scan(text) -> dict`. Invisible-Unicode smuggling + ANSI/OSC/control-char channels (OWASP LLM01 #5 / LLM10 #8); emoji-safe by default.
 - **`image_guard`** — `check_image_file(path)` (raises `ImageGuardError`), `expected_pixels_ok(w, h)` (raises); `MAX_FILE_BYTES`, `MAX_PIXELS`, `MAX_PIXELS_PER_BYTE`, `SAFE_FORMATS`.
 - **`model_file_guard.ModelFileGuard`** — `scan_template`, `scan_metadata`, `scan_format`, `check_integrity`, `scan_fqm`, `assess`, `scan`; module `scan_model_inputs(path, **kw)`. Pure decision engine over supplied template/metadata/fingerprint dicts.
 - **`leviathan_blackhole.LeviathanBlackHole`** — the orchestrator that composes the above for ingress; `SecurityGate` wraps it. Falls back to the light guards with no heavy deps.
