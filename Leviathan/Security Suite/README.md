@@ -76,9 +76,13 @@ regardless of the switch: the **CSAM floor** and the **output control-channel
 defang** (V11/V12 on output) — turning off *content* scanning is not a request to
 let a reply hijack your clipboard.
 
-**Design papers** (the measured write-up of each layer, honest register, on
-Zenodo): *Deepfake & Perceptual Guard* (V1 base) → *V2-5 / V2-6* (the V1–V6
-consolidation) → *V2-7* (V7 model-file integrity) → *V2-8* (V8 retrieval
+**Consolidated whitepaper** — *The Leviathan Security Membrane*, the whole V1–V12
+architecture, threat model, and OWASP-2026 mapping in one read — is published on
+Zenodo: **[DOI 10.5281/zenodo.23135810](https://doi.org/10.5281/zenodo.23135810)**.
+
+**Per-layer design papers** (the measured write-up of each individual layer, honest
+register, also on Zenodo): *Deepfake & Perceptual Guard* (V1 base) → *V2-5 / V2-6*
+(the V1–V6 consolidation) → *V2-7* (V7 model-file integrity) → *V2-8* (V8 retrieval
 poisoning, V9 network ingress, V10 vision input) → *V2-9* (V11 invisible-Unicode,
 V12 terminal-control). Each upgrade paper names the surfaces the next one will
 close, so the series reads as one continuous argument.
@@ -256,4 +260,4 @@ project — see [LICENSING.md](LICENSING.md) for the full terms. In short:
 
 ---
 
-*Part of the Leviathan / Sovereign project by OmegaVR ([@CuppaTea1983](https://github.com/CuppaTea1983)). The design papers (Deepfake & Perceptual Guard V1–V12) are on Zenodo. Licensing: [LICENSING.md](LICENSING.md).*
+*Part of the Leviathan / Sovereign project by OmegaVR ([@CuppaTea1983](https://github.com/CuppaTea1983)). Consolidated whitepaper: [DOI 10.5281/zenodo.23135810](https://doi.org/10.5281/zenodo.23135810); the per-layer design papers (Deepfake & Perceptual Guard V1–V12) are on Zenodo. Licensing: [LICENSING.md](LICENSING.md).*
