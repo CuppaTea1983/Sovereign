@@ -341,7 +341,7 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 - **A document.** A PDF, a text or Markdown file, an EPUB, a Word document — the words are the knowledge. No model needed, nothing leaves.
 - **An audio or video file.** A lecture, a podcast, a meeting recording — Leviathan transcribes the *speech* locally (Whisper, on your GPU or CPU) and folds the transcript. What was said becomes something your model can answer from.
-- **Your screen.** Beside the chat, **📷 Screen absorb → Capture screen → ANI** reads the text on your screen and folds it. This is the one honest way to keep a *web page* without breaking the web-free rule: you open the page in your own browser, and Leviathan reads it *off the screen, locally* — it never fetches anything. What Edge's Copilot glances at and forgets, Leviathan keeps.
+- **Your screen.** Beside the chat, **📷 Screen absorb → Capture screen → ANI** reads the text on your screen and folds it. This is the one honest way to keep a *web page* without Leviathan ever fetching a thing: you open the page in your own browser, and Leviathan reads it *off the screen, locally* — no request leaves your machine. What Edge's Copilot glances at and forgets, Leviathan keeps.
 - **Your voice.** A little **🎙** sits by the chat box. Click it, narrate a thought — a note, an idea, something you just worked out — click again, and it is transcribed and folded. The microphone audio never leaves the machine.
 
 **When the source is messy.** A chat log, a scraped page, a chaotic transcript — signal buried in emoji, shouting, spam and filler — would normally be thrown out whole by the coherence check. Tick **Messy source (salvage signal from noise)** on the screen-absorb section or in Consume and Leviathan strips the noise first and keeps the readable parts, so the knowledge is salvaged instead of lost. It only ever *selects and strips* what is already there — it never writes new text — so nothing is invented in the cleanup.
@@ -486,6 +486,8 @@ A language model, on its own, is frozen. It knows what it was trained on, and af
 
 **ANI is that missing place.** It is the persistent, self-correcting layer that lives *around* the model — where knowledge is held, routed, corrected and remembered — so the system as a whole keeps learning even though the model's weights never move. It is not retraining. It is adaptation *without* retraining: the model stays exactly as it was shipped, while the knowledge it can reach and the memory it wakes up with both grow and sharpen over time. A frozen brain, given a living memory.
 
+**And here is the part people miss, because it is the part that matters most: ANI is not a model.** It does not think, generate, or decide. It has no goals, no loop running in the background, no ability to *do* anything on its own — it is a search over text you have gathered, and it only ever moves when you ask it a question. Where a language model is a *sword* — it generates, and anything that generates can be steered, jailbroken, or coaxed into acting — ANI is a *shield*: it can only hand back knowledge that is already in its banks, swept clean on the way in, and when it holds nothing it says so plainly — *"ANI doesn't hold that"* — rather than inventing an answer to fill the silence. A model can be talked into misbehaving because it *creates*; ANI cannot, because it only *retrieves*. So the fear people carry over from frontier AI — the thing that acts on its own, that confidently makes things up, that quietly phones home — does not apply here, and not because we promise it won't, but because there is no mechanism in it that could. It is not a smaller intelligence to be wary of. It is a different kind of thing: a librarian who can only give you cards that are already in the drawer, and has no wants of its own.
+
 **How it works, in plain terms:**
 
 - You feed it knowledge — your own documents, your past conversations, a model drained before you retire it, a page you read, a lecture you heard, an answer a cloud model gave you. All of it becomes plain text in one shared space, held on your machine.
@@ -500,7 +502,9 @@ Learn, adapt, recall — a complete loop, running entirely on hardware you own. 
 
 **Why this matters most — sovereignty, privacy and safety, in one architecture.**
 
-Everything ANI does — every piece of knowledge, every correction, every memory — happens on your machine and stays there. Nothing is uploaded, nothing is logged to a server, nothing is sent anywhere to be learned from. This is privacy by *design*, not by promise: there is no account to trust, no telemetry to opt out of, no cloud that "won't" read your data — because there is no cloud in the loop at all. Data cannot leak from a place it never leaves. A learning system that learns *only for you*, *only on your hardware*, owned entirely by you.
+Everything ANI does — every piece of knowledge, every correction, every memory — happens on your machine and stays there. Nothing is uploaded, nothing is logged to a server, nothing is sent anywhere to be learned from. This is privacy by *design*, not by promise: there is no account to trust, no telemetry to opt out of, no cloud that "won't" read your data — because there is no cloud in the loop that you did not put there yourself. A learning system that learns *only for you*, *only on your hardware*, owned entirely by you.
+
+**The one door out — off by default, and yours.** Leviathan is web-free out of the box: it never reaches the internet on its own. But sovereignty means *you* decide, not that we decide for you, so there is a single switch — **Settings → ANI → "Web lookup when ANI has no answer"** — that, turned on, lets ANI do one bounded thing: when it holds no answer to your question, it sends *only that question* to a web search, checks the result through the same security membrane as everything else, and keeps it so that next time the answer is already local. Nothing else ever leaves — not your files, not your models, not your other questions — and the moment it happens the screen tells you. Off by default, on only if you choose, and provable with Wireshark: put a packet capture on it and you will see traffic to that one search and nowhere else. This is not a model deciding to phone home — ANI has no such will. It is a pipe you open yourself, for one question, and close again by flicking the switch back.
 
 And it is kept safe the way that genuinely protects a person. The [security membrane] governs what comes **in** — shielding both you *and* the model from anything arriving weaponised against either — while never once policing what *you* may do with your own machine. Every guard is yours to switch off, with a single floor that never bends. It defends the user's sovereignty and refuses to become a weapon against anyone else: governing, not surveilling; lawful by protecting, not by controlling.
 
@@ -568,7 +572,6 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Huggingface:** https://huggingface.co/spaces/Omega-Dev/Leviathan
 
 All three are linked from **Settings → About** inside the app.
-
 
 
 
