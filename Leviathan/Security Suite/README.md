@@ -27,13 +27,19 @@ reproduce the measurement in one command (see *Prove it* below).
 | **Invisible-Unicode & terminal-control** *(in + out)* | zero-width / tag-block / variation-selector smuggling (ASCII-smuggling, covert exfil); ANSI / OSC / control-sequence terminal, clipboard & log hijacks in output | `text_sanitizer` | stdlib |
 | **Model-file integrity** *(load-time)* | executable chat-template SSTI, pickle/code-exec metadata, unsafe formats, tamper (fingerprint / trust-on-first-use) | `model_file_guard` | stdlib |
 | **Image input** | decompression bombs, malformed images, absurd expansion ratios | `image_guard` | stdlib (Pillow optional) |
+| **Image sub-perceptual payloads** *(V13)* | LSB / bit-plane steganography, high-frequency adversarial perturbation, metadata payloads — what a single base64 image on a page can carry | `image_sanitizer` | **numpy + Pillow** |
+| **Image machine-codes** *(V14)* | QR / barcode / data-matrix carrying an instruction a human can't read but a model decodes | `machine_code_detector` | **numpy + Pillow + scipy** |
 | **Network ingress** | DNS-rebinding / CSRF / cross-origin on the local HTTP bridge, token on non-loopback | `leviathan_bridge_server` | stdlib |
 | **Deep content analysis** *(optional)* | richer content-safety, hallucination scoring, chaos scrub, JSON/PDF/interaction | `deepfake_guard_expanded` | **numpy + torch** |
 
-Everything above the last row is **standard-library only**. The deep content
-layer is a heavy, *optional* enhancement — when it is absent the membrane falls
-back to the light guards and keeps working (measured; see
-[PORTABILITY.md](PORTABILITY.md)).
+The **text / model-file / network core** is **standard-library only** — it runs with
+zero third-party dependencies, *proven* by `membrane_selfcheck.py`, which blocks
+numpy / PIL / scipy and still passes. Two tiers sit beside it and are numpy-based *by
+nature*: the **image neutralisers** (V13 / V14 — they transform pixels, so there is
+nothing to prove by blocking numpy) and the *optional* **deep content** layer
+(numpy + torch; when it is absent the core falls back to the light guards and keeps
+working). The image tier has its own battery, `image_membrane_selfcheck.py`. See
+[PORTABILITY.md](PORTABILITY.md).
 
 The output path adds two rules across **every** exit (chat, out-of-process
 runner, HTTP bridge, cloud relay): a positive **harm** detection **withholds**
@@ -44,7 +50,7 @@ delivering the legitimate answer with the dangerous bytes removed. See
 
 ---
 
-## The twelve layers (V1–V12)
+## The fourteen layers (V1–V14)
 
 The membrane grew one measured surface at a time; each version targets a real
 vector, proves it with a test, and is written up in its own design paper. This is
@@ -64,6 +70,8 @@ the whole system at a glance:
 | **V10** | Vision input | decompression bombs / malformed images | on open |
 | **V11** | **Invisible-Unicode smuggling** | ASCII-smuggling, zero-width-split injection, covert exfil | in + out |
 | **V12** | **Terminal-control output** | ANSI / OSC / control-char terminal, clipboard & log hijacks | out |
+| **V13** | **Image sub-perceptual payloads** | LSB stego, high-freq adversarial, metadata — the image is bounded to the human-perceptible band, so a model can't absorb what no eye can see | on ingest |
+| **V14** | **Image machine-codes** | QR / barcode / data-matrix instructions (human-unreadable, model-decoded) — flagged by *structure* not *format*, then redacted (proven against a real decoder) | on ingest |
 
 Two action classes on the way out: **withhold** (V1 perceptual, V2 CSAM — the
 content *is* the harm, so the whole reply is refused) and **clean** (V11/V12 —
@@ -84,8 +92,9 @@ Zenodo: **[DOI 10.5281/zenodo.23135810](https://doi.org/10.5281/zenodo.23135810)
 register, also on Zenodo): *Deepfake & Perceptual Guard* (V1 base) → *V2-5 / V2-6*
 (the V1–V6 consolidation) → *V2-7* (V7 model-file integrity) → *V2-8* (V8 retrieval
 poisoning, V9 network ingress, V10 vision input) → *V2-9* (V11 invisible-Unicode,
-V12 terminal-control). Each upgrade paper names the surfaces the next one will
-close, so the series reads as one continuous argument.
+V12 terminal-control) → *V2-10* (V13 perceptual-bound image sanitation + V14 machine-
+code redaction — the numpy image tier; **forthcoming**). Each upgrade paper names the
+surfaces the next one will close, so the series reads as one continuous argument.
 
 ---
 
@@ -100,7 +109,7 @@ the model-as-component; it is not a training-pipeline or agent-permission system
 
 | # | OWASP LLM Top 10 (2026) | Membrane coverage | Level |
 |---|---|---|---|
-| LLM01 | Prompt Injection | intent/injection scorer (jailbreak, persona-override, delimiter) + the magic-eye for **encoded / steganographic channels** (base64/hex/obfuscation) + **invisible-Unicode stripping** (tag-block / variation-selector / zero-width — the ASCII-smuggling vector, incl. zero-width-split evasion reconstituted before the scan) + knowledge-guard for injection in retrieved/absorbed content. *Multimodal (image/audio) stego is a noted gap.* | ◐ text + RAG ingress |
+| LLM01 | Prompt Injection | intent/injection scorer (jailbreak, persona-override, delimiter) + the magic-eye for **encoded / steganographic channels** (base64/hex/obfuscation) + **invisible-Unicode stripping** (tag-block / variation-selector / zero-width — the ASCII-smuggling vector, incl. zero-width-split evasion reconstituted before the scan) + knowledge-guard for injection in retrieved/absorbed content + **image** sub-perceptual payloads bounded to the human-perceptible band (V13) and **machine-codes** (QR/barcode) redacted by structure (V14). *Audio stego remains a noted gap.* | ◐ text + RAG + image ingress |
 | LLM02 | Sensitive Information Disclosure | magic-eye hidden-channel / **exfiltration** detector + **invisible-Unicode covert-channel stripping** on output + egress withhold-before-deliver-or-persist. *Training-data memorization and inference side-channels are out of scope.* | ◐ egress exfil channel |
 | LLM03 | Excessive Agency | tool/permission scoping is the host application's job — the 2026 list defers agentic risk to the Agentic Top 10 | ✗ out of scope |
 | LLM04 | Supply Chain | model-file integrity — refuses unsafe formats/deserialization, scans chat-template SSTI + code-exec metadata, tamper fingerprint (trust-on-first-use). *And the membrane itself carries zero transitive dependencies.* Honest limit: a backdoor in a "safe"-format computational graph isn't caught. | ✅ model-file |
@@ -177,6 +186,22 @@ RESULT: PASS — stdlib-only, all verdicts correct
 
 Exit code `0` = pass. If any detection path secretly needed a third-party
 library, the import blocker makes it fail **loudly** here rather than silently.
+
+The **image tier** (V13 / V14) is numpy-based *by nature* — it transforms pixels — so
+it has its own battery that runs *with* numpy/PIL present and reports that honestly:
+
+```bash
+python image_membrane_selfcheck.py   # needs numpy + Pillow (+ scipy; cv2 optional)
+```
+
+It proves V13 **destroys an LSB-steganographic payload** and strips image metadata
+while keeping the visible surface (PSNR > 28 dB), and V14 **defeats a real QR decoder**
+after redaction (OpenCV if present, else a synthetic structure check) without touching a
+clean photo. Expected tail:
+
+```
+RESULT: PASS — V13 + V14 verdicts correct
+```
 
 ---
 

@@ -16,6 +16,12 @@ Then verify:  python membrane_selfcheck.py   (it finds ./membrane automatically)
 Only stdlib-only modules are bundled. The OPTIONAL deep content layer
 (deepfake_guard_expanded.py, which needs numpy+torch) is deliberately NOT copied:
 the membrane falls back to the bundled light guards when it is absent.
+
+The IMAGE NEUTRALISER tier — image_sanitizer.py (V13, perceptual-bound sub-perceptual
+strip) and machine_code_detector.py (V14, QR / barcode / data-matrix redactor) — is
+numpy-based BY NATURE (it transforms pixels), so it is NOT part of this stdlib bundle.
+It has its own behaviour battery, image_membrane_selfcheck.py, run with numpy/PIL/scipy
+present (cv2 optional, for the real-QR-decoder-defeated proof).
 """
 import argparse
 import hashlib
@@ -29,6 +35,7 @@ PORTABLE = {
     "leviathan_csam_floor.py":        "always-on CSAM floor (pure stdlib)",
     "deepfake_perceptual_guard.py":   "perceptual hidden-channel + intent + identity (stdlib; numpy optional)",
     "knowledge_guard.py":             "knowledge-bank / retrieval-injection guard (stdlib)",
+    "text_sanitizer.py":              "invisible-Unicode strip + terminal-control/ANSI sanitizer (OWASP LLM01 #5 / LLM10 #8; pure stdlib)",
     "image_guard.py":                 "image decompression-bomb / malformed-image guard (stdlib; PIL optional)",
     "model_file_guard.py":            "model-file integrity decision engine (stdlib)",
     "leviathan_security.py":          "SecurityGate facade: check() / check_output() (stdlib; host settings optional)",
