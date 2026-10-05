@@ -16,18 +16,18 @@ What makes it different from the other ways of running a model locally is what h
 
 ## Contents
 
-- [Requirements]
-- [First run]
-- [The two file types]	— **start here if you only read one section**
-- [The tabs]
-- [Chat] · [Models] · [Studio] · [Cores] · [Memory Vault] · [Traits] · [Inline Studio] · [Settings]
-- [The systems]
-- [Persistent memory] · [Knowledge routing] · [Reasoning layer] · [Forensic Grid] · [Surface Sight] · [Recycling cloud answers] · [Eidetic recall] · [Second-opinion fact-check] · [Any model, described by itself] · [The security membrane]
-- [What ANI is — and why it matters]	— **the thesis, in plain words**
-- [Using Leviathan from other programs]
-- [Where your files live]
-- [What Leviathan will not do]
-- [Licence and attribution]
+- [Requirements](##Requirements)
+- [First run](##First-run)
+- [The two file types](##The-two-file-types)	— **start here if you only read one section**
+- [The tabs](##The-Tabs)
+- [Chat](##Chat) · [Models](##Models) · [Studio](##Studio) · [Cores](##Cores) · [Memory Vault](##Memory-Vault) · [Traits](##Traits) · [Inline Studio](##Inline-Studio) · [Settings](##Settings)
+- [The systems](##The-systems)
+- [Persistent memory](##Persistent-memory) · [Knowledge routing](##Knowledge-Routing) · [Reasoning layer](##Reasoning-layer) · [Forensic Grid](##Forensic-Grid) · [Surface Sight](##Surface-Sight) · [Recycling cloud answers](##Recycling-cloud-answers) · [Eidetic recall](##Eidetic-recall) · [Second-opinion fact-check](##Second-opinion-fact-check) · [Any model, described by itself](##Any-model-described-by-itself) · [The security membrane](##The-security-membrane)
+- [What ANI is — and why it matters](##What-ANI-is-and-why-it-matters)	— **the thesis, in plain words**
+- [Using Leviathan from other programs](##Using-Leviathan-from-other-programs)
+- [Where your files live](##Where-your-files-live)
+- [What Leviathan will not do](##What-Leviathan-will-not-do)
+- [License and attribution](##Licence-and-attribution)
 
 ---
 
