@@ -268,29 +268,39 @@ The right-hand column is the team — the models taking part on top, their runni
 
 ### ⚙ Settings
 
-Six sections. (The reasoning-depth control used to live here; it now sits down by the chat box instead — see [Chat] and [Reasoning layer].)
+One scrollable tab holding every switch and dial in Leviathan, grouped by what it governs. Nothing here needs a restart — a change takes effect on your next message, and every one is remembered between runs. (The one control that *used* to live here, reasoning depth, now sits by the chat box instead — see [Chat] and [Reasoning layer].)
 
-**🛡 Security membrane**
-Scans what you send — and anything you paste or load — before the model sees it. Covered properly [below].
+Here is everything you will find, top to bottom:
+
+**🛡 Security membrane** — scans what you send, and anything you paste or load, before the model sees it. [Below].
 
 - **Security enabled** — the master switch. Off is a legitimate choice; it is your machine.
-- **warn / block** — whether something hostile gets flagged with an explanation, or stopped outright.
+- **When something looks hostile: warn / block** — flagged with an explanation, or stopped outright.
 - **Also scan files and pasted documents** — extends scanning beyond what you type to what you drop in.
+- **Watch for steering across a conversation** — catches a restricted request spread across several innocent-looking messages, not just a single one.
 
-**🧠 Eidetic recall**
-Answers a question you have asked before instantly from cache instead of regenerating it. Exact matches only. [Below].
+**🧠 Knowledge routing (ANI)** — the knowledge engine, and the one optional door to the web. See [Knowledge routing].
 
-**🔍 Leviathan Fact‑Check**
-After a factual answer, re-asks the model the same thing a few times and flags it if the retellings disagree. Off by default (it costs a few extra local runs). [Below].
+- **Knowledge routing enabled** — on by default; only fires when a bank actually holds something that fits the question.
+- **🌐 Web lookup when ANI has no answer** — off by default. The one door out: on a gap it sends *only* your question to be answered, gates the result, and keeps it local for next time ([the one door out] explains it in full).
+- **Gemini key** — optional. Paste your own key and the web lookup returns a composed, live-search-grounded answer from Google's Gemini instead of a bare snippet. Your key, sent only to Google.
+- **Consume a source** — distil a document (PDF, text, Markdown, EPUB, DOCX), an audio/video file (transcribed locally), or your captured cloud logs into a routable bank. Pick a source, press **Consume**; tick *salvage* for a messy source.
 
-**♻ Leviathan Vault Capture**
-Keeps the substance of what a cloud model tells you — on your own key, on your machine — so your local models can draw on it later. On by default. [Below].
+**🧠 Eidetic recall** — answers a question you have asked before instantly from cache instead of regenerating it. Exact matches only. [Below].
 
-**🖥 This machine**
-What Leviathan found: your graphics card, and the exact folder your data is being written to.
+**🔍 Leviathan Fact‑Check** — after a factual answer, re-asks the model the same thing a few times and flags it if the retellings disagree. Off by default (it costs a few extra local runs). [Below].
 
-**ℹ About**
-Author, copyright, licence, and buttons through to the GitHub repository, the Zenodo whitepaper archive, and the full licence text.
+**♻ Leviathan Vault Capture** — keeps the substance of what a cloud model tells you, on your own key, on your machine, so your local models can draw on it later. On by default. See [Recycling cloud answers].
+
+**🌉 Server for other programs** — lets a game engine, a script, or any other program on this machine use the models Leviathan runs, over a local HTTP endpoint (127.0.0.1:8080, OpenAI-compatible *and* Leviathan-native). Flip on to start, off to stop. [Using Leviathan from other programs].
+
+**🎚 Token budget** — how much a model may write in one reply, set per surface (**Chat** and **Inline Studio**). This is *reply* length, separate from a model's context length; slide to the top for ∞ (bounded only by the model's own context window).
+
+**🖥 This machine** — what Leviathan found: your graphics card, and the exact folder your data is being written to.
+
+**ℹ About** — author, copyright, licence, and buttons through to the GitHub repository, the Zenodo whitepaper archive, and the full licence text.
+
+*(Encryption for your knowledge is not here — it lives on its own tab, as a single padlock. See [Memory Vault].)*
 
 ---
 
