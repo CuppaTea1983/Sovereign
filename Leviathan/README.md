@@ -20,14 +20,14 @@ What makes it different from the other ways of running a model locally is what h
 - [First run](#first-run)
 - [The two file types](#the-two-file-types) — **start here if you only read one section**
 - [The tabs](#the-tabs)
-- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Settings](#Settings)
+- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Settings](#settings)
 - [The systems](#the-systems)
 - [Persistent memory](#persistent-memory) · [Knowledge routing](#knowledge-routing) · [Reasoning layer](#reasoning-layer) · [Forensic Grid](#forensic-grid) · [Surface Sight](#surface-sight) · [Recycling cloud answers](#recycling-cloud-answers) · [Eidetic recall](#eidetic-recall) · [Second-opinion fact-check](#second-opinion-fact-check) · [Any model, described by itself](#any-model-described-by-itself) · [The security membrane](#the-security-membrane)
-- [What ANI is — and why it matters](#what-ani-is--and-why-it-matters) — **the thesis, in plain words**
+- [What ANI is — and why it matters](#what-ani-is-and-why-it-matters) — **the thesis, in plain words**
 - [Using Leviathan from other programs](#using-leviathan-from-other-programs)
 - [Where your files live](#where-your-files-live)
 - [What Leviathan will not do](#what-leviathan-will-not-do)
-- [License and attribution](#license-and-attribution)
+- [Licence and attribution](#licence-and-attribution)
 
 ---
 
@@ -117,6 +117,7 @@ Seven tabs down the left side.
 
 ---
 
+<a name="chat"></a>
 ### 💬 Chat
 
 Where you actually talk to the model.
@@ -131,6 +132,7 @@ The chat is the main event. Beside it sits a slim companion panel — the models
 
 ---
 
+<a name="models"></a>
 ### 🤖 Models
 
 Where models are connected, configured and saved.
@@ -175,6 +177,7 @@ Routes work only from what the two models already know. They do not browse the w
 
 ---
 
+<a name="studio"></a>
 ### 🌀 Studio
 
 Where you build the things Leviathan runs on. Nearly every control has a sensible default; the notes below tell you which ones are worth touching and which to leave alone.
@@ -207,6 +210,7 @@ Builds a Personality profile — the *second* kind of `.fqm`, the one you make o
 
 ---
 
+<a name="cores"></a>
 ### 🧿 Cores
 
 *Individual memory · Individual mind.*
@@ -222,6 +226,7 @@ Each model gets its own core. They do not pool and they do not leak into each ot
 
 ---
 
+<a name="memory-vault"></a>
 ### 🔮 Memory Vault
 
 *Pure knowledge · No personality bleed.*
@@ -236,6 +241,7 @@ The archive. Every memory file, model and knowledge file Leviathan can see, in o
 
 ---
 
+<a name="traits"></a>
 ### 🧬 Traits
 
 *Measured interaction traits · model evolution over time.*
@@ -246,6 +252,7 @@ It measures what the model **did**, not what it claims about itself or what its 
 
 ---
 
+<a name="inline-studio"></a>
 ### ⌨ Inline Studio
 
 *Autonomous coding · one model, or a team taking turns on a shared project.*
@@ -266,6 +273,7 @@ The right-hand column is the team — the models taking part on top, their runni
 
 ---
 
+<a name="settings"></a>
 ### ⚙ Settings
 
 One scrollable tab holding every switch and dial in Leviathan, grouped by what it governs. Nothing here needs a restart — a change takes effect on your next message, and every one is remembered between runs. (The one control that *used* to live here, reasoning depth, now sits by the chat box instead — see [Chat] and [Reasoning layer].)
@@ -334,6 +342,7 @@ The four tabs above are surfaces. These are the things running underneath them.
 
 ---
 
+<a name="knowledge-routing"></a>
 ### Knowledge routing — ANI
 
 **The problem.** A model knows what it was trained on. It does not know your rulebook, your codebase, your company's processes or your world's history. The usual fix is to paste the relevant document into the chat, which means knowing in advance which document is relevant and having room for it.
@@ -394,6 +403,7 @@ A bigger model can always use a *lower* mode safely — it just under-uses the r
 
 ---
 
+<a name="forensic-grid"></a>
 ### 🔬 Forensic Grid
 
 *Structural vision for models that have none.*
@@ -410,6 +420,7 @@ A bigger model can always use a *lower* mode safely — it just under-uses the r
 
 ---
 
+<a name="surface-sight"></a>
 ### 🔎 Surface Sight
 
 *Actual image recognition, run as a tool the engine never has to become.*
@@ -488,6 +499,7 @@ Powerful local tooling is only a gift if it can't be quietly turned against the 
 
 ---
 
+<a name="what-ani-is-and-why-it-matters"></a>
 ## What ANI is — and why it matters
 
 Everything above describes *parts*. This is the whole of it. **ANI is the layer that learns.**
@@ -584,5 +596,4 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Huggingface:** https://huggingface.co/spaces/Omega-Dev/Leviathan
 
 All three are linked from **Settings → About** inside the app.
-
 
