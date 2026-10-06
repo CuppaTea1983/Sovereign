@@ -20,7 +20,7 @@ What makes it different from the other ways of running a model locally is what h
 - [First run](#first-run)
 - [The two file types](#the-two-file-types) — **start here if you only read one section**
 - [The tabs](#the-tabs)
-- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Settings](#settings)
+- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Settings](#Settings)
 - [The systems](#the-systems)
 - [Persistent memory](#persistent-memory) · [Knowledge routing](#knowledge-routing) · [Reasoning layer](#reasoning-layer) · [Forensic Grid](#forensic-grid) · [Surface Sight](#surface-sight) · [Recycling cloud answers](#recycling-cloud-answers) · [Eidetic recall](#eidetic-recall) · [Second-opinion fact-check](#second-opinion-fact-check) · [Any model, described by itself](#any-model-described-by-itself) · [The security membrane](#the-security-membrane)
 - [What ANI is — and why it matters](#what-ani-is--and-why-it-matters) — **the thesis, in plain words**
