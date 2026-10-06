@@ -314,7 +314,7 @@ Here is everything you will find, top to bottom:
 
 ## The systems
 
-The four tabs above are surfaces. These are the things running underneath them.
+The tabs above are the surfaces — what you open, click and type into. These are the systems running *underneath* them: the machinery that gives a model a memory that lasts, knowledge it can reach for, answers held to their own honesty, and a guard on everything that comes in. You never open these directly; they are what the tabs are *for*.
 
 ---
 
@@ -596,4 +596,3 @@ Free to use, share and adapt, with attribution. Not for commercial use.
 - **Huggingface:** https://huggingface.co/spaces/Omega-Dev/Leviathan
 
 All three are linked from **Settings → About** inside the app.
-
