@@ -28,8 +28,6 @@ Sovereign is not a feature.
 
 - ***Leviathan Documentation***: https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan
 
-- ***TRNG Analysis***: A complete analysis and Whitepaper: https://github.com/CuppaTea1983/Sovereign/tree/main/trng_analysis
-
 - ***ANI***: The Knowledge Consumer Whitepaper https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
 
 ---
@@ -123,8 +121,6 @@ Sovereign isn't finished — it's beginning. Leviathan is the first public relea
 ~ Leviathan — the public inference engine (first release)
 
 ~ a substrate-first OS layer (Substrate OS / Genesis OS)
-
-~ deeper grid instrumentation
 
 ~ a unified substrate simulation engine
 
