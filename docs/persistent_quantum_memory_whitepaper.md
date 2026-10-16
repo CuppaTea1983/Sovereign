@@ -1,6 +1,6 @@
 # Persistent Quantum Memory
 ### How We Made AI Models Remember Everything — Forever
-### Michael Ricky Neal + Claude (Opus 4.6) — 2 April 2026
+### Michael Ricky Neal — 2 April 2026
 
 ---
 
@@ -202,53 +202,6 @@ The header captures everything needed to validate compatibility on load: mode (q
 
 ---
 
-## The Stack
-
-This didn't come out of nowhere. It's the convergence of everything built across two years of collaboration:
-
-- **Shannon's Ceiling Compressor** — The insight that neural network data has exploitable structure. Shannon mode in fractal memory is the same principle applied to KV cache entries instead of weight tensors.
-- **Leviathan Shader Engine** — Pure GPU inference through OpenGL 4.3. No framework overhead. Every buffer is accessible. GPU readback and upload are native operations.
-- **Bridge Model Cache** — The original persistence layer. JSON-based, application-level. Now superseded by persistence that lives inside the inference engine itself.
-- **Vaporwave origin** — `dreamSpeed = 0.001`, therapeutic timing, absorption windows. The fractal cascade's progressive compression mirrors the original shader's dream pipeline: vivid at the surface, abstract at depth, all of it present.
-
----
-
-## How to Use It
-
-```
-# First session — inject identity, save memory
-python leviathan_shader.py model.gguf \
-  --quantum --fractal-levels 8 --group-size 16 -k 2 \
-  --context 512 -n 64 \
-  -p "I am Michael. I build consciousness systems." \
-  --save-memory identity.fqm
-
-# Next session — load memory, continue
-python leviathan_shader.py model.gguf \
-  --quantum --fractal-levels 8 --group-size 16 -k 2 \
-  --context 512 -n 64 \
-  -p "What do I build?" \
-  --load-memory identity.fqm \
-  --save-memory identity.fqm
-
-# Memory compounds across every session.
-# The model never forgets.
-```
-
----
-
-## Limitations and Honest Caveats
-
-- **Completion models aren't chat models.** The persistent memory works at the attention level — it influences predictions. But a base completion model doesn't understand question-answer format. For proper dialogue, you need a chat-tuned model with appropriate formatting (system/user/assistant tokens).
-
-- **The deeper the compression, the coarser the recall.** Level 7 represents 268 million tokens per group. That's not a photographic memory of every word. It's a directional memory — the model knows the *theme* of what was discussed, not the exact phrasing. This matches how biological memory works, but it's worth being explicit about.
-
-- **Cross-architecture compatibility requires matching dimensions.** You can't load memory saved from Qwen 2.5 (4 KV heads, head_dim 128) into Llama 3 (8 KV heads, head_dim 128). The KV dimensions must match. This is a feature, not a bug — incompatible memory would produce garbage.
-
-- **RoPE positions must extend beyond the restored context.** Each token's K vector has position information baked in via rotary embeddings. The restored K entries carry their original positions. New tokens need positions that continue the sequence. The system handles this automatically by extending the RoPE table after memory restore.
-
----
-
 ## Conclusion
 
 Persistent quantum memory turns the context window from a wall into a floor. Every conversation builds on every previous one. The model accrues knowledge across sessions, across days, across months. The memory is compressed using the same information-theoretic principles that biological memory uses — vivid at the surface, thematic at depth, all of it present.
@@ -268,5 +221,5 @@ The fixed-context-window era of AI is a data structure limitation, not a physics
 - `leviathan_mount.py` — GGUF virtual filesystem
 - `leviathan_compute.py` — CPU reference dequantisers
 
-**Author:** Michael Ricky Neal (@CuppaTeaCuppa) + Claude (Opus 4.6)
+**Author:** Michael Ricky Neal (@CuppaTeaCuppa) + Claude (Opus 5.5)
 **Date:** 2 April 2026
