@@ -1,5 +1,6 @@
-**Soon to come**
+**Very Soon to come**
 ---
+
 # Leviathan
 
 **Local AI models, running directly on your graphics card. No server, no cloud, no account, no subscription, no telemetry.**
@@ -20,7 +21,7 @@ What makes it different from the other ways of running a model locally is what h
 - [First run](#first-run)
 - [The two file types](#the-two-file-types) — **start here if you only read one section**
 - [The tabs](#the-tabs)
-- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Settings](#settings)
+- [Chat](#chat) · [Models](#models) · [Studio](#studio) · [Cores](#cores) · [Memory Vault](#memory-vault) · [Traits](#traits) · [Inline Studio](#inline-studio) · [Graph](#graph) · [Planner](#planner) · [Settings](#settings)
 - [The systems](#the-systems)
 - [Persistent memory](#persistent-memory) · [Knowledge routing](#knowledge-routing) · [Reasoning layer](#reasoning-layer) · [Forensic Grid](#forensic-grid) · [Surface Sight](#surface-sight) · [Recycling cloud answers](#recycling-cloud-answers) · [Eidetic recall](#eidetic-recall) · [Second-opinion fact-check](#second-opinion-fact-check) · [Any model, described by itself](#any-model-described-by-itself) · [The security membrane](#the-security-membrane)
 - [What ANI is — and why it matters](#what-ani-is-and-why-it-matters) — **the thesis, in plain words**
@@ -87,13 +88,11 @@ A rough analogy, if it helps: if the model is a **person**, then `.lev` is their
 
 A `.fqm` is that memory, written to a file. When you load the model again, the memory loads with it. The conversation genuinely continues.
 
-**A `.fqm` comes into being one of two ways, and it is worth knowing which is which — they are the same kind of file doing the same job, but they start life very differently, and people often assume there is only the first.**
+**How a `.fqm` comes into being — on its own, as you talk.** If a model has memory enabled, Leviathan saves a `.fqm` after the first exchange and then every fifth one, quietly, in the background. This is the running memory of *your* conversations with *this* model — it grows as you chat and loads back the next time you open the model. You do not have to do anything, and if it ever *cannot* save, it says so out loud rather than pretending it worked. It also refuses to save a turn that came out garbled, so one bad reply can never lodge itself in the memory permanently.
 
-**One — it happens on its own, as you talk.** If a model has memory enabled, Leviathan saves a `.fqm` after the first exchange and then every fifth one, quietly, in the background. This is the running memory of *your* conversations with *this* model — it grows as you chat and loads back the next time you open the model. You do not have to do anything, and if it ever *cannot* save, it says so out loud rather than pretending it worked. It also refuses to save a turn that came out garbled, so one bad reply can never lodge itself in the memory permanently.
+**The save is atomic.** A `.fqm` is written whole or not at all. The new memory is built in full, then swapped in for the old one in a single step the operating system guarantees cannot be interrupted part-way — so a crash, a power cut or a pulled plug mid-save leaves you with the *previous* good memory, never a torn or half-written file. Memory you can trust is memory that cannot corrupt itself, and this atomic write is the quiet mechanism that makes "it just remembers" safe to rely on rather than a thing you hope survived.
 
-**Two — you build one on purpose, in Studio → Personality.** Instead of letting memory accumulate one chat at a time, you hand the model a whole body of text at once — a folder of past conversations, your project notes, your novel, your world's lore — and it absorbs the lot in a single pass into a `.fqm` that you name and keep. **This is not the auto-memory above, and it is not connected to it.** The auto-memory is what the model happened to remember from talking to you; a Personality profile is a deliberate portrait you construct and can rebuild whenever your source text grows. It is how you make a model that already knows your material — or already sounds like you — before you have typed a word. You point chat at it yourself, and you can keep as many as you like. The Studio section below explains exactly what each control does.
-
-**The auto-memory: one per model.** The memory that builds itself as you chat is named after the model and lives in your FQM Database folder. Two models loaded at once do not share it or bleed into each other. Personality profiles you build by hand are separate files that you manage yourself, so they never collide with the auto-memory.
+**One per model.** The memory is named after the model and lives in your FQM Database folder. Two models loaded at once do not share it or bleed into each other — each wakes up with its own past and no one else's. (Making a model that *sounds like you*, or that already *knows your material*, is a separate and cleaner job: your register is ANI's to mirror — see [ANI Voice] — and your material lives in [knowledge banks], readable by any model, rather than baked into one model's memory.)
 
 ---
 
@@ -104,7 +103,7 @@ A **knowledge bank** is a body of knowledge you can give a model without retrain
 **Where a bank comes from — three ways, all the same kind of thing in the end:**
 
 - **Drained from a model.** In **Studio → Absorb → ANI**, a model talks out what it knows and the substance is kept as text — keeping only what the model is actually confident of. The knowledge a model spent its whole training absorbing is lifted out and kept, so a retired model becomes a knowledge *donor* instead of a deleted file. No giant weight file is created; the bank is text.
-- **Folded from your own conversations.** A captured session becomes a bank, in **Settings → Consume knowledge**. What you worked out with a model last week is answerable next week — even by a *different* model.
+- **Consumed from your own material.** A document, a recording, or an answer a cloud model gave you — folded into a bank in **Settings → Consume a source**. What you read, heard or worked out is answerable later, even by a *different* model.
 - **Built by hand.** Your own notes, a rulebook, a body of lore.
 
 **Why it is text, and why that matters.** Knowledge crosses between models as text, carried by meaning — not as transplanted weights. That is what makes a bank portable: it does not care what architecture, size or family the model reading it is, because it is re-read into whatever model is live. It is also tiny — a text bank is kilobytes to a few megabytes, where the old weight-bank approach cost gigabytes for the same knowledge. A bank is only ever as good as what went into it — a strong source makes a strong bank, a vague one makes a vague bank — and on any given question the router surfaces the best match it has, honestly, either way.
@@ -113,7 +112,7 @@ A **knowledge bank** is a body of knowledge you can give a model without retrain
 
 ## The tabs
 
-Seven tabs down the left side.
+Ten tabs down the left side.
 
 ---
 
@@ -187,6 +186,29 @@ Turns a `.gguf` (or a safetensors model folder) into a `.lev`, the format Leviat
 - **Model list** — every model Leviathan found, with buttons to select **All**, **None**, or just the **Unconverted** ones. Tick what you want and convert in a batch.
 - **Q8_0 mode** — how eight-bit models are laid out. **Split (default)** is the safe choice and what you want almost always. *Shannon* and *Tensor Core F16* are alternative layouts for particular cards; leave it on Split unless you have a specific reason. (Applies to `.gguf` only — safetensors always convert as raw F16.)
 
+**🔬 Analyze GGUF**
+Reads a `.gguf` (or safetensors) file's header without loading the model: architecture, parameter count, tensor types, the key settings (context length, layers, attention heads, experts) and what its tokenizer declares — the special tokens and whether it carries a chat template. Nothing is changed.
+
+**🧮 Tensor Scan**
+Lists every tensor in a model — shape, type, layer and role — with statistics (mean, spread, range, share of zeros) for the full-precision ones. Filter and sort the table, or export the scan as a JSON blueprint.
+
+**🧬 Merge GGUF**
+Combines two fine-tunes of the same base model into a new `.gguf`. It reads any quantization (Q4_K, Q6_K, Q8_0, IQ, F16, BF16), merges at full precision and writes an unquantized F16 file — about 2 bytes per parameter, so a 7B model comes to roughly 15 GB. Quantize it afterwards, or convert it to `.lev`. **Check** confirms the models fit together (same architecture, tokenizer and tensor shapes) and shows the output size before anything is written; **Cancel** stops cleanly and leaves no half-written file.
+- **Linear** and **SLERP** — blend A and B (*Weight of A*).
+- **TIES** and **DARE** — combine what each fine-tune changed relative to their shared **base model** (*Density* or *Drop*, and *Strength*). Without a base model, Model A is treated as the base.
+- **Add difference** — A + Strength × (B − base): carries what fine-tuning changed in B over to A. Needs the base model.
+
+**🧩 Join SafeTensors**
+Hugging Face splits big models into numbered pieces (`model-00001-of-00004.safetensors` …) plus an index file. This joins them into one `.safetensors` file holding every tensor, byte for byte. Nothing is converted, any data type works, and memory use stays small whatever the model's size. Pick a piece, the `.index.json` or the model's folder. **Check** lists the pieces, tensors and output size before anything is written, and the pieces are never touched.
+- **Output** — by default a folder of its own (`<model folder>-joined\model.safetensors`) with the config and tokenizer files copied beside it, ready to load or convert. Keep it out of the pieces' folder: llama.cpp's converter reads the pieces listed in the index while that file is there, and every `model*.safetensors` in the folder when it isn't.
+- **Read back** (on by default) — reads the joined file back and checks every tensor against its piece.
+
+**🏷 Strip Metadata**
+Lists the keys that record where a model came from — source and repository links, base models, datasets, author, licence — and writes a copy of the `.gguf` without the ones you tick. The tensors are copied byte for byte. Licence and author start unticked: keep them if you share the file. (A `.gguf` cannot phone home; these keys are labels, not tracking.)
+
+**🎚 Sampling Defaults**
+Bakes default sampling settings — temperature, top-p, top-k, min-p and repeat penalty — into a copy of a `.gguf` as llama.cpp's own `general.sampling.*` keys. They travel with the file: llama.cpp uses them whenever you don't pass the flag yourself, while other apps may ignore them, and Leviathan's own chat uses its Settings. Four presets (Creative, Balanced, Coherent, Code-Focused), and you can save your own.
+
 **🧠 Absorb → ANI**
 Absorbs a model's knowledge into a routable text bank. Pick a model, and it works through a broad sweep of questions, keeping each answer *only* if the model is genuinely confident of it (and dropping honest "I don't know" replies). What survives folds into an ANI knowledge bank you can then use with any model — no retraining, and no multi-gigabyte weight file kept, just text. It runs one pass on the GPU, so it takes a while; a strong model yields rich knowledge, a tiny one yields little. This is the working way to keep a model's knowledge before you retire it.
 
@@ -194,19 +216,21 @@ Two more ways to fill a bank sit in the same tab, both for **code** — where kn
 - **📘 Absorb a code cookbook** — point it at a file of worked functions (`.py`, `.md`, `.txt`). Each function is extracted, compiled and smoke-run; only the ones that genuinely work fold into a code bank, one runnable pattern each. Nothing broken is kept.
 - **⚙ Generate a code cookbook** — hand a *coder* model a topic (say "string, list and dict utilities") and it writes the cookbook itself, as a task: it plans the functions, writes each one, and Leviathan compiles and runs every one — repairing from the error and retrying once if it fails — so the bank fills with functions that are correct by construction. A strong coder builds the library; a small model then borrows those patterns. It is how a lightweight model can code well above its own weight — it fetches a verified pattern instead of guessing one.
 
-**🔎 Inspect .fkb**
-Opens a legacy knowledge-bank file and shows what is actually inside it — where it came from and how it is put together. For older weight-based banks; new knowledge is text (Absorb → ANI above).
+**🎭 ANI Voice**
+How ANI *sounds* — delivery only. This sets the tone ANI's answers are wrapped in; it never changes what ANI knows or says, only how it says it — the facts are identical in every setting. (It replaces the old "Personality → .fqm" builder: a `.fqm` is a *model's own memory*, and *how a model comes across* is ANI's job — kept separate, and kept clean.)
+- **ANI's voice — your call.** Three registers: **Auto** (match your voice — it learns how you talk, live as you chat and from logs you give it), **Warm** (always-friendly framing), or **Cold** (pure and sharp — the default).
+- **Learn my voice from chat logs.** Point it at your saved chat logs (`.txt`, `.md`, `.json`, `.log`). ANI reads **only your turns** — never the model's, never pasted code — and measures your *register*: your rhythm, how you emphasise, the tells you lean on. It is **gated** — a thin, spammy or incoherent log is rejected rather than learned from, so a poisoned log can't skew how ANI sounds and your existing voice is kept. And the log is read for register **only**: none of its text is ever written into a knowledge bank, so this can never pollute or bloat the vault.
+- **Current learned voice.** Shows the measured profile — how emphatic it is, how often it trails off, its sentence rhythm, the cues it leans on — so you can see exactly what was learnt. Your learned voice is yours and local; nothing leaves.
 
-**🪞 Personality → .fqm**
-Builds a Personality profile — the *second* kind of `.fqm`, the one you make on purpose, not the memory that accumulates on its own as you chat. Point it at the **model** the profile is for (the same one you will chat with — a profile is tied to its model) and at the **chat log or folder** to absorb (`.txt`, `.md`, `.json`, `.log`). Press **Preview (dry-run)** to see what it will do without writing anything, or **Build profile** to make it.
-- **Mirror me (weight my turns)** *(on)* — makes the profile reflect *you* rather than the assistant voice, by weighting your side of the conversation. Leave it on for a "sounds like me" profile.
-- **Assistant chars kept** *(default 200; 0 = pure-you)* — how much of the assistant's replies to keep for context. Set it to 0 for a profile built purely from your own words.
-- **Resume / accumulate into existing .fqm** *(off)* — adds to a profile you already built instead of starting fresh. Turn it on to grow one profile across several batches of source text.
-- **Stage-11 quantum cascade** *(on)* — lets a full-length log be absorbed without hitting a memory wall, and does nothing on models that do not need it. Leave it on.
-- **Hot-window** *(default 2048)* — how many of the newest tokens are kept at full detail while older ones compress. The default suits most logs.
-- **Trait weighting (feel the weight)** *(on)* with **Boost** *(default 1.0)* — keeps the charged, distinctive moments sharp while filler blurs, so personality survives compression. Raise the Boost above 1 to make the personality bite harder; 1.0 is balanced.
-- **Skip duplicate messages** *(on)* — skips byte-identical messages (boilerplate, copy-pasted snippets, "thanks"), roughly 40% faster on real logs with no loss.
-- **Harvest reasoning chains** *(on)* — pulls step-by-step reasoning out of the same log into a companion file beside the profile, so the model keeps that too.
+**🔍 Inspect .fqm**
+Look inside a model's memory. A `.fqm` is what Leviathan saves so a model can pick up where you left off; this tab shows everything in one without changing it. Your memory files are listed; **Open another file…** takes one from anywhere.
+- **What it is** — which model it belongs to, how many tokens it has read, how many it keeps exactly and how many older ones are summarised.
+- **Every byte accounted for** — a `.fqm` is a short tag, a plain-text (JSON) header and blocks of numbers, and their sizes add up to the file's size exactly, so nothing else can hide in it. Every block is unpacked and checked: it is all numbers, and nothing in it is ever run as code. Anything the format doesn't define is flagged.
+- **The header** — every field in plain words, and the text exactly as stored.
+- **The numbers** — every block, what it holds, and a picture of it. **Save this block as .npy** hands you the numbers to check with your own tools.
+- **Read it back** — with the model that made it, the recent part of the memory turns back into the words it came from. A model's first layer computes each entry from its token alone, so every entry matches exactly one token of the model's vocabulary. It runs on the CPU in a few seconds, and it also proves which model a memory belongs to: a different model matches nothing.
+
+A `.fqm` holds no text, but it is made from your conversation: anyone with the same model can read its recent part back. Keep it, and share it, the way you would the chat itself.
 
 ---
 
@@ -235,7 +259,7 @@ The archive. Every memory file, model and knowledge file Leviathan can see, in o
 
 - **📁 Add Folder** brings in a folder from anywhere on your machine. Your models do not have to live where Leviathan put them.
 - **🧹** cleans up files flagged as stale or broken.
-- **Auto-backup** *(on by default)* — when on, absorbing or consuming knowledge also writes a `.jsonl` backup of your banks to the backup folder, so your distilled knowledge is never trapped in a single file. (Whether knowledge is *offered* to models is the **Knowledge routing** switch in **Settings → Consume knowledge**; this toggle is purely about keeping backups.)
+- **Auto-backup** *(on by default)* — when on, absorbing or consuming knowledge also writes a `.jsonl` backup of your banks to the backup folder, so your distilled knowledge is never trapped in a single file. (Whether knowledge is *offered* to models is the **Knowledge routing** switch in **Settings → Knowledge routing (ANI)**; this toggle is purely about keeping backups.)
 
 **The right-hand panel on this tab** is the **🧠 Knowledge Banks** browser: the text knowledge banks Leviathan holds right now (the live banks and their `.jsonl` backups), which folders they are read from, and — click a bank — how many entries it holds with a sample of what is inside. You can point it at additional folders anywhere on your machine and it remembers them between sessions. It is the place to check what knowledge Leviathan can actually see.
 
@@ -273,6 +297,41 @@ The right-hand column is the team — the models taking part on top, their runni
 
 ---
 
+<a name="graph"></a>
+### 🔗 Graph
+
+*Build with nodes — and let a model build with you.*
+
+A visual node canvas: wire up shapes, numbers, expressions and snippets of code into a graph that computes a result. These are Leviathan's **own** nodes, not a bolted-on third-party pack — each does one clear thing, and the wires carry values between them.
+
+What lifts it past an ordinary node editor is that a **model can read and build the graph alongside you.** The old trap with model-driven node tools was that the model was never told which nodes or ports existed, so it guessed and the whole thing fell apart — Leviathan hands the model that context, so it actually knows the graph it is working in and can lay one out or extend it on request. In the public build a model may *propose and build* a graph, but **only you run it**: the host keeps the trigger, never the guest.
+
+And a graph is not the end of the line. When one describes a shape, **⇢ Send to Planner** hands it straight to the 3D Planner as a solid part. That is the thread running through these tabs — **code → graph → part** — each handing on to the next.
+
+---
+
+<a name="planner"></a>
+### 🧊 Planner
+
+*A real 3D modelling engine, built from scratch — parametric, watertight, and in true-to-life scale.*
+
+The Planner is not a preview pane or a toy. It is a genuine **parametric CAD engine**, written in-house, where you build a solid part the way an engineer does — a sketch, an extrude, a cut, a pushed face — with every step recorded, so the whole part is a *history* you can walk back through and change. Undo is not a snapshot; it steps back through the real operations that made the part, and the part rebuilds itself from them.
+
+**What makes it serious engineering, not a mesh viewer:**
+
+- **Watertight, manifold geometry.** Every operation produces a *solid* — a closed, manifold mesh with no holes, no self-intersections, nothing that only looks right from one angle. That is the property real CAD and 3D printing demand, and it holds at every step because the geometry kernel *guarantees* it rather than hoping for it.
+- **Absolute, real-world scale.** Everything is in **millimetres**, grounded on a build bed at zero. A 40 mm box is 40 mm — not forty arbitrary units. A dimension you type means the same on a tilted face as on the bed, because each face you pick is given its own coordinate frame in the proper CAD convention. What you model is what you could hold.
+- **The operations.** Import a base mesh; sketch a **rectangle, circle or polygon** on any plane and **extrude** or **cut** it; pick a flat face and **push or pull** it (out to add material, in to carve it away); draw directly **on a face**; and **move, rotate, scale** or **drop** the whole part onto the bed. Snap-to-grid in millimetres, keyboard shortcuts, a polygon that closes on its own first corner — the muscle-memory of a real modeller.
+- **A GPU-drawn viewport.** The 3D view is rendered on your graphics card, so you orbit, pan and zoom a detailed part at 4K smoothly — the renderer was built for it, not bolted on.
+- **The file is yours, and it is open.** A part saves as plain **JSON** — the ordered history of operations, not an opaque blob — so it is readable, diff-able, and never locked to a format only Leviathan understands. It autosaves and keeps backups as you work.
+- **It fabricates.** **⇢ Send to Fabrication** exports the part as **3MF and STL** — the formats a 3D printer or slicer actually takes — so what you model here goes straight to a machine that makes it real.
+
+**And it is driven by more than the mouse.** A graph from the [Graph] tab can be sent in as a solid part — *CAD as code* — and the same pipeline runs the other way too, from Inline Studio's code, to a graph, to a finished part. Model by hand, by node, or by code, all into one engine.
+
+This is early, and it is deliberately ambitious. The plan is to keep widening what it imports and exports until it is a full fabrication suite — built entirely in-house and entirely local, no subscription, no cloud project store, no account, the parts you make kept as files on your own disk in a format you can read. It is a foundation laid to grow, and it will.
+
+---
+
 <a name="settings"></a>
 ### ⚙ Settings
 
@@ -290,8 +349,12 @@ Here is everything you will find, top to bottom:
 **🧠 Knowledge routing (ANI)** — the knowledge engine, and the one optional door to the web. See [Knowledge routing].
 
 - **Knowledge routing enabled** — on by default; only fires when a bank actually holds something that fits the question.
+- **🗣 ANI background voice** — on by default. ANI speaks through your loaded chat model for free; this lets her *also* use a small bundled model (3B/1B, a *Custom* installer choice) as her voice when nothing's loaded — freed the instant you mount your own. Off → she speaks only through your loaded model, else plain text. See [Knowledge routing] → *How ANI speaks*.
 - **🌐 Web lookup when ANI has no answer** — off by default. The one door out: on a gap it sends *only* your question to be answered, gates the result, and keeps it local for next time ([the one door out] explains it in full).
-- **Gemini key** — optional. Paste your own key and the web lookup returns a composed, live-search-grounded answer from Google's Gemini instead of a bare snippet. Your key, sent only to Google.
+- **Web source** — the default is **Wikipedia**: keyless, free, no signup, and only `en.wikipedia.org` ever sees your question — ideal for *what-is-X* facts, which the local binder phrases into a grounded answer. Two optional keys layer on top, tried first and falling back to Wikipedia:
+  - **Tavily key** — optional, genuinely free tier (sign up at tavily.com). A search built for LLMs that returns a *direct answer*, so it handles **premise** questions Wikipedia can't — ask "the capital of the Moon" and it comes back with "the Moon has no capital," which ANI then grounds and stores. Only `api.tavily.com` sees the question.
+  - **Gemini key** — optional, and only useful on a *paid* Gemini plan (Google moved search-grounding behind billing). With a paid key it returns a composed, live-search-grounded answer, sent only to Google.
+  - Whichever source answers, the result is membrane-gated, grounded (ANI only states what the source said), and kept local for next time.
 - **Consume a source** — distil a document (PDF, text, Markdown, EPUB, DOCX), an audio/video file (transcribed locally), or your captured cloud logs into a routable bank. Pick a source, press **Consume**; tick *salvage* for a messy source.
 
 **🧠 Eidetic recall** — answers a question you have asked before instantly from cache instead of regenerating it. Exact matches only. [Below].
@@ -332,7 +395,7 @@ The tabs above are the surfaces — what you open, click and type into. These ar
 - The memory is not a transcript being re-read. It is the model's own representation, so it does not consume your context window the way pasting a summary does.
 - What it keeps is the *substance of the exchange* — your messages and its answers. The invisible scaffolding Leviathan wraps around each turn (the reasoning nudges, the safety checks, the context it assembles for that one reply) steers the answer and is then left out of the memory. Knowledge is kept; the machinery around it is not, so the memory stays lean and on-point instead of bloating with structure that carries no meaning.
 
-**When it saves.** After your first exchange, then every fifth. No button. If it cannot save, it tells you — silence would be worse than a warning, because a memory system that quietly does nothing is indistinguishable from one that works.
+**When it saves.** After your first exchange, then every fifth. No button. If it cannot save, it tells you — silence would be worse than a warning, because a memory system that quietly does nothing is indistinguishable from one that works. Each save is **atomic**: the new memory is written in full and swapped in as one uninterruptible step, so a crash or power cut mid-save leaves the previous good memory standing, never a corrupted file. The memory can grow, and it can fail to save, but it cannot tear.
 
 **Where it lives.** One file per model in your FQM Database folder, named after the model. Deleting it resets that model to a blank slate. Copying it elsewhere backs up that mind.
 
@@ -347,7 +410,7 @@ The tabs above are the surfaces — what you open, click and type into. These ar
 
 **The problem.** A model knows what it was trained on. It does not know your rulebook, your codebase, your company's processes or your world's history. The usual fix is to paste the relevant document into the chat, which means knowing in advance which document is relevant and having room for it.
 
-**What Leviathan does instead.** You build knowledge banks, and each one is *text* — knowledge drained out of a model before you retire it, folded in from your own past conversations, or written by hand. ANI, the router, projects every bank and every question you ask into **one shared space**, where nearness means relatedness of *meaning*. Ask something and it finds the knowledge that actually fits — across all your banks at once — and hands it to the model before it answers. You never file the question under a subject or pick a bank from a list; the geometry does that for you.
+**What Leviathan does instead.** You build knowledge banks, and each one is *text* — knowledge drained out of a model before you retire it, consumed from a document or a recording, or written by hand. ANI, the router, projects every bank and every question you ask into **one shared space**, where nearness means relatedness of *meaning*. Ask something and it finds the knowledge that actually fits — across all your banks at once — and hands it to the model before it answers. You never file the question under a subject or pick a bank from a list; the geometry does that for you.
 
 **What that means in practice:**
 
@@ -356,14 +419,19 @@ The tabs above are the surfaces — what you open, click and type into. These ar
 - The strongest bank wins and a weak one loses, on the same question, by relevance alone — so quality beats quantity. A bank is only ever as good as what went into it; a vague source makes a vague bank, and the router will faithfully surface exactly that.
 - Banks grow. Consume the same knowledge twice and the duplicate is dropped; add something new and it accretes. The space reshapes itself as the substrate grows.
 
-**Consuming knowledge — four ways in, all of them local.** This is where Leviathan is genuinely unusual: it can take knowledge in from almost anything you have, and *every* path runs on your own machine with nothing sent anywhere. In **Settings → Consume knowledge** you point it at a source and press **Consume**; it folds the text into a bank in the background — deduplicated so nothing is stored twice, coherence-checked so degenerate or repetitive text never makes it in, and backed up as `.jsonl`. The sources:
+**How ANI speaks — her voice.** ANI *finds* the right knowledge, but reading it back as a fluent answer needs a small generator to phrase it — a voice. Here is the honest shape of it, because it's the question most people ask first ("why is there a model in settings — why not just use my own?"):
+
+- **ANI uses your own loaded model.** When you have a chat model mounted, ANI speaks through *it* — for free, no extra memory. Your model is her voice. That is the normal case, and it's exactly what you'd expect.
+- **The bundled binder is only for when nothing is loaded.** So that ANI can still answer when you *haven't* mounted a model, Leviathan can ship a small model (a fluent 3B ~2 GB, or a lighter 1B ~1 GB) that becomes her voice in that moment. **The instant you load your own model, that binder is freed** — it never sits alongside yours competing for VRAM, and it never overrides your model. It's a backup voice, not a second brain.
+- **It only ever phrases — it can't invent.** The binder speaks *only* from the knowledge ANI retrieved, held to it by a grounding check. A near-empty 3B whose knowledge all comes from ANI *cannot* hallucinate facts of its own — which is the point. The knowledge is ANI's; the binder just gives it a mouth.
+- **Entirely optional, and off-switchable.** The binder models are a *Custom* choice in the installer — tick the 3B, the 1B, both, or neither. And **Settings → ANI → ANI background voice** turns the whole thing off: ANI then speaks only through your loaded model, or hands back the retrieved knowledge as plain text. ANI itself stays on either way — this only ever decides her *voice*, never whether she works.
+
+**Consuming knowledge — local, every time.** In **Settings → Consume a source** you point Leviathan at a source and press **Consume**; it folds the text into a bank in the background — deduplicated so nothing is stored twice, coherence-checked so degenerate or repetitive text never makes it in, and backed up as `.jsonl`. Every path runs on your own machine with nothing sent anywhere. The sources:
 
 - **A document.** A PDF, a text or Markdown file, an EPUB, a Word document — the words are the knowledge. No model needed, nothing leaves.
 - **An audio or video file.** A lecture, a podcast, a meeting recording — Leviathan transcribes the *speech* locally (Whisper, on your GPU or CPU) and folds the transcript. What was said becomes something your model can answer from.
-- **Your screen.** Beside the chat, **📷 Screen absorb → Capture screen → ANI** reads the text on your screen and folds it. This is the one honest way to keep a *web page* without Leviathan ever fetching a thing: you open the page in your own browser, and Leviathan reads it *off the screen, locally* — no request leaves your machine. What Edge's Copilot glances at and forgets, Leviathan keeps.
-- **Your voice.** A little **🎙** sits by the chat box. Click it, narrate a thought — a note, an idea, something you just worked out — click again, and it is transcribed and folded. The microphone audio never leaves the machine.
 
-**When the source is messy.** A chat log, a scraped page, a chaotic transcript — signal buried in emoji, shouting, spam and filler — would normally be thrown out whole by the coherence check. Tick **Messy source (salvage signal from noise)** on the screen-absorb section or in Consume and Leviathan strips the noise first and keeps the readable parts, so the knowledge is salvaged instead of lost. It only ever *selects and strips* what is already there — it never writes new text — so nothing is invented in the cleanup.
+**When the source is messy.** A scraped page or a chaotic transcript — signal buried in emoji, shouting, spam and filler — would normally be thrown out whole by the coherence check. Tick **Messy source (salvage signal from noise)** in Consume and Leviathan strips the noise first and keeps the readable parts, so the knowledge is salvaged instead of lost. It only ever *selects and strips* what is already there — it never writes new text — so nothing is invented in the cleanup.
 
 Every one of these lands in the same shared space and is answerable, by any model you load, next week or next year. That is the everyday way to turn *a thing I read, heard, watched or said* into *something my models can reason from* — even when the model that could first have told you is long gone. It is opt-in and deliberate every time: nothing is captured unless you press the button, and nothing ever leaves your machine.
 
@@ -399,7 +467,7 @@ A bigger model can always use a *lower* mode safely — it just under-uses the r
 
 **It feeds the routing, too.** What the reasoning layer works out a question is *about* also nudges [knowledge routing] — a coding question leans the router a little further toward your coding banks — but only ever as a gentle reinforcement added on top, never overriding where the knowledge actually comes from.
 
-**Where the reasoning comes from.** The library is distilled from real traces of a frontier model reasoning through tens of thousands of problems — coding, mathematics, the sciences, medicine, law and more. It is *text* — worked examples — not anyone's weights, and none of it changes what your model *is*. It only changes how your model is asked to think. Your own past conversations are folded in on top, so the library grows toward the kind of problems you actually bring it.
+**Where the reasoning comes from.** The library is distilled from real traces of a frontier model reasoning through tens of thousands of problems — coding, mathematics, the sciences, medicine, law and more. It is *text* — worked examples — not anyone's weights, and none of it changes what your model *is*. It only changes how your model is asked to think. It is fed only from **vetted** sources — licensed reasoning traces, and code examples that were compiled and run before being kept — never scraped from your own chats, so a stray conversation can never quietly reshape how every model reasons.
 
 ---
 
@@ -433,7 +501,7 @@ A bigger model can always use a *lower* mode safely — it just under-uses the r
 
 **Honest about confidence.** It tells you *how sure it is*, and when it is not sure it says so and offers its best few guesses rather than bluffing a single answer. It is strong on clear subjects and honest about the fuzzy ones — you will always see the number, so you always know how much to trust it.
 
-**The vision add-on.** To keep the installer small, the vision model itself is an **optional, one-time download** you choose to add — it is not shipped inside Leviathan and nothing is fetched without you asking. Until you add it, the button is there and simply tells you the add-on isn't installed yet. Forensic Grid (structure) needs nothing extra and works out of the box; Surface Sight (recognition) is the opt-in companion for when you want the model to know *what*, not just *where*.
+**The vision add-on — bundled, local, optional.** The recogniser is an **optional component you choose at install time** — tick it or leave it, your call. When you tick it, the whole model ships **inside the installer** and installs locally; it is **never downloaded at runtime** and never phones home, so Surface Sight holds to the same web-free floor as the rest of Leviathan. Leave it out and the button is still there — it simply tells you the component isn't installed. Forensic Grid (structure) needs nothing extra and works out of the box; Surface Sight (recognition) is the opt-in companion for when you want the model to know *what*, not just *where*.
 
 ---
 
@@ -512,7 +580,7 @@ A language model, on its own, is frozen. It knows what it was trained on, and af
 
 **How it works, in plain terms:**
 
-- You feed it knowledge — your own documents, your past conversations, a model drained before you retire it, a page you read, a lecture you heard, an answer a cloud model gave you. All of it becomes plain text in one shared space, held on your machine.
+- You feed it knowledge — your own documents, a model drained before you retire it, a lecture you heard, an answer a cloud model gave you. All of it becomes plain text in one shared space, held on your machine.
 - When you ask a question, ANI finds the knowledge that fits — by *meaning*, not by matching words — and hands it to the model before it answers.
 - When the model reaches the edge of what it knows — where it would otherwise fill the gap with a confident guess — that gap can be caught, and answered from real knowledge instead of invented on the spot.
 - The corrected exchange is remembered in that model's own persistent memory. The next time, it already knows.
@@ -528,7 +596,7 @@ Everything ANI does — every piece of knowledge, every correction, every memory
 
 And if you want more than privacy by location, you can lock it. One switch — **Memory Vault → the padlock** — encrypts every knowledge bank at rest with a passphrase only *you* hold. Copy the files to another machine and they are an unreadable blob without it; the key is never written to disk and never leaves your head. It is portable (unlock on any machine with your passphrase, not chained to one computer) and it has no recovery *by design* — forget the passphrase and the knowledge is gone, because a backdoor for you is a backdoor for everyone. Your knowledge, your version of ANI, sealed to you alone.
 
-**The one door out — off by default, and yours.** Leviathan is web-free out of the box: it never reaches the internet on its own. But sovereignty means *you* decide, not that we decide for you, so there is a single switch — **Settings → ANI → "Web lookup when ANI has no answer"** — that, turned on, lets ANI do one bounded thing: when it holds no answer to your question, it sends *only that question* out to be answered, checks the result through the same security membrane as everything else, and keeps it so that next time the answer is already local. You choose where that one question goes. By default it is a keyless web search. Or, if you supply your *own* API key (**Settings → ANI → Gemini key**), it goes to Google's Gemini with live search grounding — a composed, cross-checkable answer from an authoritative source, rather than a bare snippet — sent only to Google and nowhere else. Either way nothing else ever leaves — not your files, not your models, not your other questions — and the moment it happens the screen tells you. Off by default, on only if you choose, and provable with Wireshark: put a packet capture on it and you will see traffic to that one destination and nowhere else. This is not a model deciding to phone home — ANI has no such will. It is a pipe you open yourself, for one question, and close again by flicking the switch back. And because the answer is fetched, gated, and *kept*, the same door doubles as a cross-reference: a second, independent answer the model's own reply can be checked against.
+**The one door out — off by default, and yours.** Leviathan is web-free out of the box: it never reaches the internet on its own. But sovereignty means *you* decide, not that we decide for you, so there is a single switch — **Settings → ANI → "Web lookup when ANI has no answer"** — that, turned on, lets ANI do one bounded thing: when it holds no answer to your question, it sends *only that question* out to be answered, checks the result through the same security membrane as everything else, and keeps it so that next time the answer is already local. You choose where that one question goes. By default it is **Wikipedia** — keyless, free, no signup, and only `en.wikipedia.org` ever sees the question; the local binder phrases the encyclopedia extract into a grounded answer. Supply your *own* key for a sharper source and it is tried first, with Wikipedia still the fallback: **Tavily** (a free-tier search built for LLMs that returns a direct answer, so it handles *premise* questions — ask "the capital of the Moon" and it replies "the Moon has no capital," which ANI then grounds and stores), or **Gemini** on a paid plan (a composed, live-search-grounded answer). Whichever source answers, ANI only ever states what *that source said* — grounded, never invented. Either way nothing else ever leaves — not your files, not your models, not your other questions — and the moment it happens the screen tells you. Off by default, on only if you choose, and provable with Wireshark: put a packet capture on it and you will see traffic to that one destination and nowhere else. This is not a model deciding to phone home — ANI has no such will. It is a pipe you open yourself, for one question, and close again by flicking the switch back. And because the answer is fetched, gated, and *kept*, the same door doubles as a cross-reference: a second, independent answer the model's own reply can be checked against.
 
 And it is kept safe the way that genuinely protects a person. The [security membrane] governs what comes **in** — shielding both you *and* the model from anything arriving weaponised against either — while never once policing what *you* may do with your own machine. Every guard is yours to switch off, with a single floor that never bends. It defends the user's sovereignty and refuses to become a weapon against anyone else: governing, not surveilling; lawful by protecting, not by controlling.
 
