@@ -1,4 +1,4 @@
-***Leviathan HF Space: https://huggingface.co/spaces/Omega-Dev/Leviathan***
+***Leviathan has become so large it now requires its own repo: https://github.com/CuppaTea1983/Leviathan***
 ---------------------------------------------------------------------------
 
 ***Q: What is Sovereign***
