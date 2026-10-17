@@ -20,7 +20,7 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
-- ***Leviathan Security Membrane:*** https://github.com/CuppaTea1983/Sovereign/tree/main/Leviathan/Security%20Suite
+- ***Leviathan Security Membrane:*** https://github.com/CuppaTea1983/Leviathan/tree/main/Leviathan%20Security/Security%20Suite
 
 - ***Stage 11 V2 Whitepaper***: https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
