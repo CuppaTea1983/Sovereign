@@ -22,7 +22,7 @@ Sovereign is not a feature.
 
 - ***Leviathan Security Membrane:*** - (Security Membrane) https://github.com/CuppaTea1983/Leviathan/tree/main/Leviathan%20Security/Security%20Suite
 
-- ***The IID Ceiling Is Not Shannon's Floor:*** - (Shannon Stage 11) https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
+- ***The IID Ceiling Is Not Shannon's Floor:*** - (Shannon Stage 11 & .shn format) https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
 - ***Persistent Quantum Memory***: - (.fqm) https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
 
