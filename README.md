@@ -1,4 +1,4 @@
-***Leviathan has become so large it now requires its own repo: https://github.com/CuppaTea1983/Leviathan***
+***Leviathan has been fully released: https://github.com/CuppaTea1983/Leviathan***
 ---------------------------------------------------------------------------
 
 ***Q: What is Sovereign***
