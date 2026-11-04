@@ -20,13 +20,15 @@ Sovereign is not a feature.
 
 **Quick Links:**
 
-- ***Leviathan Security Membrane:*** - (Security Membrane) https://github.com/CuppaTea1983/Leviathan/tree/main/Leviathan%20Security/Security%20Suite
+- **CQFM:** - (Claude Code Plugin) https://github.com/CuppaTea1983/cfqm
 
-- ***The IID Ceiling Is Not Shannon's Floor:*** - (Shannon Stage 11 & .shn format) https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
+- **Leviathan Security Membrane:** - (Security Membrane) https://github.com/CuppaTea1983/Leviathan/tree/main/Leviathan%20Security/Security%20Suite
 
-- ***Persistent Quantum Memory***: - (.fqm) https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+- **The IID Ceiling Is Not Shannon's Floor:** - (Shannon Stage 11 & .shn format) https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
 
-- ***The Knowledge Consumer Whitepaper***: - (ANI) https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
+- **Persistent Quantum Memory**: - (.fqm) https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+
+- **The Knowledge Consumer Whitepaper**: - (ANI) https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
 
 ---
 
