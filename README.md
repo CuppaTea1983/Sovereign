@@ -135,5 +135,7 @@ Persistence, geometry, compression, continuity, state reconstruction — these a
 A personal note
 This has been a long haul — years of work, thousands of hours, countless iterations. It's been a weight I've carried for a long time, and now I can finally start to release it. Sovereign isn't just technology. It's the sum of everything I've learned, built, and imagined — made by one person, from first principles.
 
+---
+
 License & contact
 All whitepapers and technologies are released under CC BY-NC 4.0 — non-commercial use permitted; commercial use requires permission. For collaboration, research inquiries, or industry integration, reach out via GitHub.
