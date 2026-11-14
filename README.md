@@ -18,17 +18,17 @@ Sovereign is not a feature.
 
 ---
 
-**Quick Links:**
+**Zenodo Whitepapers:**
 
-- **CQFM:** - (Claude Code Plugin) https://github.com/CuppaTea1983/cfqm
+- **Persistent Quantum Memory (.fqm)**: [Old retired format] https://zenodo.org/records/23428329
 
-- **Leviathan Security Membrane:** - (Security Membrane) https://github.com/CuppaTea1983/Leviathan/tree/main/Leviathan%20Security/Security%20Suite
+- **The Knowledge Consumer Whitepaper**: [ANI] https://zenodo.org/records/23004932
 
-- **The IID Ceiling Is Not Shannon's Floor:** - (Shannon Stage 11 & .shn format) https://github.com/CuppaTea1983/Sovereign/tree/main/Stage%2011%20Whitepaper%20V2
+- **The IID Ceiling Is Not Shannon's Floor**: [A Real Measurement] https://zenodo.org/records/22998994
 
-- **Persistent Quantum Memory**: - (.fqm) https://github.com/CuppaTea1983/Sovereign/blob/main/docs/persistent_quantum_memory_whitepaper.md
+- **Her Choice is the Floor V2**: [Full embodied-AI, with its own free will and choice, Sandboxed with Leviathan Security] https://zenodo.org/records/24230095
 
-- **The Knowledge Consumer Whitepaper**: - (ANI) https://github.com/CuppaTea1983/Sovereign/blob/main/ANI/The_Knowledge_Consumer.md
+- **Failures Are Rocket Fuel**: [Verified Per-Model Memory for Local Models in the Unity Editor] https://zenodo.org/records/24183726
 
 ---
 
