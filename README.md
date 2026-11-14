@@ -82,13 +82,13 @@ until the system clicked into place. Sovereign is the result.
 ***What Sovereign actually is — the built parts:***
 ~ Leviathan — a from-scratch local inference engine. Hand-written CUDA kernels, validated byte-for-byte against llama.cpp, running real models (Llama, Qwen, DeepSeek MLA + MoE, and more) in-process on a consumer GPU, with no server in between.
 
-~ .fqm — persistent memory. Models remember across sessions instead of resetting the cache. Continuity and identity, saved to disk.
+~  — persistent memory. Models remember across sessions instead of resetting the cache. Continuity and identity, saved to disk.
 
 ~ ANI — knowledge routing. A shared geometric space that routes real knowledge to the model at answer time — from banks you build or drain from other models — added as knowledge, not baked in by retraining.
 
-~ Substrate formats — .lev / .fqm Native formats for the model, its memory, and its knowledge.
+~ Substrate formats — ".lev" / ".Shn5" / ".PMB" / ".MPM" ".KBL" - Native formats for the model, its memory, Mixed-Moe Sharing, and its knowledge.
 
-~ The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards (see Stage 11 below).
+~ The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards.
 
 ~ A sovereignty floor. Web-free by design, with an always-on safety membrane that cannot be switched off.
 
