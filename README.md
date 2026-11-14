@@ -20,7 +20,7 @@ Sovereign is not a feature.
 
 **Zenodo Whitepapers:**
 
-- **Persistent Quantum Memory (.fqm)**: [Old retired format] https://zenodo.org/records/23428329
+- **Persistent Quantum Memory: (.fqm)** [Old retired format] https://zenodo.org/records/23428329
 
 - **The Knowledge Consumer Whitepaper**: [ANI] https://zenodo.org/records/23004932
 
