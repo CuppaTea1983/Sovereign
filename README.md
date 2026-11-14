@@ -1,4 +1,4 @@
-***Leviathan Has been Updated to V1.1.0 (Vulkan Support) https://github.com/CuppaTea1983/Leviathan***
+***Leviathan Has been Updated to V1.1.0 (Vulkan Support) + Shn5 File format, Read: RELEASE_NOTES.md for more information  https://github.com/CuppaTea1983/Leviathan***
 ---------------------------------------------------------------------------
 
 ***Q: What is Sovereign***
@@ -118,11 +118,7 @@ Persistence, geometry, compression, continuity, state reconstruction — these a
 The road ahead — roadmap
 Sovereign isn't finished — it's beginning. Leviathan is the first public release. Planned beyond it (roadmap, not yet released):
 
-~ Leviathan — the public inference engine (first release)
-
-~ a substrate-first OS layer (Substrate OS / Genesis OS)
-
-~ a unified substrate simulation engine
+~ a substrate-first OS layer (Substrate OS)
 
 Each release builds on the last. I'll let each one ship and speak for itself.
 
