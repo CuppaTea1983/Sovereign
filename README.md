@@ -1,4 +1,4 @@
-***Leviathan has been fully released: https://github.com/CuppaTea1983/Leviathan***
+***Leviathan Has been Updated to V1.1.0 (Vulkan Support) https://github.com/CuppaTea1983/Leviathan***
 ---------------------------------------------------------------------------
 
 ***Q: What is Sovereign***
