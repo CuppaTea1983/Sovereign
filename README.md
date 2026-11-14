@@ -20,7 +20,7 @@ Sovereign is not a feature.
 
 **Zenodo Whitepapers:**
 
-- **Persistent Quantum Memory: (.fqm)** [Old retired format] https://zenodo.org/records/23428329
+- **Leviathan's Persistent Memory Bank**: https://zenodo.org/records/24234988
 
 - **The Knowledge Consumer Whitepaper**: [ANI] https://zenodo.org/records/23004932
 
@@ -29,6 +29,12 @@ Sovereign is not a feature.
 - **Her Choice is the Floor V2**: [Full embodied-AI, with its own free will and choice, Sandboxed with Leviathan Security] https://zenodo.org/records/24230095
 
 - **Failures Are Rocket Fuel**: [Verified Per-Model Memory for Local Models in the Unity Editor] https://zenodo.org/records/24183726
+
+---
+
+**Old Retired Formats**
+
+- **Persistent Quantum Memory: ".fqm"** https://zenodo.org/records/23428329
 
 ---
 
