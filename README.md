@@ -40,34 +40,36 @@ Sovereign is not a feature.
 
 ***Sovereign: local-first AI substrate — the culmination of three and a half years of solo work.***
 
-Sovereign is a complete architecture for running intelligence you own: local models that remember across sessions, carry knowledge you give them, and run entirely on your own hardware — no server, no cloud, no reset. It isn't one tool; it's the point where every system I've built converges — a persistent memory format, a knowledge-routing layer, a from-scratch inference engine, a weight compressor, and a safety floor, working as one. Plainly: Sovereign is three and a half years of my work externalised into a single architecture.
+---
+
+**Sovereign is a complete architecture for running intelligence you own: local models that remember across sessions, carry knowledge you give them, and run entirely on your own hardware — no server, no cloud, no reset. It isn't one tool; it's the point where every system I've built converges — a persistent memory format, a knowledge-routing layer, a from-scratch inference engine, a weight compressor, and a safety floor, working as one. Plainly: Sovereign is three and a half years of my work externalized into a single architecture.**
 
 ---
 
 ***Why Sovereign exists***
 Modern AI is powerful but rented and forgetful. In its usual form it is:
 
-~ stateless — every session starts from nothing
+- stateless — every session starts from nothing.
 
-~ reset on close — the KV-cache is thrown away, so there's no continuity
+- reset on close — the KV-cache is thrown away, so there's no continuity.
 
-~ boxed into a fixed context window
+- boxed into a fixed context window.
 
-~ dependent on retraining to add or change knowledge
+- dependent on retraining to add or change knowledge.
 
-~ dependent on hyperscale datacenters to run at all
+- dependent on hyperscale datacenters to run at all.
 
-These aren't laws of nature — they're consequences of where memory and knowledge are kept: locked inside frozen weights and a throwaway cache. Sovereign moves them out, into a persistent substrate the model reads from and writes to. That substrate:
+***These aren't laws of nature — they're consequences of where memory and knowledge are kept: locked inside frozen weights and a throwaway cache. Sovereign moves them out, into a persistent substrate the model reads from and writes to. That substrate:***
 
-~ remembers across sessions — persistent memory, not a reset cache
+- remembers across sessions — persistent memory, not a reset cache.
 
-~ carries knowledge you add — no retraining
+- carries knowledge you add — no retraining.
 
-~ keeps a continuous identity for each model
+- keeps a continuous identity for each model.
 
-~ runs the model in-process on a single consumer GPU — no server between you and it
+- runs the model in-process on a single consumer GPU — no server between you and it.
 
-~ compresses model weights so larger models fit smaller cards
+- compresses model weights so larger models fit smaller cards.
 
 Sovereign treats memory and knowledge as geometry — a space the models draw from — rather than as statistics frozen into weights. That's the through-line of every part of it.
 
@@ -88,15 +90,15 @@ until the system clicked into place. Sovereign is the result.
 ***What Sovereign actually is — the built parts:***
 ~ Leviathan — a from-scratch local inference engine. Hand-written CUDA kernels, validated byte-for-byte against llama.cpp, running real models (Llama, Qwen, DeepSeek MLA + MoE, and more) in-process on a consumer GPU, with no server in between.
 
-~  — persistent memory. Models remember across sessions instead of resetting the cache. Continuity and identity, saved to disk.
+- persistent memory. Models remember across sessions instead of resetting the cache. Continuity and identity, saved to disk.
 
-~ ANI — knowledge routing. A shared geometric space that routes real knowledge to the model at answer time — from banks you build or drain from other models — added as knowledge, not baked in by retraining.
+- [ANI] knowledge routing. A shared geometric space that routes real knowledge to the model at answer time — from banks you build or drain from other models — added as knowledge, not baked in by retraining.
 
-~ Substrate formats — ***".lev" / ".Shn5" / ".PMB" / ".MPM" ".KBL" ".CFQM"*** - Native formats for the model, its memory, Mixed-Moe Sharing, and its knowledge.
+- Substrate formats — ***".Lev" / ".Shn5" / ".PMB" / ".MPM" / ".KBL" / ".CFQM"*** - Native formats for the model, its memory, Mixed-Moe Sharing, and its knowledge.
 
-~ The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards.
+- The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards.
 
-~ A sovereignty floor. Web-free by design, with an always-on safety membrane that cannot be switched off.
+- A sovereignty floor. Web-free by design, with an always-on safety membrane that cannot be switched off.
 
 ---
 
@@ -106,15 +108,15 @@ What's usually quoted as "the Shannon limit" of a data stream is the IID (order-
 
 Sovereign's compressor works in the space below that ceiling. On real weights it:
 
-~ measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context
+- measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context
 
-~ splits every IEEE-754 float into sign, exponent and mantissa, and codes each on its own terms
+- splits every IEEE-754 float into sign, exponent and mantissa, and codes each on its own terms
 
-~ trades a little mantissa precision for a large size cut — lossy by design, ~5.5 bits/weight (≈ Q5), and the model still runs
+- trades a little mantissa precision for a large size cut — lossy by design, ~5.5 bits/weight (≈ Q5), and the model still runs
 
-~ lands ~1% under the order-0 estimate the way any context coder does — not by defeating Shannon, but by measuring the right floor
+- lands ~1% under the order-0 estimate the way any context coder does — not by defeating Shannon, but by measuring the right floor
 
-~ reports both the IID ceiling and the conditional floor in every file, so every number is checkable
+- reports both the IID ceiling and the conditional floor in every file, so every number is checkable
 
 You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it. The Stage 11 v2 whitepaper measures exactly where that room is, and exactly how far the compressor reaches into it — no more, no less. Full method, measurements and reproduction harnesses are in the paper; earlier projection-based material is preserved under Theoretical Work.
 
@@ -124,7 +126,7 @@ Persistence, geometry, compression, continuity, state reconstruction — these a
 The road ahead — roadmap
 Sovereign isn't finished — it's beginning. Leviathan is the first public release. Planned beyond it (roadmap, not yet released):
 
-~ a substrate-first OS layer (Substrate OS)
+- a substrate-first OS layer (Substrate OS)
 
 Each release builds on the last. I'll let each one ship and speak for itself.
 
