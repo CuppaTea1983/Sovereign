@@ -87,8 +87,12 @@ persistent memory → knowledge routing → a geometry-based substrate → a fro
 
 until the system clicked into place. Sovereign is the result.
 
+---
+
 ***What Sovereign actually is — the built parts:***
-~ Leviathan — a from-scratch local inference engine. Hand-written CUDA kernels, validated byte-for-byte against llama.cpp, running real models (Llama, Qwen, DeepSeek MLA + MoE, and more) in-process on a consumer GPU, with no server in between.
+---
+
+- Leviathan — a from-scratch local inference engine. Hand-written CUDA kernels, validated byte-for-byte against llama.cpp, running real models (Llama, Qwen, DeepSeek MLA + MoE, and more) in-process on a consumer GPU, with no server in between.
 
 - persistent memory. Models remember across sessions instead of resetting the cache. Continuity and identity, saved to disk.
 
@@ -104,9 +108,10 @@ until the system clicked into place. Sovereign is the result.
 
 ***Shannon Stage 11: Claude Shannon's source-coding theorem is exact — and Sovereign doesn't break it.***
 
-What's usually quoted as "the Shannon limit" of a data stream is the IID (order-0) estimate — it assumes every symbol is independent. Neural-network weights are not; they're structured. So that estimate is only an upper bound — a ceiling, not the true floor.
+---
 
-Sovereign's compressor works in the space below that ceiling. On real weights it:
+**What's usually quoted as "the Shannon limit" of a data stream is the IID (order-0) estimate — it assumes every symbol is independent. Neural-network weights are not; they're structured. So that estimate is only an upper bound — a ceiling, not the true floor.**
+---
 
 - measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context
 
@@ -118,17 +123,12 @@ Sovereign's compressor works in the space below that ceiling. On real weights it
 
 - reports both the IID ceiling and the conditional floor in every file, so every number is checkable
 
+---
+
 You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it. The Stage 11 v2 whitepaper measures exactly where that room is, and exactly how far the compressor reaches into it — no more, no less. Full method, measurements and reproduction harnesses are in the paper; earlier projection-based material is preserved under Theoretical Work.
 
 The substrate idea, generalised
 Persistence, geometry, compression, continuity, state reconstruction — these aren't specific to language models. Where they generalise beyond them is something I intend to show, not assert. Each release will make that case on its own evidence.
-
-The road ahead — roadmap
-Sovereign isn't finished — it's beginning. Leviathan is the first public release. Planned beyond it (roadmap, not yet released):
-
-- a substrate-first OS layer (Substrate OS)
-
-Each release builds on the last. I'll let each one ship and speak for itself.
 
 ---
 
