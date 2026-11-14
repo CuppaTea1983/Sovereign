@@ -32,6 +32,12 @@ Sovereign is not a feature.
 
 ---
 
+**Other Links to my Projects**
+
+- **.CFQM**: https://github.com/CuppaTea1983/cfqm
+
+---
+
 ***Sovereign: local-first AI substrate — the culmination of three and a half years of solo work.***
 
 Sovereign is a complete architecture for running intelligence you own: local models that remember across sessions, carry knowledge you give them, and run entirely on your own hardware — no server, no cloud, no reset. It isn't one tool; it's the point where every system I've built converges — a persistent memory format, a knowledge-routing layer, a from-scratch inference engine, a weight compressor, and a safety floor, working as one. Plainly: Sovereign is three and a half years of my work externalised into a single architecture.
@@ -86,7 +92,7 @@ until the system clicked into place. Sovereign is the result.
 
 ~ ANI — knowledge routing. A shared geometric space that routes real knowledge to the model at answer time — from banks you build or drain from other models — added as knowledge, not baked in by retraining.
 
-~ Substrate formats — ".lev" / ".Shn5" / ".PMB" / ".MPM" ".KBL" - Native formats for the model, its memory, Mixed-Moe Sharing, and its knowledge.
+~ Substrate formats — ***".lev" / ".Shn5" / ".PMB" / ".MPM" ".KBL" ".CFQM"*** - Native formats for the model, its memory, Mixed-Moe Sharing, and its knowledge.
 
 ~ The Shannon compressor (.shn). A lossy weight compressor that shrinks models so bigger ones fit smaller cards.
 
