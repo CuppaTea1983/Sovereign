@@ -20,6 +20,8 @@ Sovereign is not a feature.
 
 **Zenodo Whitepapers:**
 
+- **.SHN5**: https://zenodo.org/records/24235771
+
 - **Leviathan's Persistent Memory Bank**: https://zenodo.org/records/24234988
 
 - **The Knowledge Consumer Whitepaper**: [ANI] https://zenodo.org/records/23004932
