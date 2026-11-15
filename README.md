@@ -68,10 +68,12 @@ Modern AI is powerful but rented and forgetful. In its usual form it is:
 
 - dependent on hyperscale datacenters to run at all.
 
-***These aren't laws of nature — they're consequences of where memory and knowledge are kept: locked inside frozen weights and a throwaway cache. Sovereign moves them out, into a persistent substrate the model reads from and writes to. That substrate:***
+***These aren't laws of nature — they're consequences of where memory and knowledge are kept: locked inside frozen weights and a throwaway cache. Sovereign moves them out, into a persistent substrate the model reads from and writes to.***
 
 ---
 
+**That substrate**:
+---
 - remembers across sessions — persistent memory, not a reset cache.
 
 - carries knowledge you add — no retraining.
