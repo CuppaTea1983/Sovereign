@@ -141,9 +141,9 @@ until the system clicked into place. Sovereign is the result.
 
 ***You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it. The Stage 11 v2 whitepaper measures exactly where that room is, and exactly how far the compressor reaches into it — no more, no less. Full method, measurements and reproduction harnesses are in the paper; earlier projection-based material is preserved under Theoretical Work.***
 
-**The substrate idea, generalised**
+**The substrate idea, generalised**:
 ---
-Persistence, geometry, compression, continuity, state reconstruction — these aren't specific to language models. Where they generalise beyond them is something I intend to show, not assert. Each release will make that case on its own evidence.
+- Persistence, geometry, compression, continuity, state reconstruction — these aren't specific to language models. Where they generalise beyond them is something I intend to show, not assert. Each release will make that case on its own evidence.
 
 ---
 
