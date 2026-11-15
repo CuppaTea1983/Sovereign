@@ -20,6 +20,8 @@ Sovereign is not a feature.
 
 **Zenodo Whitepapers:**
 
+- **The Eigenweight Engine V2**: https://zenodo.org/records/24241135
+
 - **.SHN5**: https://zenodo.org/records/24235771
 
 - **Leviathan's Persistent Memory Bank**: https://zenodo.org/records/24234988
