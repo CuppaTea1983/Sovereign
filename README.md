@@ -34,13 +34,13 @@ Sovereign is not a feature.
 
 ---
 
-**Old Retired Formats**
+**Old Retired Formats**:
 
 - **Persistent Quantum Memory: ".fqm"** https://zenodo.org/records/23428329
 
 ---
 
-**Other Links to my Projects**
+**Other Links to my Projects**:
 
 - **.CFQM**: https://github.com/CuppaTea1983/cfqm
 
@@ -54,7 +54,8 @@ Sovereign is not a feature.
 
 ---
 
-***Why Sovereign exists***
+***Why Sovereign exists***:
+---
 Modern AI is powerful but rented and forgetful. In its usual form it is:
 
 - stateless — every session starts from nothing.
@@ -68,6 +69,8 @@ Modern AI is powerful but rented and forgetful. In its usual form it is:
 - dependent on hyperscale datacenters to run at all.
 
 ***These aren't laws of nature — they're consequences of where memory and knowledge are kept: locked inside frozen weights and a throwaway cache. Sovereign moves them out, into a persistent substrate the model reads from and writes to. That substrate:***
+
+---
 
 - remembers across sessions — persistent memory, not a reset cache.
 
@@ -85,7 +88,8 @@ Sovereign treats memory and knowledge as geometry — a space the models draw fr
 
 ***How Sovereign began***
 ---
-This didn't start as an academic exercise. It started as a personal one.
+
+***This didn't start as an academic exercise. It started as a personal one.***:
 
 Years ago I watched a family member lose themselves to dementia — a collapse of memory continuity. Later I saw the same failure mode in AI: no persistence, no continuity, no identity. It crystallised the day I opened VS Code and started my first project with Claude Sonnet — who couldn't remember our work, or our conversation, from one session to the next. I asked why. Sonnet explained that the model has no persistent memory. That parallel pushed me into AI and science, and I've built this architecture solo ever since — from first principles, no textbooks, merging code with more code until it became one thing.
 
@@ -97,7 +101,7 @@ until the system clicked into place. Sovereign is the result.
 
 ---
 
-***What Sovereign actually is — the built parts:***
+***What Sovereign actually is — the built parts***:
 ---
 
 - Leviathan — a from-scratch local inference engine. Hand-written CUDA kernels, validated byte-for-byte against llama.cpp, running real models (Llama, Qwen, DeepSeek MLA + MoE, and more) in-process on a consumer GPU, with no server in between.
@@ -121,21 +125,22 @@ until the system clicked into place. Sovereign is the result.
 **What's usually quoted as "the Shannon limit" of a data stream is the IID (order-0) estimate — it assumes every symbol is independent. Neural-network weights are not; they're structured. So that estimate is only an upper bound — a ceiling, not the true floor.**
 ---
 
-- measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context
+- measures the conditional entropy the IID estimate ignores — order-1 ≈ 0.89 of IID, and it keeps falling with context.
 
-- splits every IEEE-754 float into sign, exponent and mantissa, and codes each on its own terms
+- splits every IEEE-754 float into sign, exponent and mantissa, and codes each on its own terms.
 
-- trades a little mantissa precision for a large size cut — lossy by design, ~5.5 bits/weight (≈ Q5), and the model still runs
+- trades a little mantissa precision for a large size cut — lossy by design, ~5.5 bits/weight (≈ Q5), and the model still runs.
 
-- lands ~1% under the order-0 estimate the way any context coder does — not by defeating Shannon, but by measuring the right floor
+- lands ~1% under the order-0 estimate the way any context coder does — not by defeating Shannon, but by measuring the right floor.
 
-- reports both the IID ceiling and the conditional floor in every file, so every number is checkable
+- reports both the IID ceiling and the conditional floor in every file, so every number is checkable.
 
 ---
 
-You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it. The Stage 11 v2 whitepaper measures exactly where that room is, and exactly how far the compressor reaches into it — no more, no less. Full method, measurements and reproduction harnesses are in the paper; earlier projection-based material is preserved under Theoretical Work.
+***You cannot break Shannon's limit. The number everyone quotes is the IID estimate — a ceiling, not the floor — and there's room beneath it. The Stage 11 v2 whitepaper measures exactly where that room is, and exactly how far the compressor reaches into it — no more, no less. Full method, measurements and reproduction harnesses are in the paper; earlier projection-based material is preserved under Theoretical Work.***
 
-The substrate idea, generalised
+**The substrate idea, generalised**
+---
 Persistence, geometry, compression, continuity, state reconstruction — these aren't specific to language models. Where they generalise beyond them is something I intend to show, not assert. Each release will make that case on its own evidence.
 
 ---
