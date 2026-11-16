@@ -18,6 +18,10 @@ Sovereign is not a feature.
 
 ---
 
+**ORCHID**: https://orcid.org/my-orcid?orcid=0009-0001-6886-3510
+
+---
+
 **Zenodo Whitepapers:**
 
 - **The Eigenweight Engine V2**: https://zenodo.org/records/24241135
