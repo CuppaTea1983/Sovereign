@@ -7,7 +7,7 @@ On one RTX 4080, Leviathan runs a 61 GB mixture-of-experts model at **16.2** tok
   <img src="https://raw.githubusercontent.com/CuppaTea1983/Sovereign/main/measured/img/tiles-light.png" width="856" alt="MoE decode, a 61 GB model on a 16 GB card: 16.2 tok/s, llama.cpp 9.5–10.4 · 1.56×; The same 61 GB model as a lossless .shn5: 40.5 GB, BF16 GGUF 61.1 GB · 34 % smaller; Video: denoising one 1280 × 736 LTX-2.3 shot: 68.3 s, PyTorch 232.0 s · 3.40×; MoE 700-token prompt: 683 tok/s, llama.cpp at its fastest settings 365 · 1.87×; 7B decode, 128-token context: 81.2 tok/s, llama.cpp 81.6, same session · 1.00×; Models inside the reference bar: 10 of 10, worst KL among the dense models 2.8e-6">
 </picture>
 
-**Every chart and table:** [the full measurements](measured/README.md) · **Interactive:** [Hugging Face](https://huggingface.co/spaces/Omega-Dev/Leviathan-Measured) · [claude.ai](https://claude.ai/artifact/NBQbfsfgfHfhop9KcNNUMB) · **Leviathan:** [GitHub](https://github.com/CuppaTea1983/Leviathan) · [Hugging Face](https://huggingface.co/spaces/Omega-Dev/Leviathan)
+**Every chart and table:** [the full measurements](measured/README.md) · **Interactive:** [Hugging Face](https://huggingface.co/spaces/Omega-Dev/Leviathan) · [claude.ai](https://claude.ai/artifact/NBQbfsfgfHfhop9KcNNUMB) · **Leviathan:** [GitHub](https://github.com/CuppaTea1983/Leviathan) · [Hugging Face](https://huggingface.co/spaces/Omega-Dev/Leviathan)
 
 ---
 
