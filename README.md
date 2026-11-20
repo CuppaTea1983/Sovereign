@@ -11,7 +11,7 @@ On one RTX 4080, Leviathan runs a 61 GB mixture-of-experts model at **16.2** tok
 
 ---
 
-***Leviathan Has been Updated to V1.1.0 (Vulkan Support) + Shn5 File format, Read: RELEASE_NOTES.md for more information  https://github.com/CuppaTea1983/Leviathan***
+***Leviathan Has been Updated to V2.0.0 (Vulkan Support) + Shn5 File format, Read: RELEASE_NOTES.md for more information  https://github.com/CuppaTea1983/Leviathan/releases***
 ---------------------------------------------------------------------------
 
 ***Q: What is Sovereign***
